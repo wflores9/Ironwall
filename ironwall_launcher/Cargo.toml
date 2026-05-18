@@ -1,0 +1,67 @@
+[package]
+name = "ironwall-launcher"
+version = "0.1.0"
+edition = "2021"
+description = "Ironwall native launcher — scans game DLLs, hashes them, submits to TEE for attestation before game boot"
+license = "MIT"
+repository = "https://github.com/wflores9/Ironwall"
+
+[[bin]]
+name = "ironwall-launcher"
+path = "src/main.rs"
+
+[lib]
+name = "ironwall_launcher"
+path = "src/lib.rs"
+
+[dependencies]
+# Async runtime
+tokio        = { version = "1", features = ["full"] }
+
+# HTTP client — talks to the Python TEE attestation broker
+reqwest      = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
+
+# Serialisation
+serde        = { version = "1", features = ["derive"] }
+serde_json   = "1"
+
+# SHA3-256 — must match Python layer (sha3_256, not sha256)
+sha3         = "0.10"
+
+# HMAC — matches ironwall/core/crypto.py hmac_sign()
+hmac         = "0.12"
+
+# Hex encoding
+hex          = "0.4"
+
+# Walkdir — recursive DLL scan
+walkdir      = "2"
+
+# CLI args
+clap         = { version = "4", features = ["derive"] }
+
+# Logging
+tracing      = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Error handling
+anyhow       = "1"
+thiserror    = "1"
+
+# Windows API (DLL metadata, process launch) — only on Windows
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.58", features = [
+    "Win32_Foundation",
+    "Win32_System_LibraryLoader",
+    "Win32_System_Threading",
+    "Win32_Storage_FileSystem",
+]}
+
+[dev-dependencies]
+tempfile     = "3"
+tokio-test   = "0.4"
+
+[profile.release]
+opt-level    = 3
+lto          = true
+strip        = true   # strip symbols for distribution
