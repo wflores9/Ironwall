@@ -1,0 +1,1792 @@
+[
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "90151c2146786b28fd2a4b7503a1d1b67f8f99a1c27a629a237f09fcff17e82e",
+    "sig": "3045022100800c9cc861ec028da9ef5e582cec6213b13531420fa5ae162ce334b2f345ff6b0220035378c963f0c3ddb76708dac42b4af8bb487e6018482c63e4864b03544a7390",
+    "ts": 1779083311,
+    "ct_anchor": "24e8d9fe9ded65e122064b27ae22522109e10d0eee5a3e5a5c31ed3c01df5187",
+    "filename": "amd_ags_x64.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\amd_ags_x64.dll",
+    "size_bytes": 179408
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "80a5a2da12b4624f75efff8d452201e58957a5197933f671fe5d25d157c92c11",
+    "sig": "30450221008f2891a7b8c2d7036e979e04f83b256e349ced5a9cc3f6d827317c99cf010a06022043c2b17a17674988ddc3606098aebafaa2914705b2dda8d3b4e3cba2bd0e01f9",
+    "ts": 1779083312,
+    "ct_anchor": "06d9e77f13612541b3e84e5089e70659d336c085d8c13dc71cd0cd5a9a953b21",
+    "filename": "amd_fidelityfx_denoiser_dx12.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\amd_fidelityfx_denoiser_dx12.dll",
+    "size_bytes": 9300240
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "fa7800938781f7059709518bfd0b7301bedea22d21cb6712a14b65d6ba80bf09",
+    "sig": "3044022075fb3c20590551e52ad11f978f54b4db727d19d86425d3c3df2a1b1446069b86022074dc1a340231e255980e45ca9d90473f5765a8ba6ba3e5d1822153e25d813c1e",
+    "ts": 1779083312,
+    "ct_anchor": "b1574ec767cbe1191ad488cf7b2f3e5f0a67a856b3255453eacb11c7c562921a",
+    "filename": "amd_fidelityfx_dx12.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\amd_fidelityfx_dx12.dll",
+    "size_bytes": 6621392
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "16ec7934231be85ba0fb0bf3bc24cdddd6c5d60dee3ac3a06f33ff689b72e595",
+    "sig": "3046022100a95cfd9589fa8008270cdaf539be9f32ab224846c5b0b121682f3b0b59115beb022100907358af4e96b67aa4e66b01c5e8720cdb14398045e5348370b3f28b3959437b",
+    "ts": 1779083312,
+    "ct_anchor": "90f7df0b3d51a43cbd68653319da8d202447628a1f39dc63212de62b1fb18a63",
+    "filename": "amd_fidelityfx_framegeneration_dx12.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\amd_fidelityfx_framegeneration_dx12.dll",
+    "size_bytes": 1090832
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "94e99e8984e5a314bac8ab89cc179e5af63452a34da583e63a687cd9660af275",
+    "sig": "304502201094ebd876aaf392f450e418853a05fcc9cf7e5b2cb016e0291536b7633771b4022100a8a047cd75a0a38a6b2ec70e7431cc088d55700f8466cc61ee450ae7bba563ed",
+    "ts": 1779083312,
+    "ct_anchor": "8b36bc5d82df784c0917f98ecaa16f76d067c68adb1de7a679a294bdc46c33ed",
+    "filename": "amd_fidelityfx_loader_dx12.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\amd_fidelityfx_loader_dx12.dll",
+    "size_bytes": 25864
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "a71b06a8e949734a03e266e9f5f15696e905d2894084af3090707438e40a9664",
+    "sig": "304502200880290df0c4a152661ba8a26f9d44b3acd28140d96542eb10c85d0f8a46a415022100c8568d0eb31a016c8d41531a9ee0d3617e6250b5fab8ba6130e39d3ab351d106",
+    "ts": 1779083312,
+    "ct_anchor": "0a88fa0e8e260ab0a528e91acea0b0f9c1922cde0be6414d38a35284438ef72e",
+    "filename": "amd_fidelityfx_upscaler_dx12.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\amd_fidelityfx_upscaler_dx12.dll",
+    "size_bytes": 13138192
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "2603cf7b408ac169003ebf31494b28296d6897737e450e79c713cdd0f0d5de7c",
+    "sig": "3044022010026d5a6c3aff996144997974dff513ca40ba382a440e252ea48ad247d4ca8702207c0ca430160c6fc24bb3a1cdd89eb3ed18767a696cf47f5ca6bd01aa1b5a832c",
+    "ts": 1779083312,
+    "ct_anchor": "526e461df642dbe73c77c401358b952032c56d4bd32726cf492f52aa27ba5049",
+    "filename": "api-ms-win-core-file-l1-2-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-core-file-l1-2-0.dll",
+    "size_bytes": 11784
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "c580afb20773e61c9b8bfa9b59d5793a926640e3981c9b0bb0916cf79024e14e",
+    "sig": "304502203f2a966bbac11ac5c652314b1ecbc3a1435a8356e6ad2107f7aa6d940a4443150221008238c1c0fc1ece5d0e0acc39c63d66882e0753bcf79590e223758cd07bca4733",
+    "ts": 1779083312,
+    "ct_anchor": "4654064696b75f218585d4657ca6d68ef9063a1a7dce8bff52cdf7f32fcb1daf",
+    "filename": "API-MS-Win-core-file-l2-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\API-MS-Win-core-file-l2-1-0.dll",
+    "size_bytes": 11792
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "f8de371611531bc98b3fa67879cbd8d64e051fb5a881f61c89a4634f351f4248",
+    "sig": "3045022100f80062ff7d2f3f953a62cd049763bb1abe79fc879a5f15ada53abedc28ea1328022067f57a805b68ea6632a8f178f710b738672041af1ab77bfcda4eb518ac570f96",
+    "ts": 1779083312,
+    "ct_anchor": "204bb9e37b0ed0a066546455fc3e38157eb12e1dc0aa1a8e76f731ae8caab49d",
+    "filename": "api-ms-win-core-localization-l1-2-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-core-localization-l1-2-0.dll",
+    "size_bytes": 14376
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "3c7c0954cfb2d60cad021e41568a656d7963b116a5e963153cae989e4bd29a47",
+    "sig": "3045022100f5f63e772fc34ffc4e90a7aa4998e7970f69ed048bdc7a8cc54e9fde7ba09f930220656918a9eede96e5b3c83d5cc1850354a2d5148a3481e0a686e7d8694d82e2fb",
+    "ts": 1779083312,
+    "ct_anchor": "3a3919cbfbbec4308cb3ce798caac8d67db4303b75582b0adc5eb85ac9ffe850",
+    "filename": "api-ms-win-core-processthreads-l1-1-1.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-core-processthreads-l1-1-1.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "f103f6689672dd4f46c8e9a8525f557aa5c320f739bc3322a50861ccc9dbcac4",
+    "sig": "30460221009d1ed1bd1cc69a842c496097510c7d5ddff49a59f2e2e25dc5ef532f25c4d40f022100d8e30c98df64b632fa611200428aaae0dd8363f2c4c3f2d04170c0f97c4bf895",
+    "ts": 1779083312,
+    "ct_anchor": "01cbc46c528c177ae6620d959110261893864df5c989e3145c038b1fdbd40e38",
+    "filename": "api-ms-win-core-synch-l1-2-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-core-synch-l1-2-0.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "fdaf360eb2323f8bb96d80633a001bef06bffb2d113cfd43ededf22f76abc918",
+    "sig": "304402200b137dd5ec3982c688ca877b9c83c1cca0f68c647150fc35310754113741af500220765ad51c7885e4c50b53b2855674d2f588801c693294c8947d32a5b22f634c52",
+    "ts": 1779083312,
+    "ct_anchor": "4f6a0356700447eeeaef21bddb4ae9164582f6b3d7c37994544211b68e3899f0",
+    "filename": "api-ms-win-core-timezone-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-core-timezone-l1-1-0.dll",
+    "size_bytes": 12296
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "25a62bd72a716bc36c97942d44dfa7eb03f7195a004f769fe653d0aeb834e75e",
+    "sig": "304502206133444344697f5a018aee5958cca3c6a7014e08d1a017d20ceb950eae7b0109022100d214819ba0a5d8d6e3df6eca8b22be5c787cb9bbe4067d98488e178e7e425a89",
+    "ts": 1779083312,
+    "ct_anchor": "34201eb39613550448cd23675c93d88c69963ced494169d6ed1cee2681bac5f1",
+    "filename": "api-ms-win-core-winrt-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-core-winrt-l1-1-0.dll",
+    "size_bytes": 19704
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "cf6a2f62d65ced83ab9a6a096d9df3183863b7e41fa1bcb9652dbe9ce0484f76",
+    "sig": "30450221009ef73dbef7b5e1beb884b1005bc0f614c7f35f75c783c2d15303379d19bf15b902200b3c48d922b8f013ee7eeb156d131a1c650cd9c20816f3ce11c6fc2d9bee7ea1",
+    "ts": 1779083312,
+    "ct_anchor": "ac1e9e18d76feed5f39104ae85bfb417f4e8032b1e4fbb6f22690bf30824db0a",
+    "filename": "api-ms-win-core-winrt-string-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-core-winrt-string-l1-1-0.dll",
+    "size_bytes": 20240
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "83e407a00a8bbda93edd503a25377f1bddc923a71c950bec618fdc4c6eaac746",
+    "sig": "3045022100917d25034311c706254eba7dce1d045eac5b6b9a426b283f09cde422b8e90fe0022038e7d03f472f6159ffa69362f14889be9166aa8249c63a0c5d880b1d1d1bda9f",
+    "ts": 1779083312,
+    "ct_anchor": "6411421890e963ac7b3fb6231e2bba6a91321a55dbb976f35b68dc0d2f56e48b",
+    "filename": "api-ms-win-crt-convert-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-crt-convert-l1-1-0.dll",
+    "size_bytes": 15880
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "0ae9c501110268bbf22f7703d15d282aea8215f0e79736ec9848d6797d49f766",
+    "sig": "3045022100ab665022190735b9e523595fad47a137ec83b86ce9a9baf688fb6033af946feb0220567a7fb65e79322025a94c4d4e7fb2e37329160d519ac717ff20c2f3619978cd",
+    "ts": 1779083312,
+    "ct_anchor": "427e7e7d6d08ab87d448ba54d092128e43453a48ff9feee2a6c8229f17f4a743",
+    "filename": "api-ms-win-crt-environment-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-crt-environment-l1-1-0.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "39971442910314da7de95ee35065b44e6c007d6004c0bdcd6b308a9196f5b94e",
+    "sig": "3045022100e814a8ed5e8bd6734111bf1bc793404ec6d820512e92b6e441465c68586a4d7502201dde2920b0bc8a0e28dbf8f6f2d916d7daa817ccc6cfbf791a323bc2f857267a",
+    "ts": 1779083312,
+    "ct_anchor": "1ac02df67fb2f5d2e7a8c9bf9c3447e33caf245d5a03de7ac76339a5f014e572",
+    "filename": "api-ms-win-crt-filesystem-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-crt-filesystem-l1-1-0.dll",
+    "size_bytes": 13840
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "359da4b43bd597daf3b15ffb22fc729d4be6ecd37337b9351ccd7dd01a2dc15f",
+    "sig": "3045022100b9a4eb0656c5f34af00f8e780e05c6893361b7e45a98d3871880794f4272cd8e02204af0e9435662465aae564a5e0cba7b71f06bb75103ceb2c0ab33808eab55956b",
+    "ts": 1779083312,
+    "ct_anchor": "9bbff029c9828766380dc79bc77a6cd029389ac56e6a2869eb4d49b841e4bb8b",
+    "filename": "api-ms-win-crt-heap-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-crt-heap-l1-1-0.dll",
+    "size_bytes": 12816
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "9ba67d04cab3cf0eb77d02fb0c1115bfbaf583bc081993f00e9e378f9bc8c9da",
+    "sig": "304502202cf1b2ea085822c1810ce46eb15c142dd5f5eb3bed19caf2a137236040e7f6de02210096d4c3ff5eb6e7db92f5fbd1caa7934aaa90e5dae4a534614a3c8a51f4b0a4d3",
+    "ts": 1779083312,
+    "ct_anchor": "92352fe881ac69a3c64d8253e07bc8375f4499f0deb6697d6ec8208a72570710",
+    "filename": "api-ms-win-crt-locale-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-crt-locale-l1-1-0.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "95939a42b1c8a8f318f1ab004dcb2ceb3735602b0c3bb5acc1dc4d181cfb0c02",
+    "sig": "30450220092ee17536a2d19d6352680e51395bcd6e836ffad94201044c2382aac1b5fc3c022100b2a246b619b95699ddd3d1e5834ab47a92ffbec14656473cc3ee7b2d81ebf43a",
+    "ts": 1779083312,
+    "ct_anchor": "df0e2dbdeec94d964f1305cd82835925846222ed97e041aaf45bfeaeaa2a2e0b",
+    "filename": "api-ms-win-crt-math-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-crt-math-l1-1-0.dll",
+    "size_bytes": 21008
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "48cf88e20807462965039900abfb1f432c7d0be1181366960ff3bf8c212fea51",
+    "sig": "3045022100937c6991182325c594ddfe68493ada72c040e484d61fc2c8d57eb1e8cb9cf964022072683e17ce3ed6fdc4198b53e70a2989480073ffd650e2d333805ce0add77661",
+    "ts": 1779083312,
+    "ct_anchor": "9aac98ca3fe9188cf6a647eec9670040f84c99ad38acbe434967706a8479b5ee",
+    "filename": "api-ms-win-crt-private-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-crt-private-l1-1-0.dll",
+    "size_bytes": 64528
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "5250f5d933d2078e64110f764ecfba8a0af3b8cdb01e181ac04241ce52292c63",
+    "sig": "3045022029171c05cd66ce58d5b58a9f09ac385fd819d716e972f5e5e5bece04d8f0b960022100881653f5864880a6e0cf819b16f1f6e6a32005bc1a027c7eac1d0f6ec5bf17f6",
+    "ts": 1779083312,
+    "ct_anchor": "379bcd7d574f836cdfc0852c9bb0f808d2cb0c379bb048db7c5ad9b7b7ba7624",
+    "filename": "api-ms-win-crt-runtime-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-crt-runtime-l1-1-0.dll",
+    "size_bytes": 16400
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "79aa95d34cf586cdd28705ca5f61660ca2c7e22554ff85a9e668eb3220e226b5",
+    "sig": "3045022100cf3c9c82c411b108f5031ac809a9f0142d298e3497142a64edc76ad57183605802204886b1025a6f9b4dec550785fba2d2ac13b37e64a8fb781643cb266c8bd9d6e1",
+    "ts": 1779083312,
+    "ct_anchor": "8e402d8e8f647a806a303ab170789f8cf5cf8c9ef05c854481932f63500e933f",
+    "filename": "api-ms-win-crt-stdio-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-crt-stdio-l1-1-0.dll",
+    "size_bytes": 17936
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "42715c173e308bb2c5078d719a9ca5834837ad3f080c1990a54634139baa2ef5",
+    "sig": "304402206c64dafd407ba8a2fa47dccf8f38dfc1919e58c0b53a3bd5c2d991d3192d14c802206f49f289622f3c67e761147c17f1697b0dc19a1e82bf2754c6d6b93e968fdca7",
+    "ts": 1779083312,
+    "ct_anchor": "4e4337ee6db75af11938198d2b2a7f7609f8974ff093532ea16f58b5ed8af003",
+    "filename": "api-ms-win-crt-string-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-crt-string-l1-1-0.dll",
+    "size_bytes": 18472
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "18ddd6fc4aef927c9c4fc75d403843e38f1a38f65581bb9b31b072dba2b0d04a",
+    "sig": "3044022037ef9b7927c624170dd689b94a7fda7ddd3e50d0863491c8bfacde01f9d71bf502206697b1f78b5fd8f94880bfca17cc58d1c42dfb6cc5dfec71bb82a39a365eee1a",
+    "ts": 1779083312,
+    "ct_anchor": "406de8eecb50b51ef0c571c2f1294b328fdc40b5bfa955eadde7aceb97c89264",
+    "filename": "api-ms-win-crt-time-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-crt-time-l1-1-0.dll",
+    "size_bytes": 14352
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "07d0d1be0e66601c3e36eb900586a7eed26e0e9e8772a610a3789580d86b7b70",
+    "sig": "304602210080948d08c345e7b9d3ade58e60578b6c52b08002e39f7ba284dbc54b1aeffb750221008ef05408b5a8a92fef82f5b041e0f0b6e76a7d82ad70485c268e218f35845690",
+    "ts": 1779083312,
+    "ct_anchor": "74afd0316e5b39ec88f4d533dffaad377b0253db00c08d83ab220c21b4437760",
+    "filename": "api-ms-win-crt-utility-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\api-ms-win-crt-utility-l1-1-0.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "c3e94f0fbf9ed8cf5e1766d554b12a31a7aeda7cee5f736480fac3d4d52eb207",
+    "sig": "30450221009e0add3320d79101a30ce94dd9912894c203b787dbabb606a6ff774cd1aeb8d202207dbe58a28638208e7b0adf314d43163edcbe9a8a464d0fba849c564e0875bfd3",
+    "ts": 1779083312,
+    "ct_anchor": "08528daa2388c43d01ee3a037ea6102f710225981764a77a2f6c42c85fdd45e1",
+    "filename": "azure-attest-manager.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\azure-attest-manager.dll",
+    "size_bytes": 42384
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "a5777d77a51395e291ea4e8a1b89f5ae8458c2bf712000970b8fcba6404f99bd",
+    "sig": "30460221009c7f4da4432efcc1f94ccabf2c6ce29e029efbfcf0de245e7ee0f1ec64952867022100f47382f74ec05ecfa2c1cb4a38c24ccfc4294b35960b0cca0ac02d49900bac12",
+    "ts": 1779083312,
+    "ct_anchor": "b5a256277abb5776c1207cac17011c4c8c3f894ea80087dfe1657717ff31a66d",
+    "filename": "AzureAttestManager.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\AzureAttestManager.dll",
+    "size_bytes": 262048
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "d774575ba2615548e78400a959f2cf164daf1457402a106a411baadb225d0de4",
+    "sig": "3046022100c68883b0203504962c54bd4d585a4963990325c9420f1280f8502fb937b47c09022100943a4d3d155bab933f11de0307095f1040ba52076a6095c3e63b1ec412150f3e",
+    "ts": 1779083312,
+    "ct_anchor": "37398680b01e43fa5f23be702ff269027bb247b9ef3855631aaf65f1558d453b",
+    "filename": "AzureAttestNormal.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\AzureAttestNormal.dll",
+    "size_bytes": 380304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "592c413cf81961addeda3d90b700b84b5c5651960f6a8aeff8e095658321d98c",
+    "sig": "3045022100b66e22923055ecb7f250202b25fc809f4e446d665963058dde3dffdd7a54ea0d02207dfdf798723102a52679be2f1550b2b06bb828de53ba625f4767ea41ed994099",
+    "ts": 1779083312,
+    "ct_anchor": "d75221d013aa8b40096b381df677f34b66030aa4cc4d283231ce8dedd2017ed0",
+    "filename": "bink2w64.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\bink2w64.dll",
+    "size_bytes": 416752
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "6de491b7febd1195439aeddf2799c518a681a36e081a27df799ad7b7f990b6ac",
+    "sig": "30460221009d0dda35d2a172cb025f40fe933676b8260aa46013b6d5ce8a32be5a70d80cbf022100c6e612a8eb6c375c870b29e87229075e7068e0cea51c89f960a50da56bf3c8b8",
+    "ts": 1779083312,
+    "ct_anchor": "a6e6d337568bbdfbc240d7daa510894185c76c067019f3518c555888b86eb2fa",
+    "filename": "CgSDK.x64_2019.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\CgSDK.x64_2019.dll",
+    "size_bytes": 260712
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "90151c2146786b28fd2a4b7503a1d1b67f8f99a1c27a629a237f09fcff17e82e",
+    "sig": "3045022100bcf3679c2e1dee273b8aedcc1e592b6c89d92a7552a4a57fd1e1d519dda08d04022069c491300f63ddadc9ba2cd6a00c05203d96d9000bcfa2e6929cecbafbb62c1f",
+    "ts": 1779083312,
+    "ct_anchor": "1d0975091e5baba12a7413d655683aa7afad7593c76a80a6428091725c639003",
+    "filename": "amd_ags_x64.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\amd_ags_x64.dll",
+    "size_bytes": 179408
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "fa7800938781f7059709518bfd0b7301bedea22d21cb6712a14b65d6ba80bf09",
+    "sig": "304302200396126d32ce9bc923cb316219145eda885039ce370b966465ab1d6196c8319e021f27931d9be24622408dc52f7c26cd67e599cb8d5d6b076bf769223a414fefea",
+    "ts": 1779083312,
+    "ct_anchor": "b1574ec767cbe1191ad488cf7b2f3e5f0a67a856b3255453eacb11c7c562921a",
+    "filename": "amd_fidelityfx_dx12.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\amd_fidelityfx_dx12.dll",
+    "size_bytes": 6621392
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "2603cf7b408ac169003ebf31494b28296d6897737e450e79c713cdd0f0d5de7c",
+    "sig": "3045022040b0722d65d8150e4243914e07588ccbc960ca6d6858cb1e7ada7180a768a217022100c1fdb2708cf84a0655eb48373534bbd84c3bff4b67e58364a8954c7be209a2df",
+    "ts": 1779083312,
+    "ct_anchor": "526e461df642dbe73c77c401358b952032c56d4bd32726cf492f52aa27ba5049",
+    "filename": "api-ms-win-core-file-l1-2-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-core-file-l1-2-0.dll",
+    "size_bytes": 11784
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "c580afb20773e61c9b8bfa9b59d5793a926640e3981c9b0bb0916cf79024e14e",
+    "sig": "3045022020310756db40cc98a5e306b3ccf491ee8dd5da0494a10c0dca7521a91aabfa25022100beba6d4d5948032a445f7e31f83466833ea2a96bc8a08dc16ace31b09268243e",
+    "ts": 1779083312,
+    "ct_anchor": "4654064696b75f218585d4657ca6d68ef9063a1a7dce8bff52cdf7f32fcb1daf",
+    "filename": "API-MS-Win-core-file-l2-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\API-MS-Win-core-file-l2-1-0.dll",
+    "size_bytes": 11792
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "f8de371611531bc98b3fa67879cbd8d64e051fb5a881f61c89a4634f351f4248",
+    "sig": "3046022100fc3cd7ed3ad79931f8115797bbf897002ec103f94d36a95c5476bc738fbeed02022100eeacd2a2e178807336743871387b6f54bca6c829bf8ece372db55081cb918bfb",
+    "ts": 1779083312,
+    "ct_anchor": "204bb9e37b0ed0a066546455fc3e38157eb12e1dc0aa1a8e76f731ae8caab49d",
+    "filename": "api-ms-win-core-localization-l1-2-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-core-localization-l1-2-0.dll",
+    "size_bytes": 14376
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "3c7c0954cfb2d60cad021e41568a656d7963b116a5e963153cae989e4bd29a47",
+    "sig": "30440220639fa0117613d6d233fcba901a24ed849e99d04f61061d6051c5ef23888130b402203b9b21c5c5bd3811e3a941e1e29a6b3b98180f68d7d6c2a90f1b06b553fc6b72",
+    "ts": 1779083312,
+    "ct_anchor": "3a3919cbfbbec4308cb3ce798caac8d67db4303b75582b0adc5eb85ac9ffe850",
+    "filename": "api-ms-win-core-processthreads-l1-1-1.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-core-processthreads-l1-1-1.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "f103f6689672dd4f46c8e9a8525f557aa5c320f739bc3322a50861ccc9dbcac4",
+    "sig": "3046022100993a38eff186e7ede61bad445f69c01aa23f986b048d42fef51d57307e673d83022100c6b383cff34f2c375d59425bda36760d028caf71d55afff5867096a1837664fe",
+    "ts": 1779083312,
+    "ct_anchor": "01cbc46c528c177ae6620d959110261893864df5c989e3145c038b1fdbd40e38",
+    "filename": "api-ms-win-core-synch-l1-2-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-core-synch-l1-2-0.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "fdaf360eb2323f8bb96d80633a001bef06bffb2d113cfd43ededf22f76abc918",
+    "sig": "3046022100d4ef699b77973bddc1d8f7bea139237c8d41d1172f53c5df9157e1592fd6912f022100ec95308b563184af6aba060ba6b41a88f4d576848ee2aa1c0dc1132ff84035dd",
+    "ts": 1779083312,
+    "ct_anchor": "4f6a0356700447eeeaef21bddb4ae9164582f6b3d7c37994544211b68e3899f0",
+    "filename": "api-ms-win-core-timezone-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-core-timezone-l1-1-0.dll",
+    "size_bytes": 12296
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "25a62bd72a716bc36c97942d44dfa7eb03f7195a004f769fe653d0aeb834e75e",
+    "sig": "30460221009600d1772ce4fceb6d47877ac82c2c3da2b1227d2a1d27d5277b464d95f788c1022100896fc864eb2b6eca2d90f8d9def7af5af9f72060add7ddf5361e7a9b939ecb48",
+    "ts": 1779083312,
+    "ct_anchor": "34201eb39613550448cd23675c93d88c69963ced494169d6ed1cee2681bac5f1",
+    "filename": "api-ms-win-core-winrt-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-core-winrt-l1-1-0.dll",
+    "size_bytes": 19704
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "cf6a2f62d65ced83ab9a6a096d9df3183863b7e41fa1bcb9652dbe9ce0484f76",
+    "sig": "3045022029866e3e2b86e3069223d678f8d88538af6014421c80e2f1d0ca273bb0dd395e022100a2b9387a25d1c4d9dfc9de9b1a16c6b0377b8f5471acd27ae946e4fe00dfadfe",
+    "ts": 1779083312,
+    "ct_anchor": "ac1e9e18d76feed5f39104ae85bfb417f4e8032b1e4fbb6f22690bf30824db0a",
+    "filename": "api-ms-win-core-winrt-string-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-core-winrt-string-l1-1-0.dll",
+    "size_bytes": 20240
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "83e407a00a8bbda93edd503a25377f1bddc923a71c950bec618fdc4c6eaac746",
+    "sig": "3044022049f99703a218b65f4be1e248c1316b3a2b2a25ffdabdb7c5ab38e26598b507f5022027201ca707457fc2425aa00b5b21a2e16b3cf9a7ecc112058b3fd0aa16e5bc70",
+    "ts": 1779083312,
+    "ct_anchor": "6411421890e963ac7b3fb6231e2bba6a91321a55dbb976f35b68dc0d2f56e48b",
+    "filename": "api-ms-win-crt-convert-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-crt-convert-l1-1-0.dll",
+    "size_bytes": 15880
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "0ae9c501110268bbf22f7703d15d282aea8215f0e79736ec9848d6797d49f766",
+    "sig": "3046022100d7b702d82d568d07a87c97d010c146db3909bf790bb3ddb5cdd2727aed175e4c022100efe9555dd7482d12ce34772ba17896ee6cf9616e24f5f37019a7a37454ac24ed",
+    "ts": 1779083312,
+    "ct_anchor": "427e7e7d6d08ab87d448ba54d092128e43453a48ff9feee2a6c8229f17f4a743",
+    "filename": "api-ms-win-crt-environment-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-crt-environment-l1-1-0.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "39971442910314da7de95ee35065b44e6c007d6004c0bdcd6b308a9196f5b94e",
+    "sig": "3046022100c3fc9deb0d9e1c53e0ee39ee095eb51da4a24fdc03c868c929e5d55a23455941022100a7534039f65fbe2e3dbcff154cd5c2285ed0e7c26c145346fcc1b1c3eea7b263",
+    "ts": 1779083312,
+    "ct_anchor": "1ac02df67fb2f5d2e7a8c9bf9c3447e33caf245d5a03de7ac76339a5f014e572",
+    "filename": "api-ms-win-crt-filesystem-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-crt-filesystem-l1-1-0.dll",
+    "size_bytes": 13840
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "359da4b43bd597daf3b15ffb22fc729d4be6ecd37337b9351ccd7dd01a2dc15f",
+    "sig": "30440220692519bbec0df80f023129f3c8ba4a1ab684d5573644793c98cb9cd158e519530220704ea376bf4edebcda2a0f8a9961f7ecc3c18c1880eb9efa7c4c27761721511f",
+    "ts": 1779083312,
+    "ct_anchor": "9bbff029c9828766380dc79bc77a6cd029389ac56e6a2869eb4d49b841e4bb8b",
+    "filename": "api-ms-win-crt-heap-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-crt-heap-l1-1-0.dll",
+    "size_bytes": 12816
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "9ba67d04cab3cf0eb77d02fb0c1115bfbaf583bc081993f00e9e378f9bc8c9da",
+    "sig": "304402200bdaf5b2f69988bde732a281fc007a4d1f376d304bd8ad982695ae142dacb62402200164a812775ecbdb7f585a58b569dce8db017e8084a0519d8dc3c794ea919db2",
+    "ts": 1779083312,
+    "ct_anchor": "92352fe881ac69a3c64d8253e07bc8375f4499f0deb6697d6ec8208a72570710",
+    "filename": "api-ms-win-crt-locale-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-crt-locale-l1-1-0.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "95939a42b1c8a8f318f1ab004dcb2ceb3735602b0c3bb5acc1dc4d181cfb0c02",
+    "sig": "3046022100abc260821004a183d7ef20e5ee83eba39b55e6ece16f706371e5c2cfc983a2f5022100d577191b8d86f10ad4a160af546f4ebec80f949d91f1a6bb79a3b791738bd248",
+    "ts": 1779083312,
+    "ct_anchor": "df0e2dbdeec94d964f1305cd82835925846222ed97e041aaf45bfeaeaa2a2e0b",
+    "filename": "api-ms-win-crt-math-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-crt-math-l1-1-0.dll",
+    "size_bytes": 21008
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "48cf88e20807462965039900abfb1f432c7d0be1181366960ff3bf8c212fea51",
+    "sig": "3044022046070442d23153142497249dc4813b256d7de3ca49096b56897a7502bc626c0d0220068aeb5152c02a169f46456a611d1cdda8990d90533bc938257a0277b1b5214d",
+    "ts": 1779083312,
+    "ct_anchor": "9aac98ca3fe9188cf6a647eec9670040f84c99ad38acbe434967706a8479b5ee",
+    "filename": "api-ms-win-crt-private-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-crt-private-l1-1-0.dll",
+    "size_bytes": 64528
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "5250f5d933d2078e64110f764ecfba8a0af3b8cdb01e181ac04241ce52292c63",
+    "sig": "30440220170c45e782d75a089ff687b4de9690cad9d381f40f131b61f1ba6aa6993f449c022068263ab4271edc51f7c9903ede382ef16db3453644e63c2010b741f3c4e2665c",
+    "ts": 1779083312,
+    "ct_anchor": "379bcd7d574f836cdfc0852c9bb0f808d2cb0c379bb048db7c5ad9b7b7ba7624",
+    "filename": "api-ms-win-crt-runtime-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-crt-runtime-l1-1-0.dll",
+    "size_bytes": 16400
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "79aa95d34cf586cdd28705ca5f61660ca2c7e22554ff85a9e668eb3220e226b5",
+    "sig": "304402202719a9256eee3b3823ab8d3e6abc2ec1f5b077233c8efb18aa47b03687135819022072f106b8aec50777b84c2e8ad14354a834da720006f839f4aebe090ba688641c",
+    "ts": 1779083312,
+    "ct_anchor": "8e402d8e8f647a806a303ab170789f8cf5cf8c9ef05c854481932f63500e933f",
+    "filename": "api-ms-win-crt-stdio-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-crt-stdio-l1-1-0.dll",
+    "size_bytes": 17936
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "42715c173e308bb2c5078d719a9ca5834837ad3f080c1990a54634139baa2ef5",
+    "sig": "304402204a0aa666ee15daf8f1e4d8eea6440b10406b5044d844dc357d2bf19c5972ad8002203936fac7f7a16f7273c04103a6e978da90f060fe4e4191d91c3533ebec3081b4",
+    "ts": 1779083312,
+    "ct_anchor": "4e4337ee6db75af11938198d2b2a7f7609f8974ff093532ea16f58b5ed8af003",
+    "filename": "api-ms-win-crt-string-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-crt-string-l1-1-0.dll",
+    "size_bytes": 18472
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "18ddd6fc4aef927c9c4fc75d403843e38f1a38f65581bb9b31b072dba2b0d04a",
+    "sig": "304402203976d60c46c9373cc73f610b9fdcab7e5ba754934402694d64f754dede591a08022027ee16d2b82bad5be03a92dda03f339d4cf611dfac278b62c8a79768c9d20c31",
+    "ts": 1779083312,
+    "ct_anchor": "406de8eecb50b51ef0c571c2f1294b328fdc40b5bfa955eadde7aceb97c89264",
+    "filename": "api-ms-win-crt-time-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-crt-time-l1-1-0.dll",
+    "size_bytes": 14352
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "07d0d1be0e66601c3e36eb900586a7eed26e0e9e8772a610a3789580d86b7b70",
+    "sig": "304502205f015e4839adaa7e86a067d2ac519278fec996f30efa1dfc97993a851a70c30f022100df4a67768c6b158d36356a337d0de57a8670c1beca1f9bd2095e967610e971a6",
+    "ts": 1779083312,
+    "ct_anchor": "74afd0316e5b39ec88f4d533dffaad377b0253db00c08d83ab220c21b4437760",
+    "filename": "api-ms-win-crt-utility-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\api-ms-win-crt-utility-l1-1-0.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "c3e94f0fbf9ed8cf5e1766d554b12a31a7aeda7cee5f736480fac3d4d52eb207",
+    "sig": "3045022100a523b3bbede87da8436f250ce6b019fb515caaf0ecaf2f964802232abc64cf1802204421be0fe8f89518c91a75f1df7459ab7741d11d0ed3428000fe543804c6c225",
+    "ts": 1779083312,
+    "ct_anchor": "08528daa2388c43d01ee3a037ea6102f710225981764a77a2f6c42c85fdd45e1",
+    "filename": "azure-attest-manager.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\azure-attest-manager.dll",
+    "size_bytes": 42384
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "a5777d77a51395e291ea4e8a1b89f5ae8458c2bf712000970b8fcba6404f99bd",
+    "sig": "3046022100e66aa01f44627811350112c7337a1aeda51232f4b65adde328f5f397ce7f9f89022100df70f1b458cf09ddc8af8f5bd455a4cb6875e3e1152c40af4962faa659d344d0",
+    "ts": 1779083312,
+    "ct_anchor": "b5a256277abb5776c1207cac17011c4c8c3f894ea80087dfe1657717ff31a66d",
+    "filename": "AzureAttestManager.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\AzureAttestManager.dll",
+    "size_bytes": 262048
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "d774575ba2615548e78400a959f2cf164daf1457402a106a411baadb225d0de4",
+    "sig": "30440220288a99a810776b8fdc547078cd621525b0caeb67618904a72938fac70821701902202a8011ee5afa5bf826beda2c90cc4f42a11789c1293d4faf7ef931c821874d26",
+    "ts": 1779083312,
+    "ct_anchor": "37398680b01e43fa5f23be702ff269027bb247b9ef3855631aaf65f1558d453b",
+    "filename": "AzureAttestNormal.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\AzureAttestNormal.dll",
+    "size_bytes": 380304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "3db16c1fbe59fa494f86e2d53227745d20fabe7efe95032ee14e4f784c53b79e",
+    "sig": "304402204480402a267212569fc97a69fd034f6a46752552cc7916f7828594f2f52d856a0220160b86cba106473e8e43b7a660ece6a929614e7523c627889a5794311c6f9718",
+    "ts": 1779083312,
+    "ct_anchor": "be459a42cfc70c77bf8ae424523e17dc616f70e8e7f0a323079adea0e970610b",
+    "filename": "bink2w64.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\bink2w64.dll",
+    "size_bytes": 416760
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "6de491b7febd1195439aeddf2799c518a681a36e081a27df799ad7b7f990b6ac",
+    "sig": "3045022100ffe949725f48683ebf6b66998b5ff0f7ce72b6b22830c351fbd5850f22411c0a02202fa0ed94fda40a2397bc739d2a486e7eadaddae9d8649ea45ffdb36a1bec34d7",
+    "ts": 1779083312,
+    "ct_anchor": "a6e6d337568bbdfbc240d7daa510894185c76c067019f3518c555888b86eb2fa",
+    "filename": "CgSDK.x64_2019.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\CgSDK.x64_2019.dll",
+    "size_bytes": 260712
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "892cea82e850f3de6379c5b3a01aeb1fa29a024d1caae585cbda9a7d4ec263c0",
+    "sig": "3044022008edd13e7413f89117f291bb1d83ad41902514120ecc953b22b57636007c4ff7022007c77a20ddcbd0f16986621b30582a5316ed45a06547d9f94531f04573d16c27",
+    "ts": 1779083312,
+    "ct_anchor": "457b3a3285b80132c5d974a8ae32f346f60817480cc711aafc173b5511c02f85",
+    "filename": "concrt140.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\concrt140.dll",
+    "size_bytes": 299504
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "83510786549ff142c4aa5ced8e07524a6e36b5ea0ad1359895ee73b00c803abf",
+    "sig": "30440220071eb4d1f36d558dd6d2ee2596117370a761c3f4ece302887cf051b914f3e10d022020f31a305a5b179d58b7b106a53bc6c3e602a139f3e733e12b7272ef443dd781",
+    "ts": 1779083312,
+    "ct_anchor": "831872e00bd4abc816494080c2fa060c93eaa4921c69a0df580386e46d30794c",
+    "filename": "D3D12Core.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\D3D12\\D3D12Core.dll",
+    "size_bytes": 5616520
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "2afcd22f008ddd88a54bfdfbc6f064650c4bbd0448686c3d23df8d0ebd0b2fab",
+    "sig": "30450221008450b54ba63142d546dfb94f6225c9faf33aecd4e983a5184c8a96cac5bba15f02203e3b6355254c324cab992256e34ce0b7cf1724cc4e4b6da20f6f359b05566243",
+    "ts": 1779083312,
+    "ct_anchor": "7bd420f4dad960700e3b1cba9b8d5dc809cc057eee3d74d28c7597123ab9fae1",
+    "filename": "dbghelp.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\dbghelp.dll",
+    "size_bytes": 1543360
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "20efeb706758c9c8948cd0adf73d3c754172bef31b8ae370f3879efa6b9ffe1f",
+    "sig": "3045022100f8b33c0cfc1b41057b9a5b6364da72cdb41ddb4b36f4fa91632391a2c3ac1bda022073b095fb66e0d7522cce95c6bae9f05bbabe7ff0d2c8864bd35211e7c6f69100",
+    "ts": 1779083312,
+    "ct_anchor": "0d71506cc89f7b9be99d4e9b6de4111900e9e21e8ddf7a3d691c8e533ce65275",
+    "filename": "discord_game_sdk.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\discord_game_sdk.dll",
+    "size_bytes": 3488768
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "b683e311cdbc910eeca1816e254900f3ffb73861ce328b34e8a0fb584ddf0564",
+    "sig": "3045022061d41fccd64419eab12c3abe864e9a0def4115cd4bd4222956899b77076d60770221008eb2d4368de07ee12cc9d405092a67cecd75118b06767127eb71071fe63a3e98",
+    "ts": 1779083312,
+    "ct_anchor": "953ee2a7d78e9392e9c85e6f4aa91b42c39e020d61379c8a5876354693b1a718",
+    "filename": "GFSDK_Aftermath_Lib.x64.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\GFSDK_Aftermath_Lib.x64.dll",
+    "size_bytes": 5448280
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "0e4e15e66c7f490062918640b814a7cc70f0699698a23cbabc7deba644211eb5",
+    "sig": "3044022046d1d7025d13f9b0303e5dc78d25bf2ba388b0b8c6bda5e0b42338394ac3afca02207fc1c8ecbd4131b2731cff18831be32d0a8c76e2163d30863f355d78584620df",
+    "ts": 1779083312,
+    "ct_anchor": "0bba2b2c27fa98420459411bb0bc60f10b9c3fe08e2731db39e7bb34ab9fd007",
+    "filename": "ImmerseApi.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\ImmerseApi.dll",
+    "size_bytes": 1017200
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "c02e8c115b7ce5c03811cde78ebaaa42167884327e4edb62651148ab0e970199",
+    "sig": "3046022100f2c47599ddc32ebedd697570adcb22e7523ff78dea72c08f6212f4df1ca90c5802210096a7607256454e86b6abe9acc110a51877c5e78da8c56fc09d85280495d1c034",
+    "ts": 1779083312,
+    "ct_anchor": "11e8e93c2d4e16aa3f234307309cfaf7a63a588c5e61da9b378c6db2c2226287",
+    "filename": "ImmerseAudioAPI.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\ImmerseAudioAPI.dll",
+    "size_bytes": 86384
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "abd15c18a5732558ef566aa6ccfbdc9d3e33028ef5ea30fff4c992935816e977",
+    "sig": "3046022100d538c0d8e1d6c0a21af535f04a9a57fd3c657cfc9cd4692a9cfa5dcecbe9ae87022100be21f4360e841b94f20355c1eafee554a9e61661f120c8119b24709cbe91f334",
+    "ts": 1779083312,
+    "ct_anchor": "ec023e424ce12ec9e94437e89f53e698e5d050d2682ea20db92f60efce647272",
+    "filename": "ImmerseCommerceAPI.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\ImmerseCommerceAPI.dll",
+    "size_bytes": 442224
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "fa2ba243255ea98af484af25594b51fde18e9abb4812a61ad1978c3d75a3941b",
+    "sig": "30440220613245059767e6bafd23e4196d012325b356b6a341cfde1623aae68c79cbf33c0220651107d2fb754d756167289498084ed2b7dd1cc99f66c19bb633e59bac538078",
+    "ts": 1779083312,
+    "ct_anchor": "89a23d460c96c5ede336f17cf55362d0df44a62e79a96635a2501d066247d0e0",
+    "filename": "ImmerseEngine.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\ImmerseEngine.dll",
+    "size_bytes": 62832
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "c58d1102239f98371d2d0b0a766546ac1fae86ede1acaf659a30c0c55c3f5ab0",
+    "sig": "3046022100ba8f29cb291229fc85b62e82736397b86e1020ade3cce047f02badf511b1661202210082f8792ace088763fa9002c3409453544db1376e9e090b5a4036d63007427ea9",
+    "ts": 1779083312,
+    "ct_anchor": "cdb22eb87823232887359842db80fecc43e6f42edfb2e0826ba9c5692b7714ca",
+    "filename": "libHttpClient.GDK.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\libHttpClient.GDK.dll",
+    "size_bytes": 244728
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "253b34179d1b742432c1297bdf4cbcb3cd18fb87b1356c3c069684c2fde9b7a7",
+    "sig": "30450220446fbc89e8c6cdddd703638b30f8deca258ff745493561c99a28f5240ef169cd0221009f1ec2e80447bdca6f7f89a840c7d3a4907641f08c53f630f2667d8e867286fc",
+    "ts": 1779083312,
+    "ct_anchor": "d20af449f3efbcfcd7f42f85077e00a66144fa8901390844793365873464832f",
+    "filename": "libxess.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\libxess.dll",
+    "size_bytes": 74108944
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "ce1365af3b4294abe3a25ee24adef91dcd66a4abba10e4aee80d36421877a778",
+    "sig": "30450220613a28052c30bcfe87670ec29d4f5f3615eb7dbe6392483aa8bb0fff6fc6537b02210094f4a4b10ef02fd6507512a480144ca644c7caa74539fb5f625d343867ad4310",
+    "ts": 1779083312,
+    "ct_anchor": "fe086c935c1cb254650b6fa641b2a39d63b8b282337c2a64384c5c8a219fd75f",
+    "filename": "Microsoft.Xbox.Services.GDK.C.Thunks.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\Microsoft.Xbox.Services.GDK.C.Thunks.dll",
+    "size_bytes": 1964576
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "88673cc3f455e6fa132b302b0a42336814658fbe52c0df560004b4c7b0829631",
+    "sig": "3045022100fa8a18f1493230bb493d964850e3667ef6a168def8dcdd351f0b69f34e20922702205602b8cd6193ea14c6422b968a79eef78686f3ebd04d8332652fccd18477ef4a",
+    "ts": 1779083312,
+    "ct_anchor": "66ae68fb49f08329fe7218f0dcac0663784ec321abe5bb9dac516fb487240077",
+    "filename": "msvcp140.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\msvcp140.dll",
+    "size_bytes": 564712
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "44ce5144c73d0fc1a61009d56ac97647eae724ec0780bcb9568920ee29ef007b",
+    "sig": "304602210084462c31ad25ac156a5e4a71734c100ffe32eb1ecb25f450797b58fb0bdaaf86022100e140faef121fe90f8fe6e7357035150d5ee000e312ce2edd878c61f223434958",
+    "ts": 1779083312,
+    "ct_anchor": "e9cdf5a3b1096d6dd957aaddaeb173556d3c1464c4374fa68029e123e85cce47",
+    "filename": "nvngx_dlss.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\nvngx_dlss.dll",
+    "size_bytes": 48972848
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "3bb92b4c8804bea3021b878842e859bd9fb45b5be66100a2088e39265a5f4ce7",
+    "sig": "3046022100dbb09d4a3822ab7d07470565f2a7051756ebab15e785695a61983783c3f09683022100f5cbbc7655f20b8ef99db8e16d59f53da69d28b38c7b5a49d2f95f95bb30b7e0",
+    "ts": 1779083312,
+    "ct_anchor": "82746359a666b35d988a70644166452473f42a00da92924bf5ee047c51dfd9d2",
+    "filename": "nvngx_dlssd.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\nvngx_dlssd.dll",
+    "size_bytes": 72979488
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "c589dd9fdd73de7a1e739b70883e51d3508666877052d95a53222a8d6fb8a685",
+    "sig": "3045022100be2c86ae5204ba24f42d62282e0343ae67fee7a7c0c5d3afcb65894c1e7a2f98022073688dbac74297be16422fd88c87d6d5c5671ae2bd4dff7c3e3903e0d72933e1",
+    "ts": 1779083312,
+    "ct_anchor": "5f13de6caae87236b0d714b59200539317c03ccfcb7bc73110b683474f0f6a18",
+    "filename": "nvngx_dlssg.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\nvngx_dlssg.dll",
+    "size_bytes": 7597104
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "a9fbabcacb209af9d44d09e43b5519a29b2b804c7571170a7d8c10245e154989",
+    "sig": "3046022100d961279eb06fa2747a1325bf2565f2ea36cc10fe4b60d96b6acb76c356b31d5f0221008a0f9cf0a74558abace03e58a0a38364d43ce8439e03348ca1da0d46bb42aaf7",
+    "ts": 1779083312,
+    "ct_anchor": "bdc28f27bd51d2104558f94329c082902964b80ff407951c900f42c88b219da6",
+    "filename": "oo2core_8_win64.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\oo2core_8_win64.dll",
+    "size_bytes": 972784
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "cc3fa3b2467da1d50519b28e2df73cab3f7ba700554ab7d6cdbb77a7a9978e10",
+    "sig": "3045022100fd25c4f4d35f0175c9898a398770fce56a335deaca21f233aff86aa759d0214002201ca5c4f4ef60127c2d606a37a02a47cdabf89e1beddcdaba2c0a156e2b6c1578",
+    "ts": 1779083312,
+    "ct_anchor": "93f70acac721fa58c0b8a12cb93c46ae50425a4079f3d98585254099f47359d7",
+    "filename": "sl.common.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\sl.common.dll",
+    "size_bytes": 675800
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "657e4bd3c4e22f9faa1c2430a10c1a342c9dfb0a74c175e6b4d8714fa30c4d37",
+    "sig": "3045022050f104a46d77bd191ff7ac78969a6751510efcc5ad487159b68f3a6822e1f0af022100cb67698a754f79079846c7a40cba0995ddaf2b9e831761948ba5d11b9b41049f",
+    "ts": 1779083312,
+    "ct_anchor": "8d9858a2e06f4226783a7564738be18ac12e3baea4dc8f7a62d7706eed1da804",
+    "filename": "sl.dlss.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\sl.dlss.dll",
+    "size_bytes": 237536
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "d7fcb67d13a8157057ac884c71309cd479d4da823304cbc7bf0b203f9a475eaf",
+    "sig": "3044022002843c37ae848b278015543d25066ceb54a4e20cb68498334a51dd7414f1d8e602207e52526448f30b0ff025531e132b6c2604b679a74cfd9ad3dd16c2bdb8b882f1",
+    "ts": 1779083312,
+    "ct_anchor": "c4d2f052e0080427bae05943cf6dd8234ec194e5d81c7cb553f7ce750ad04bb8",
+    "filename": "sl.dlss_d.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\sl.dlss_d.dll",
+    "size_bytes": 251864
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "72385ebc8ae4645123de42bb344dcf3cc9fa5310e42eb552f096f3088144841b",
+    "sig": "304502207484ad458ff424adb0b516371c33a3015681095742a2b08d66d469be0dc5f76f022100bf3c9a75dfd0385006c7c35ad413076bac882d435483f28eeec55c85b2674034",
+    "ts": 1779083312,
+    "ct_anchor": "2e2a6cfc4acf69f2ae2516edc955592642667d4bf0a1b93b6056b8fd67f0c5d8",
+    "filename": "sl.dlss_g.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\sl.dlss_g.dll",
+    "size_bytes": 448472
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "2504129dc95e29aef0d91aa57bc044224a2eb10218e51337c624fe7ce66a87f7",
+    "sig": "304502210084c5ac598deb9c0a96ee4922fe3b799fe3068f0a3df3f860a6a9f0c31b7d953c0220065bb8fad7a32365277ef656216ac9b1c56261dad7cd44eacf19c2e94be86b6a",
+    "ts": 1779083312,
+    "ct_anchor": "0b6c1cc7b90e0547b69f53e621d4493f7d8bdc4f31f41f6b19d9092dd6ed8181",
+    "filename": "sl.interposer.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\sl.interposer.dll",
+    "size_bytes": 543712
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "ce77856dfe4032a2399097d6bab6ce2b795a9670c6a68428d3911bec1c5679ae",
+    "sig": "3045022044e607d3fbc8fabf990d7618c400d7e242cd9b954551fc28abee50bf69ab717e022100b7ca47d7dcee685751dcc7ef79b153cfd4c19eee1a8c0508449bf0fd8988ecd6",
+    "ts": 1779083312,
+    "ct_anchor": "3683ea45267747bceba6490e7ff1444cbd1935b5a1857ba8a86b291d6d928099",
+    "filename": "sl.pcl.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\sl.pcl.dll",
+    "size_bytes": 175064
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "02fd3cee9d9d5b673452c0cab3734f9675446cb5a6be72dc1b31375d59a23b99",
+    "sig": "30450221009edb4e85ac12b809d243d4aa44f9c682f8ecca5889377d97790c731df0a00a0c02203426a884515a90d919c1b838214eb17c36a58a49c2a023fca9bab7cf98f1b878",
+    "ts": 1779083312,
+    "ct_anchor": "d485051ffacd5586eb7af9b34aab62df8eae596495e150ee4cdbda955ed52c4d",
+    "filename": "sl.reflex.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\sl.reflex.dll",
+    "size_bytes": 198104
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "097cafad5dda21d89e72a2c1c50f6a02fe5e2e2987508677636ff854670e3651",
+    "sig": "304402200c9ae9cb7364b96edef4eb632641dcda7903f0c2801aea30937f67c7e0e27142022022434d0022b945cc3eb3e5f9ce6b12bd3ac198087b819157de54ade90f918e7b",
+    "ts": 1779083312,
+    "ct_anchor": "fb05459aa56c663bf45f126ab93b2a75a59734f861472d4b3f91b8a4045ed8ed",
+    "filename": "telescope24.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\telescope24.dll",
+    "size_bytes": 35482096
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "0874b395a926209fb19768fd30208dc1b8e91009bb00ead82e4d3e81b4662ae6",
+    "sig": "3046022100e610ea2733bc6fdcd7beda3aece4748da4978a78568c65e42182596b732d20e4022100d3b8ca5b7428e4c7e67532993e9cde64c5bb96c5dba2311d29d4b244085557bc",
+    "ts": 1779083312,
+    "ct_anchor": "86ff0dd3c311fa192e3359eaadb9884d7a46546591a3510cfadc3f7ad4f721fe",
+    "filename": "ucrtbase.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\ucrtbase.dll",
+    "size_bytes": 1123832
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "e723aaa39e2f66c7e72fc12acaba1c1f25ac5b50120447cc882e6d744d7b19c9",
+    "sig": "3046022100a07b44f7258f66efd09a99e3a35a19ec89110ddb801a63fe377cff93b515bd9802210087be19d4297ec2a1bd571327a0a759253b422638077edcfda80b01fb7d881676",
+    "ts": 1779083312,
+    "ct_anchor": "7b4de870552b30152d71304f4767dd347d16a5c0b2be29c66298315469dfb10e",
+    "filename": "vcruntime140.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\vcruntime140.dll",
+    "size_bytes": 109552
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "ab33a4c92c98efa92ee1432199ea4512b0aca32c961dd908c2a7d9cd4d2949b8",
+    "sig": "3046022100c264002ae006c33de007624efdc13a57781c1027bc98fe6f94972b38f7528bd8022100f0a50311d658f30d77c3c859270a134dd100fb51982d0223975dc4f12d00c0eb",
+    "ts": 1779083312,
+    "ct_anchor": "014b4ed3b19588ccbe8603bfc9b3065f8691bbb27ac6015370d307dfd56f3826",
+    "filename": "vcruntime140_1.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\vcruntime140_1.dll",
+    "size_bytes": 38384
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "6c9a840b1b0570b09ed800f6fb76b517bd2100937f06f683e2110dbd836ea3f9",
+    "sig": "30440220097df065b85cfc165effbc3b64294e436a64e296c6e43ab27945a2c7e60ad5f8022052fff9280947cfe19ea9e2ee8d97491017b66860e550a5a54ccf80daa9331018",
+    "ts": 1779083312,
+    "ct_anchor": "21008d88c0a6d82d1fa303615bf2714f5d33bfc3e1c9d37926db8a8524df3c54",
+    "filename": "XCurl.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\cod24\\XCurl.dll",
+    "size_bytes": 194048
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "892cea82e850f3de6379c5b3a01aeb1fa29a024d1caae585cbda9a7d4ec263c0",
+    "sig": "3046022100d5e0adf418d1b954725d87d75b9ed86d31285104ceb4cd8db4e42185f60903f002210090054049bca1a9ae9b2736fc3c5ad357d877b8cc98b9b4a91d31a63df79742ca",
+    "ts": 1779083312,
+    "ct_anchor": "457b3a3285b80132c5d974a8ae32f346f60817480cc711aafc173b5511c02f85",
+    "filename": "concrt140.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\concrt140.dll",
+    "size_bytes": 299504
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "b084f1811d36a71f3875240a9315eaebecf0d3083e9193979b8718c1192916b3",
+    "sig": "3045022071519f026b40cf85e849d168425eb591295d5c1e1a237eae375a4b90fa8369d6022100afbba2993d8889e97e33ad843489b3ca7236eecec25233a5125968e7c75a7e3f",
+    "ts": 1779083312,
+    "ct_anchor": "dfc517167d46ad5497e44492019329b46dc10b65ca70c90ee63d5be8f6a37a33",
+    "filename": "D3D12Core.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\D3D12\\D3D12Core.dll",
+    "size_bytes": 4821064
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "2afcd22f008ddd88a54bfdfbc6f064650c4bbd0448686c3d23df8d0ebd0b2fab",
+    "sig": "3045022100e5f12ef6844fe31eb59880976dcb54d5cee3283b527ed8eacfb2007408e37b74022024b450e827a46e3abafce3ae417c27621e0fb1bb24396d55669806dfcb79e696",
+    "ts": 1779083312,
+    "ct_anchor": "7bd420f4dad960700e3b1cba9b8d5dc809cc057eee3d74d28c7597123ab9fae1",
+    "filename": "dbghelp.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\dbghelp.dll",
+    "size_bytes": 1543360
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "20efeb706758c9c8948cd0adf73d3c754172bef31b8ae370f3879efa6b9ffe1f",
+    "sig": "3045022100e04d476f956cf201068e3215386b85712b9aa1f99c16d2f9b13c1e9d0a4dc73e02200702cef38f18802ffdb3e9fa18f556f18ee51eef541f2b0b621efe4760a6bec4",
+    "ts": 1779083312,
+    "ct_anchor": "0d71506cc89f7b9be99d4e9b6de4111900e9e21e8ddf7a3d691c8e533ce65275",
+    "filename": "discord_game_sdk.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\discord_game_sdk.dll",
+    "size_bytes": 3488768
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "c92ab606b37c8a3205e9de33c86ecb5c460a72a3d533063de49a8cefbf5be663",
+    "sig": "3046022100b9a56a3c84e817721d317643d41f9b579c246bb6a42b90d816d2b080d523adc9022100f8f1b1666ee95552bd0123a1dd07abdde55dd814a24ce7a9cbd857e4048007df",
+    "ts": 1779083312,
+    "ct_anchor": "64e4089c3418a380493fdfeea2d3adecfd931f2925d92a471dde8c59816c016d",
+    "filename": "GFSDK_Aftermath_Lib.x64.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\GFSDK_Aftermath_Lib.x64.dll",
+    "size_bytes": 5736000
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "9d9cb74603abd3f20329a7a197fd089fda36350e9205ae53fee64ee8a653573e",
+    "sig": "3045022100e67bb86a058f353507e48f2ebf07ae7684d42eb48bd531d8f633dc7abfe0678a022027db51a04d4a49ced6070c78aff4d6d54a05f9fe628b2902e64c007852e78ccc",
+    "ts": 1779083312,
+    "ct_anchor": "e2e73e8cb0a5cf845d542ef1e3942a6909020214389657d51e986a0b3715bd1d",
+    "filename": "Immerse25Api.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\Immerse25Api.dll",
+    "size_bytes": 1020848
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "78fed33cd2eaa02d9877e9e4395f56d150e72dc6cce9ce053d2d930bbb66cd4f",
+    "sig": "304402200de9903e255ba7d78e471686b07a04080f1802a326c2c760594ae46192c25aa9022028768f1e1a3d49a8327f3feba21013a27bc58da75abcdbfcc2380b4c4ad876ae",
+    "ts": 1779083312,
+    "ct_anchor": "a4310eddc6150cd7cde5f8fc3e3dac4387728e0dd33e42c3f219a878c2eb8c0e",
+    "filename": "Immerse25AudioAPI.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\Immerse25AudioAPI.dll",
+    "size_bytes": 1321392
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "ba6abe8ce10ba6fd6b4b733d2399c9330de81a3538558f156a80a453b26cacba",
+    "sig": "304502210086d28ae0d470b99c6c84848ab0c131cf6c09046bd867665e4aaf34ca4c75fdd3022010091960aca5e92ad2f10b727281f7009838746bee13ff0c60bafa0268df920c",
+    "ts": 1779083312,
+    "ct_anchor": "fc69928d468c5f04da2236fb0fb7a197d4736198bcdb12957f6b3df06afcd4f7",
+    "filename": "Immerse25CommerceAPI.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\Immerse25CommerceAPI.dll",
+    "size_bytes": 442288
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "869b659fb427156bf8c2477f67deaf4710a338b0c1a41659868d9466b88dc422",
+    "sig": "30440220443c1c32e26ea31c175c37e5c4c3351f18f6823b4d1f80b7553346f98946471a022017a8a2365528510e867a9229b30b26f2edcc8cfbd49ca8fa78e8141559f1e195",
+    "ts": 1779083312,
+    "ct_anchor": "267882dc5b720104b2ec64fe46ad6c1667f4d6f7d8c4644de3f35b89166b6a32",
+    "filename": "Immerse25Engine.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\Immerse25Engine.dll",
+    "size_bytes": 68528
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "0e4e15e66c7f490062918640b814a7cc70f0699698a23cbabc7deba644211eb5",
+    "sig": "30460221008ad56cb5826cef67adf1fad09b8bcceab35f8e59619fd412b26c99bf2420326a022100c639d14697283b0947a3832e11ff39d376312847bbf943712d9cc07f2d3866b9",
+    "ts": 1779083312,
+    "ct_anchor": "0bba2b2c27fa98420459411bb0bc60f10b9c3fe08e2731db39e7bb34ab9fd007",
+    "filename": "ImmerseApi.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\ImmerseApi.dll",
+    "size_bytes": 1017200
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "c02e8c115b7ce5c03811cde78ebaaa42167884327e4edb62651148ab0e970199",
+    "sig": "3044022034e2cce7b1f7e79875f1ca1a1f1fc678b7903bfc4ccaf430e15fec14ab06607002207a063deb71d88370365d8eca2a67c4fcda8c6d34ab80a8b53f5e09776688e73e",
+    "ts": 1779083312,
+    "ct_anchor": "11e8e93c2d4e16aa3f234307309cfaf7a63a588c5e61da9b378c6db2c2226287",
+    "filename": "ImmerseAudioAPI.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\ImmerseAudioAPI.dll",
+    "size_bytes": 86384
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "abd15c18a5732558ef566aa6ccfbdc9d3e33028ef5ea30fff4c992935816e977",
+    "sig": "30450221009e6e1fd52db9f3a6ee9db9c64162c88dadc5aa5c50c78dc6f227f1ee6697ad7c02204790d660d07b28f7b8301735f0e1bdb24be2a9f2458d5ea8baf1e1e66930c777",
+    "ts": 1779083312,
+    "ct_anchor": "ec023e424ce12ec9e94437e89f53e698e5d050d2682ea20db92f60efce647272",
+    "filename": "ImmerseCommerceAPI.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\ImmerseCommerceAPI.dll",
+    "size_bytes": 442224
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "fa2ba243255ea98af484af25594b51fde18e9abb4812a61ad1978c3d75a3941b",
+    "sig": "30450221009669d54e5ac7d35b010fafab87a76925782384658e1122a80a5666d8c81e97d002204208d9389f7e6b39817f64f05576b4808c489f9da7bdf5b40abbc38d9adeebb1",
+    "ts": 1779083312,
+    "ct_anchor": "89a23d460c96c5ede336f17cf55362d0df44a62e79a96635a2501d066247d0e0",
+    "filename": "ImmerseEngine.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\ImmerseEngine.dll",
+    "size_bytes": 62832
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "ffce348503782abaf8bd87038910f22d554fdc6d60ef35a16dc64b9f887b14b0",
+    "sig": "304502205e82b2db55df644cd51210330b4a79fa6cc610c15a1cf85265bd9fd828cc99cc0221009c964f76a1cec8ae76c883b1f9c2044e19525dee3ea198bf151c65d0ff1ab6c5",
+    "ts": 1779083312,
+    "ct_anchor": "2438794484c85568b824d21cb001740bf4fd9052f0a387353c4e777dc78292d1",
+    "filename": "libHttpClient.GDK.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\libHttpClient.GDK.dll",
+    "size_bytes": 947056
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "b92e7bb889efbbc7add30385e161d2508df1531b413d279fed09681a2743505d",
+    "sig": "30460221009f5500d8787d36e1f175a142f3bb74a85df7831d9b306de0101ad5ba507c4e8a022100f48f1769d136da9c5dd8de94b0f1c9aff692d8fd2e3fd5695cfeaf0bf7dd89bd",
+    "ts": 1779083312,
+    "ct_anchor": "24be42cceb2a046fb71dbef1a60194c1da67114a3c7b9bd8a2a5fc6eb0c597b7",
+    "filename": "libxell.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\libxell.dll",
+    "size_bytes": 359792
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "a2b05b3fb699867aa437c7b550650c4ed039b4b15b819d18de45e3006a8d5bc1",
+    "sig": "304502200f56146c58d46418f4b89812f75dd975925c142d022b91a59a27e0ae5520711b02210085d0c4373f402eedc7bd7a0932a5e804bb5262cfbdcf8dc920b2c6952ce795f1",
+    "ts": 1779083312,
+    "ct_anchor": "e48fb3fb89b824f31dadbffd9547b9f048077ac891e4300e805d0b0dc49280e5",
+    "filename": "libxess.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\libxess.dll",
+    "size_bytes": 77788528
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "f79eba8464ee25f9d69c1457988c800438fc51f4cf6ae0ba270ca2f33ad70219",
+    "sig": "3046022100c63d0c1b294fd219739e92bd913f723def094b30f84763e103931950f813685c022100e8c000a516ec7ee9b3ce229c2e97f6f786c097ae77b1a5734b6e1e7e7817b007",
+    "ts": 1779083313,
+    "ct_anchor": "21924c3026f8619cb21133caa9962d5add3880007ce56965b07bf62ebcef543b",
+    "filename": "libxess_fg.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\libxess_fg.dll",
+    "size_bytes": 45541752
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "6e05e5ddb06368d2f8420107533bf2ecd0f99f659dbd987b915e596f70171b50",
+    "sig": "304502203f353510370ee471244ecb2b122e7c5c3492149708f3e6b41cb8907678c547950221008107c30364a7c7e5a221f53ac55764559dd9607923247e1e11d60cd8872f277d",
+    "ts": 1779083313,
+    "ct_anchor": "7f941f8cccefcf6fce8d822475bc2e0fb494c35a7a856a26d1eac0950edef441",
+    "filename": "Microsoft.Xbox.Services.GDK.C.Thunks.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\Microsoft.Xbox.Services.GDK.C.Thunks.dll",
+    "size_bytes": 1958360
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "88673cc3f455e6fa132b302b0a42336814658fbe52c0df560004b4c7b0829631",
+    "sig": "304402200bebbbb2fd16679b6317b470b239a74505767b7f2c7d65bfe814d73ddd02c0b00220505ef0f37dda3206a2f0eca8395fa9c3084f0edcad93c19ea890e29b53bbf660",
+    "ts": 1779083313,
+    "ct_anchor": "b25e3dee3511bc1a8f9cef88bae82fdc11ecf58631686a810dd2acc903910a5a",
+    "filename": "msvcp140.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\msvcp140.dll",
+    "size_bytes": 564712
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "44ce5144c73d0fc1a61009d56ac97647eae724ec0780bcb9568920ee29ef007b",
+    "sig": "3046022100e8646a76d05e74508084cf21db7a79a38b64e20cbb3a209191ddde8743ab8799022100f16752ef3b29e92567c3d1a00a5baa1fdd40a8ed5b45154506a907008cda4239",
+    "ts": 1779083313,
+    "ct_anchor": "db554749c87c00c3bb1593e91b726fb2685753188374004f09c9df99aed0d24b",
+    "filename": "nvngx_dlss.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\nvngx_dlss.dll",
+    "size_bytes": 48972848
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "bf5fa3b30d4ab6b225495242ff6ec7f6fbdc468b2269f597b18a713d4887cd75",
+    "sig": "3045022066682374ade3efc55ebb3727fb81d4601d83332698ce5a51a5d25c50d3458d650221008dde1f04004c2d843aabd5e6b846e18fe6a0c29c67916bb7683510c6fa18174d",
+    "ts": 1779083313,
+    "ct_anchor": "e5fb8d342d65a2983afbaf33cbdd1be3b005a6bd82ce0fb0df546d9419c34198",
+    "filename": "nvngx_dlssd.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\nvngx_dlssd.dll",
+    "size_bytes": 28548208
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "c589dd9fdd73de7a1e739b70883e51d3508666877052d95a53222a8d6fb8a685",
+    "sig": "3045022100c15b452c4041a24c9e65606c495905e8f3d313d20cadc60b2395c2224db7e42e02206768f07bf50df3442f6c1b08f29c289a52e4c9ce1d26c560c9b052f5fdc91efe",
+    "ts": 1779083313,
+    "ct_anchor": "70b4783edd8b52f9d144daaece6853bbc7415f1570bf2920983dbb76ed602362",
+    "filename": "nvngx_dlssg.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\nvngx_dlssg.dll",
+    "size_bytes": 7597104
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "bef4419f8f1273884965f3f1e9e1bb879ad1a7a791f2de296d2705e088bb3f14",
+    "sig": "3046022100991780c021cbe17208874d7f866cc64d20bcc127dba2c26e9f0eb201ce9998e302210085248bd6414bcf3563bb7629f7013f88591e6e400b61dbdd6a8b6d76a520139d",
+    "ts": 1779083313,
+    "ct_anchor": "948cf658c5a62a09104bc3ea858c9e64f66242684d9e929c01f49dc8fa27539c",
+    "filename": "oo2core_8_win64.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\oo2core_8_win64.dll",
+    "size_bytes": 972784
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "cc3fa3b2467da1d50519b28e2df73cab3f7ba700554ab7d6cdbb77a7a9978e10",
+    "sig": "3046022100af77b4718375276b67234151d2083375926c63d75350d45da581c64c858ae4ad02210084e9b09aefaf3e6f2a52cdbb6b161e2705293376b81694cdd1a8a34f2a3ebf78",
+    "ts": 1779083313,
+    "ct_anchor": "cf320fbf08fb543daf276912a228a12cc2d34a7e440f4803957f3237ef10b4d3",
+    "filename": "sl.common.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sl.common.dll",
+    "size_bytes": 675800
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "657e4bd3c4e22f9faa1c2430a10c1a342c9dfb0a74c175e6b4d8714fa30c4d37",
+    "sig": "304302203ef097bd1f63a53c207c6e7f2f8df24a53e6e00a52f80ce57d0afe58f2460298021f0247b7b0a965585081609be111f1e5babd8917ea97f269e059b2fea4079fa2",
+    "ts": 1779083313,
+    "ct_anchor": "805f1c50df52a30b8594762f8cdbac972abf5a8793dbedaa8e20b28f1a9ba6aa",
+    "filename": "sl.dlss.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sl.dlss.dll",
+    "size_bytes": 237536
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "d7fcb67d13a8157057ac884c71309cd479d4da823304cbc7bf0b203f9a475eaf",
+    "sig": "3045022100cf7bef6a1d2e92ab6554fbb0adbe2c05797627acfb15bedb5c92fade0e3e40450220703ed6018264f1e999aa6b692594721672ae500e6ec1932497030696095e899e",
+    "ts": 1779083313,
+    "ct_anchor": "153a1965f8ec52020fd7a063285507c1db9e6ba9a54530e394b5a5e88469016c",
+    "filename": "sl.dlss_d.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sl.dlss_d.dll",
+    "size_bytes": 251864
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "72385ebc8ae4645123de42bb344dcf3cc9fa5310e42eb552f096f3088144841b",
+    "sig": "3044022046e65633053c6bd2fcd5a4817ea923bd6e3532d12f97acb10d1c619f86ecb7cc022053b7c8e04441c82ce044a2069ab810a417ad19b2d109bfff545bfda9f1250865",
+    "ts": 1779083313,
+    "ct_anchor": "e776c34b924f10f98c6bf84d1849a1e934eaa7d828e7efa9854e1c8c5f723942",
+    "filename": "sl.dlss_g.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sl.dlss_g.dll",
+    "size_bytes": 448472
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "2504129dc95e29aef0d91aa57bc044224a2eb10218e51337c624fe7ce66a87f7",
+    "sig": "304502202ef9c1f96459dccbd77d6e7bc8e08e309399112ae864a1d149840fa9af334c89022100b887c1f4b3f6f280a934cdc4e3aa74589b623f95ac6c3b79aa10abefc97eea05",
+    "ts": 1779083313,
+    "ct_anchor": "8962f8e799a08234d29203c632f3c8ea16d22463e5e9f5f38e18eaae216f0f44",
+    "filename": "sl.interposer.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sl.interposer.dll",
+    "size_bytes": 543712
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "ce77856dfe4032a2399097d6bab6ce2b795a9670c6a68428d3911bec1c5679ae",
+    "sig": "30450221009cf5b5d81dcf95d6ec494500a04f8851da20ede7628dc9b26589f889c05491a202205c6395871abe0871f7553942bc571538f578f998e39eca2c58bd2b1018225403",
+    "ts": 1779083313,
+    "ct_anchor": "dac26de4fd6eba55d9f0da77c9b1d044e9da36f49797264f62c360eace223df9",
+    "filename": "sl.pcl.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sl.pcl.dll",
+    "size_bytes": 175064
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "02fd3cee9d9d5b673452c0cab3734f9675446cb5a6be72dc1b31375d59a23b99",
+    "sig": "304502207bb173685297bf1e2a8e31998e7217c5e027e479a0925f9aec345e46e7dcc27b02210081fb12843967bbc6fcf34fa3efea35d0290023dd692589703e7b1bb44abe111c",
+    "ts": 1779083313,
+    "ct_anchor": "70536c14a1568633f10f852ebded1c7f11034c616e71704d3fd7a85e69513025",
+    "filename": "sl.reflex.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sl.reflex.dll",
+    "size_bytes": 198104
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "13ce4120c20f58a557df69fdbf91fc4bf2a8c7b9a15bbafd4203e4545eaf2b5a",
+    "sig": "3045022012c806cba19aecda5957f6562520cd76daefde148fb5a927c172b30447dc7c9d02210093081f5d1865cc88ef1a03703df5a2348b140d51213ef6787d2b66f0f8bca495",
+    "ts": 1779083313,
+    "ct_anchor": "a006dc5ea01eb88aa7e6117ae87cb5c0644892e55ab2a0a8bc03f507ed130775",
+    "filename": "amd_ags_x64.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\amd_ags_x64.dll",
+    "size_bytes": 178616
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "fa7800938781f7059709518bfd0b7301bedea22d21cb6712a14b65d6ba80bf09",
+    "sig": "3044022038c4d56d3f80356c0ee7bb943cf2a72515740a748294f6aac9e64ed0586b360f022058cce46dc443acb5b6475fbc0ab9c609d65dba7e97fb7a4eab45a1abf3e5fb19",
+    "ts": 1779083313,
+    "ct_anchor": "40aedf206026ae241ac0e7fd913c54f3b8be5b56ebe527cf092f2ab1e522a6b1",
+    "filename": "amd_fidelityfx_dx12.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\amd_fidelityfx_dx12.dll",
+    "size_bytes": 6621392
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "2603cf7b408ac169003ebf31494b28296d6897737e450e79c713cdd0f0d5de7c",
+    "sig": "304502210089af5cd7b157aae50fa2ea32af5f1d7e0c639f764f650fa7048e919f2caf3b23022031dbba99b3162602c8960b44a2174f1ead3018352fd44841ca3d305ef0601d78",
+    "ts": 1779083313,
+    "ct_anchor": "10f355c51f1d12f950a99851fa7e2d98fff3457e73c08283045b53f31f6cc235",
+    "filename": "api-ms-win-core-file-l1-2-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-core-file-l1-2-0.dll",
+    "size_bytes": 11784
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "c580afb20773e61c9b8bfa9b59d5793a926640e3981c9b0bb0916cf79024e14e",
+    "sig": "3045022100b121229521134c33eaa3a95410ba27b4b9e46fc31f6bf2b63929fccdbfff0b230220291dae26f0948c41bc141a8121f84ab9f6768225f1ef8cf018e8504349d949d8",
+    "ts": 1779083313,
+    "ct_anchor": "5e482e527c10ff365014a1fd0c1dcbd9a63f01669e8567c43c8d1b0b9645c148",
+    "filename": "API-MS-Win-core-file-l2-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\API-MS-Win-core-file-l2-1-0.dll",
+    "size_bytes": 11792
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "f8de371611531bc98b3fa67879cbd8d64e051fb5a881f61c89a4634f351f4248",
+    "sig": "304502206cfc52980e41040928ac6ef6aebd83010c122da9b2d024f27a3f0d2989e757a00221009c177f1bb60ee1123157cb67f9a2fb9f64f725baf553907d74db48a59bd31763",
+    "ts": 1779083313,
+    "ct_anchor": "7b1588fd6ef384f9d74c9e390cef630995e6f6316538c4bb7c3ac0ae716f2ea0",
+    "filename": "api-ms-win-core-localization-l1-2-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-core-localization-l1-2-0.dll",
+    "size_bytes": 14376
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "3c7c0954cfb2d60cad021e41568a656d7963b116a5e963153cae989e4bd29a47",
+    "sig": "3044022011868d458512434f8512d9674807747458480f85e4bfe3987794d28eadbda797022040c86f41fededde017237a5b4171af27c39b8fbce50a0fd23e83fe4b94f87ce1",
+    "ts": 1779083313,
+    "ct_anchor": "5bab0c22f832abda49cbb0fc4969ddf34cb92f9348ce10b8389277db1da289b6",
+    "filename": "api-ms-win-core-processthreads-l1-1-1.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-core-processthreads-l1-1-1.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "f103f6689672dd4f46c8e9a8525f557aa5c320f739bc3322a50861ccc9dbcac4",
+    "sig": "3045022100fdf9ce4676f998752f2d9ed5a141392b9bcd26284bffa895242fa0b5a43f9a7f022006ebd5a9502490179186e141a3df72db3a085a7297049077785e69ffcd380ff4",
+    "ts": 1779083313,
+    "ct_anchor": "824e3ef297edfc05213317775597474f26e7f8b979a94250c4837e6b5360c831",
+    "filename": "api-ms-win-core-synch-l1-2-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-core-synch-l1-2-0.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "fdaf360eb2323f8bb96d80633a001bef06bffb2d113cfd43ededf22f76abc918",
+    "sig": "3046022100ac72dd618aae5d926f9a364740541c4d4d1cfbbdf5b22059b8c34dd43e351fbf022100f887f7bc0380159e1f59a5204154aede54cfca269b33a84b654a109044bec829",
+    "ts": 1779083313,
+    "ct_anchor": "af2bafb1b83650dca1279c5904129c120f26b0d0685f908243b2886497221613",
+    "filename": "api-ms-win-core-timezone-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-core-timezone-l1-1-0.dll",
+    "size_bytes": 12296
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "25a62bd72a716bc36c97942d44dfa7eb03f7195a004f769fe653d0aeb834e75e",
+    "sig": "30450220247a2d8b775235faec2bcb6bf5e6805c31576a14ff8127ac918b67c752db7549022100e1b2b13625514bd8d723d6f2264bbb48e749f8b9d74bb22293b339682ac41ddc",
+    "ts": 1779083313,
+    "ct_anchor": "56871d421e2901e53c9c1546b4a65ba51f194ae1b2a19c301e357111769c0f6d",
+    "filename": "api-ms-win-core-winrt-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-core-winrt-l1-1-0.dll",
+    "size_bytes": 19704
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "cf6a2f62d65ced83ab9a6a096d9df3183863b7e41fa1bcb9652dbe9ce0484f76",
+    "sig": "3046022100e255352a897311b56887e840085e356b92516404f1a83b70667d4945ed58f21e022100c2a320313f3089d6b6f71b36bb9b80beb8dcb9cf36c87f9bf41a52a525ddfbc3",
+    "ts": 1779083313,
+    "ct_anchor": "584d9214f1a2b7d579bc17e34499fa142545a0ea1865882d21527d39bd0b2261",
+    "filename": "api-ms-win-core-winrt-string-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-core-winrt-string-l1-1-0.dll",
+    "size_bytes": 20240
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "83e407a00a8bbda93edd503a25377f1bddc923a71c950bec618fdc4c6eaac746",
+    "sig": "3046022100829fe5f33b10fca8d766b5339bb80724cd6f3bbb6ce3b82c2d6f62196b7f1836022100b9f20202150c7332b1fc7a14b598c46dc06dec0e23a5afe3c5606151524864c2",
+    "ts": 1779083313,
+    "ct_anchor": "85822b9f05b9f714b47c1afd40a2de278d2b9802605852f4fc9359107e0f0c4a",
+    "filename": "api-ms-win-crt-convert-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-crt-convert-l1-1-0.dll",
+    "size_bytes": 15880
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "0ae9c501110268bbf22f7703d15d282aea8215f0e79736ec9848d6797d49f766",
+    "sig": "3046022100edea89981b3dea0485adb179a0b4bfa3e8608b67184c71030444a228b83ecb1d022100da2f5d63e679d91402b72d6942142e3b66dcce2f8362938d6c1e6ac57b8a8fe2",
+    "ts": 1779083313,
+    "ct_anchor": "074b34c45074867bcd434540a9a7a9edb1b2120158a3c6f20026a7f5b5b09a97",
+    "filename": "api-ms-win-crt-environment-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-crt-environment-l1-1-0.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "39971442910314da7de95ee35065b44e6c007d6004c0bdcd6b308a9196f5b94e",
+    "sig": "3046022100d631f29a2e431316415680d6b8b06de0389ef5f1b3a7e29c65589a7043801627022100d57058b1c3a4b37ecfeb170bed8c628eb0d267123e0715aaab505698b628b9b5",
+    "ts": 1779083313,
+    "ct_anchor": "641b17ab52d00da78f8ae0935f5d18df350bc4681d6e9b508444368279c19fe3",
+    "filename": "api-ms-win-crt-filesystem-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-crt-filesystem-l1-1-0.dll",
+    "size_bytes": 13840
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "359da4b43bd597daf3b15ffb22fc729d4be6ecd37337b9351ccd7dd01a2dc15f",
+    "sig": "3045022100b299ce92229443f475e525bcdb541a2552fe5269302c5e6b213de2189658581302204926e130a8269709c96105871ce3c7e63b55f1631cf89eb909e1c0f86ff68965",
+    "ts": 1779083313,
+    "ct_anchor": "f2bd0cd2875813828a833aa33a19846cfca268d3c65232907275ba432c2df242",
+    "filename": "api-ms-win-crt-heap-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-crt-heap-l1-1-0.dll",
+    "size_bytes": 12816
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "9ba67d04cab3cf0eb77d02fb0c1115bfbaf583bc081993f00e9e378f9bc8c9da",
+    "sig": "304402200d2e0a63df85591a3f2a25f8af0fd2dd373f3192761f68af2c94efe85e08d7bd0220387ae353e649347c8a79f783e443c05e7f708ba33b533cb54b53542bc69cc379",
+    "ts": 1779083313,
+    "ct_anchor": "74743dfbb6c3682400f826340d4a39a6b505d6e1a6c665da1b64f4eaf87cf725",
+    "filename": "api-ms-win-crt-locale-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-crt-locale-l1-1-0.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "95939a42b1c8a8f318f1ab004dcb2ceb3735602b0c3bb5acc1dc4d181cfb0c02",
+    "sig": "304402203b5b760215da7a406c8c3c56f88eb27cedf7d971fb53781c396e67d2cc88fab402205a3aea1103bab03e970d2bb680006254a2fc953e510a0d5df6b37bc7f2b8032d",
+    "ts": 1779083313,
+    "ct_anchor": "35f39e6273d0893e7606b7c9ef086a41d2b4ad6d835a9e6f99fe96995cd85fac",
+    "filename": "api-ms-win-crt-math-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-crt-math-l1-1-0.dll",
+    "size_bytes": 21008
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "48cf88e20807462965039900abfb1f432c7d0be1181366960ff3bf8c212fea51",
+    "sig": "304402204774e8169f65e67fe30be8ab214dd8ac95f77f081c4804a21ed6a384dcf05ae00220406dcf7b8b536c56f51b7bce80e28b23b10ade2ebdd15b89cef51cc390d26eca",
+    "ts": 1779083313,
+    "ct_anchor": "185a00aaa48bd3b7e3e10b8101aa463c8f3e2c716cd345430c07a1a1e066b3b7",
+    "filename": "api-ms-win-crt-private-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-crt-private-l1-1-0.dll",
+    "size_bytes": 64528
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "5250f5d933d2078e64110f764ecfba8a0af3b8cdb01e181ac04241ce52292c63",
+    "sig": "30450220234f90ffe7895cb1982304d222cec1a5c6b922904f6856c2bef4ca9e10550bf5022100a37561ebb5aaf6e1647148a6d7b79ad905de1e61fc7c5bc8b16249c59adccd68",
+    "ts": 1779083313,
+    "ct_anchor": "66c2791d55f932c2994243068089e277b57de1b32a7d5534ed84c3b957a5f289",
+    "filename": "api-ms-win-crt-runtime-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-crt-runtime-l1-1-0.dll",
+    "size_bytes": 16400
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "79aa95d34cf586cdd28705ca5f61660ca2c7e22554ff85a9e668eb3220e226b5",
+    "sig": "304502207e14d5fc7324e151299dcbe05cb6174c23e3f6d1f721e4f1dd8b3e5a84807876022100b4589041f38e0b752cb77ef24a72fa49f510104bac9032c4736992a6399614aa",
+    "ts": 1779083313,
+    "ct_anchor": "59b20095c0adc8361cc5e47352c8dc7d5b5b354588ff82a11faa3cf2d1e68aa5",
+    "filename": "api-ms-win-crt-stdio-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-crt-stdio-l1-1-0.dll",
+    "size_bytes": 17936
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "42715c173e308bb2c5078d719a9ca5834837ad3f080c1990a54634139baa2ef5",
+    "sig": "304402202681a4c9a3465651cf36bc586f8d4e94a5c545a7a63220fba70e5677bcfa3e3602201392d9b3226b9e88868ebc59f945c97c8e333a5bfa260294028de6b67c01d917",
+    "ts": 1779083313,
+    "ct_anchor": "15b24d08b0afabdcf72b2e8cec9430507241711ef589ddf62950edea27c644ac",
+    "filename": "api-ms-win-crt-string-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-crt-string-l1-1-0.dll",
+    "size_bytes": 18472
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "18ddd6fc4aef927c9c4fc75d403843e38f1a38f65581bb9b31b072dba2b0d04a",
+    "sig": "304502207be0cdc95509181aebfa6a18456fdd507a3f64c440272eace5e6f1e68fa7cbd8022100b5d2d74b820f58558a761d9c9d4400d0c6cc25c2aa313c1afd168542b748c0c9",
+    "ts": 1779083313,
+    "ct_anchor": "91f7f7a260f5ab3bcb2c0d9d4d0d4d79f283eaf213e3e9f88128d9b997b390dc",
+    "filename": "api-ms-win-crt-time-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-crt-time-l1-1-0.dll",
+    "size_bytes": 14352
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "07d0d1be0e66601c3e36eb900586a7eed26e0e9e8772a610a3789580d86b7b70",
+    "sig": "3045022100c5dc2c8c91981d8bf186cc892777c5ee03b631b2953832ca9b2660f38d4e30cf02203b4aefd8d2fe1cb13b806bbdce76020ab4c4e48df1dd0a0c787610215f2535a2",
+    "ts": 1779083313,
+    "ct_anchor": "2bde3fd3b29d3def4ec6f91410f1d2277499bf9d17c9a4b51936dd4450f6865c",
+    "filename": "api-ms-win-crt-utility-l1-1-0.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\api-ms-win-crt-utility-l1-1-0.dll",
+    "size_bytes": 12304
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "7d5cd91ea38ab92e462b1785e7ead4c9b61420772acdb3aa29b74524190b8f33",
+    "sig": "3046022100bb1bf8ba2a5e22b694456b3ea4c515c1490845de57b163d87edb4eeb025ebff4022100fdada05d17cbfab48a7c97a88fd834e01d8dc8a408de1e85547be16436810316",
+    "ts": 1779083313,
+    "ct_anchor": "e56d15754b37e36fc3488b080d2b04b4422a6af2a3b3482fbd5509a41489d2dd",
+    "filename": "bink2w64.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\bink2w64.dll",
+    "size_bytes": 416752
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "6de491b7febd1195439aeddf2799c518a681a36e081a27df799ad7b7f990b6ac",
+    "sig": "30450220310729126053e45e82d314850414a7d1582f480b6bb74bf5189beca2b7eb3a480221008d782f6b09663e3d76ace0b63d0202a55859b8bc7e7d2c5e1a02f9dfc7d55c1f",
+    "ts": 1779083313,
+    "ct_anchor": "a4547932aa44189942a8439f0695dd42cfd915232535acce325dac171e6534ab",
+    "filename": "CgSDK.x64_2019.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\CgSDK.x64_2019.dll",
+    "size_bytes": 260712
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "800550f0aa12a2e0c315f0a9ae320b9339212e32ad2ea54566377199abf2f999",
+    "sig": "304402200acbcc1aa9ae304000e8dc003560a9e1454e74127bed88499b7e83304673f70502206276f1e9092b8bc64c601626affe3935b06bfb64a715b5d3e9312a73990c3436",
+    "ts": 1779083313,
+    "ct_anchor": "6513c34b2c8c22d396a3a44a47a47c924c8abea18c3935217c8ecf21b92298be",
+    "filename": "concrt140.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\concrt140.dll",
+    "size_bytes": 327576
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "83510786549ff142c4aa5ced8e07524a6e36b5ea0ad1359895ee73b00c803abf",
+    "sig": "3045022100be519c839e33f6ea70d40c33498ae52ecb7d84f31467f77fb535131642f712c7022039f6ca08c4b59a2e1efa2586afe622f2047032484a05c630e1aec34d3e434372",
+    "ts": 1779083313,
+    "ct_anchor": "d6fded0d00e1e8198c93561762cfc8fdc9ddc0d0bd06a7af3b0a7ae76877ac6f",
+    "filename": "D3D12Core.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\D3D12\\D3D12Core.dll",
+    "size_bytes": 5616520
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "2afcd22f008ddd88a54bfdfbc6f064650c4bbd0448686c3d23df8d0ebd0b2fab",
+    "sig": "3045022100b54060eed8d247d41e4984791cae6d663bea1716c12988766dd1781b147683fa0220551ecb0287ff89e32ee61aa42882857d3f856d95285e7a631524839a09518370",
+    "ts": 1779083313,
+    "ct_anchor": "0d1f54e87ef2ac0aa8f01c3ece259d6c440d125985a541a164ac9c0ed8b17d43",
+    "filename": "dbghelp.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\dbghelp.dll",
+    "size_bytes": 1543360
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "bdb221dbfa0e655bbd8dd807bec6cb59af338c05ca4bb478d14ff93d89f441a9",
+    "sig": "3046022100bcd181e44ae9a2b2199b0bd090a0b9d999b3878b6d7519e00f07bf920e9716da022100d8f67a4ea89fc8a89b8f2d089275e871c6c1d81a6b8e0bba26bc6121eb213125",
+    "ts": 1779083313,
+    "ct_anchor": "7e88428fdc7bc657609c5adc28acad25b154b39790adefba36395d4fa15c4b16",
+    "filename": "discord_game_sdk.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\discord_game_sdk.dll",
+    "size_bytes": 3883320
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "8f68cce723acb2c143a0485d60f4a013a1942ee91b5021b2704ef758e9976376",
+    "sig": "3046022100dab31b4491116bf477224c42873ff1225c43061786518b9b5c4e69180ead2e8d0221008693f7e68843c4096396e8002765d44839f7ec1dd1d5250894c44d7c46b05f1d",
+    "ts": 1779083313,
+    "ct_anchor": "aa7139d1184a6cbb1fd7ece12d5f06e35e6531b02b8b0cbbad00b21a79dcb913",
+    "filename": "GFSDK_Aftermath_Lib.x64.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\GFSDK_Aftermath_Lib.x64.dll",
+    "size_bytes": 1534536
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "0e4e15e66c7f490062918640b814a7cc70f0699698a23cbabc7deba644211eb5",
+    "sig": "3045022100c912423cc359e6546eb76ac72aa265cc1f3bb9514e72fa13a8d3b3ad00e659c402202b8e4604846c18ffab4cef3bbc1500e43ccc70bd55915e99de95dd8cb8882d77",
+    "ts": 1779083313,
+    "ct_anchor": "210741989953942bbbab314471deb2c6b41931d56bddd4e00f9626f9308af18a",
+    "filename": "ImmerseApi.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\ImmerseApi.dll",
+    "size_bytes": 1017200
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "c02e8c115b7ce5c03811cde78ebaaa42167884327e4edb62651148ab0e970199",
+    "sig": "304402201e31474ecaf61b5301481125190bb42af37d1705f0b8d0669e14714f7a1f97020220427c37841b0fb2eb1d0f62b71768059c35e2e1130697cd9a4176cb990a7629f3",
+    "ts": 1779083313,
+    "ct_anchor": "8db535b447f87630e7cfe714158d8334d81a9645e6b6c960e4f4d7349247f351",
+    "filename": "ImmerseAudioAPI.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\ImmerseAudioAPI.dll",
+    "size_bytes": 86384
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "abd15c18a5732558ef566aa6ccfbdc9d3e33028ef5ea30fff4c992935816e977",
+    "sig": "3044022069bf065743999dd7205db55bcf7111d83ca730fa5fd60526307fd975cdfa9ab4022011f2f993626b178491102d9275e9ed97b506ad623271ff72a8a5dc8acb88b391",
+    "ts": 1779083313,
+    "ct_anchor": "0362fba97b99d14b7be61e0bbf416ea5838830f6fe01e219115dcadfa65b093c",
+    "filename": "ImmerseCommerceAPI.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\ImmerseCommerceAPI.dll",
+    "size_bytes": 442224
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "fa2ba243255ea98af484af25594b51fde18e9abb4812a61ad1978c3d75a3941b",
+    "sig": "304502207c2be5555d3cc3600e4b5fc5f39ac8c5c8586628e8900884b386262d639026fa02210095de503598c0277c470dc1ccbc9d74815a91e3c88bb90e1fca550b82ccfd9d4d",
+    "ts": 1779083313,
+    "ct_anchor": "c8c5779aae88fe332bc41bc947f823658918d4d01bb781b4931e2b7061f426f7",
+    "filename": "ImmerseEngine.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\ImmerseEngine.dll",
+    "size_bytes": 62832
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "e126f884e29c45ec17738a873d4477e84dce3e82f24144c57a37b90b2bf001f3",
+    "sig": "304502204818053f744eb078c7813469dff71a5a0ec91b83eb5a9e6ba5c4ad6ec5a8f9be0221008267a9621ac01ab69f46b523cb54780c40f1066dd8304c2ed7945b02243a9431",
+    "ts": 1779083313,
+    "ct_anchor": "641210406f28acda16e1f3fd3b8a7a26f1153d5662906063666d4dc7402731e3",
+    "filename": "libHttpClient.GDK.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\libHttpClient.GDK.dll",
+    "size_bytes": 244840
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "253b34179d1b742432c1297bdf4cbcb3cd18fb87b1356c3c069684c2fde9b7a7",
+    "sig": "304402207e00716e1fb5dc56c506304802ae3332deaf8b4b51e25b3369e4496f5bc3e4c702203f5cfe69d057aebfd2b785716ef144576878b3022871f570d69517a0b4cc463f",
+    "ts": 1779083313,
+    "ct_anchor": "94a6b73b6798975e48224ed70d352edafb893407f83d3f4d83197095e98c992b",
+    "filename": "libxess.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\libxess.dll",
+    "size_bytes": 74108944
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "ce1365af3b4294abe3a25ee24adef91dcd66a4abba10e4aee80d36421877a778",
+    "sig": "3045022100e6647499f89c27740b57134ea9edd9f7226e160106c082bf9a5f6ebeef93376d02202ef4e323105568c50c179300d24a4daa3b132ebab19a3ddb6d91ef7454ca05e2",
+    "ts": 1779083313,
+    "ct_anchor": "6d6e5c4c3dbd63eb745fca36d7f66a34cc399a136e4298b4ffd1b7e90b4e640e",
+    "filename": "Microsoft.Xbox.Services.GDK.C.Thunks.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\Microsoft.Xbox.Services.GDK.C.Thunks.dll",
+    "size_bytes": 1964576
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "fcc204a9dce37c509f4961be27fdd66bcd70810359fad732bd67ad31c5fc819e",
+    "sig": "3045022100a816d3ef72f16550ef3727281888ac2b77edc673fccfc2a43b1d98ed3909066d02202c5197f3b1f46ca40c0105d966401ad4a165830e04b73dc5d15cf86c88fc78f3",
+    "ts": 1779083313,
+    "ct_anchor": "716026afedd8f3b16f130ad00d1f74d0726ca64ba4c9298ae5eea989cd90dcbf",
+    "filename": "msvcp140.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\msvcp140.dll",
+    "size_bytes": 579960
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "350cd80467ab3705f1c75b7ea493db1d79194e9822a89908008e9fb2fd1068fe",
+    "sig": "30450220046cb3e12fdb53150058a06c6cceea01f28928655427b36ac582f597830ba565022100baf93f4377b379ad6aa7eb1a963299f06b31faa33497a09c14186127d22b9bb6",
+    "ts": 1779083313,
+    "ct_anchor": "d8e468b809db3e3b7782946ee3bd626f4e838ff2fe177f5cd77d03716c0ec131",
+    "filename": "nvngx_dlss.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\nvngx_dlss.dll",
+    "size_bytes": 51263528
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "085cf58fd7b141ebcf753a80ef36094810427b894cc93e84341ddc43d70032cc",
+    "sig": "304402200182bc3a974447e6fc405bac1607aa02618dea3ace2c59f436082b5e5b129511022006b8a3af92c02cdb74dac04f78ebcbfa5cf743d6f642157255584635d89fd6a0",
+    "ts": 1779083313,
+    "ct_anchor": "3ab45c3b9572525d80f1513bc96719946731d62caeebb69fae6763cf4ab977ed",
+    "filename": "nvngx_dlssd.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\nvngx_dlssd.dll",
+    "size_bytes": 43790888
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "63b129c15d28152a76b116772abe091b5cc939ede9afd2b6a3416663e451a3ec",
+    "sig": "30460221009c3f4370eac45c4e1f51e387986daef757d05baf8704d481bf21908758341fb302210087cefd3367537b6212afb88cce64596ce843b46f52c4ca745b3460f1b0fd8700",
+    "ts": 1779083313,
+    "ct_anchor": "044bb081b889dec29e6ebeaa0b1513977a8161f8d8af32932e4bd20c1522a978",
+    "filename": "nvngx_dlssg.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\nvngx_dlssg.dll",
+    "size_bytes": 9477688
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "2ad7caf65f3e9dd31df244dbe7c798ae48328082f36a00ea522cc82527f10d90",
+    "sig": "304602210094cf2d60f323ebbcdf8548f71a1c78d09661cb8b1af945cbf588912ed3415769022100f8af3d9fdc651fc990eff05719261277f91b3ffbd3722962ec8991ae8e6fff40",
+    "ts": 1779083313,
+    "ct_anchor": "ce9c05106d559e1ca031d7bb65e153af850d93d91736d0adb8fe6f8a32b918fe",
+    "filename": "oo2core_8_win64.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\oo2core_8_win64.dll",
+    "size_bytes": 972784
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "734cda1b055d9c423f6c3ab0f72bcbd78172dbe80aaaf8482f741b24f8a07259",
+    "sig": "3046022100cce964d74a602e1aa08571cccc9b3eac086baac188ed5bff25d77ccd542ad81c022100d4d03391b1811ba808275bae265c08eb30764e250dc7ce5bdc07eaca5d556b32",
+    "ts": 1779083313,
+    "ct_anchor": "b953b1428fa15313097ed1b8c3e41072a49f07fcf29e8a17c8e79b83762e2acf",
+    "filename": "sl.common.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\sl.common.dll",
+    "size_bytes": 627176
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "efffe27b05417fa0150570689f4ec2228e2ddc4e3d375fed268cefb24732c0be",
+    "sig": "3045022063c73e8410aefe481a6e56731927528c65537e68d4aac5419cb24541a4a9737a022100f65f606ab5411f4f856ff07adb9f6781b382670137d20ce67b9dcb6215c51dff",
+    "ts": 1779083313,
+    "ct_anchor": "14fa34232a6310c005929cbf81d2a8c6fc4a996618c6a2c35f5bfc3fdf44cd4c",
+    "filename": "sl.dlss.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\sl.dlss.dll",
+    "size_bytes": 224744
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "90959bf630e00cfc73ee4851e390e6570aded85f21ac27263ea9afd19772003e",
+    "sig": "3044022029323c1f17c0793796c750076c79e1891f5d1596f1b086d07bd6862b7c356edd0220383276b12bd5353c51c283aa3986a09160066e0274d6dabe2e5cdf8b6fd55237",
+    "ts": 1779083313,
+    "ct_anchor": "fa9e20d756b17d228976269907a8e153478729e51579188cce874d394b28de72",
+    "filename": "sl.dlss_d.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\sl.dlss_d.dll",
+    "size_bytes": 237032
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "1d2b21546aebb896e4a2a67ad16ecfe89a97b10307aa1178474c721064588edd",
+    "sig": "30460221008f5b9a1df9cc2b4c330660622431918153598105d209eb83b276b38f7224d138022100d7460c087d604c6e29c69fd004ff421e1e6e4831b1b200c03f91b71f5a0e078f",
+    "ts": 1779083313,
+    "ct_anchor": "c62cf7027097ee5db1024cc48e2abbb576b4f31170e792a4579141076cd82148",
+    "filename": "sl.dlss_g.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\sl.dlss_g.dll",
+    "size_bytes": 422376
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "d571c57bb3eccd89c247fdb8664439c6fc7bf888ade62fcf259100de20e61ed3",
+    "sig": "3044022070e6c80dd2ded749388a55022645006ef38fe4c65521c9e19b5116c930f11ff702203ad5da445bb852bd38a1a2179c1fab551556d14b9e74cc8aa31cc147fc0e88f5",
+    "ts": 1779083313,
+    "ct_anchor": "8955c34a7f7b38de425b44a33bfdf43ebfa6f9989938044b0f055dfb5e361073",
+    "filename": "sl.interposer.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\sl.interposer.dll",
+    "size_bytes": 484840
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "34a04ed8cafedbb024dc23b936f3b8ec48cc399f469f214960fe1b1153c611ed",
+    "sig": "3045022100ce3c844b6ee1e6bcd0d342a207d3860588c180735818a9621efa78af3f49aeae022031a29c9b5e52b179ee8dce9215a1705f0d8f72c350fa1a2a940d7ccd5e1004ce",
+    "ts": 1779083313,
+    "ct_anchor": "e6937803cfa981d76f30815d4d33d786d344447fe9c372c65574d81a9bca009f",
+    "filename": "sl.pcl.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\sl.pcl.dll",
+    "size_bytes": 165864
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "e7d17c59720dcdefbee3429b944e176c55a1075395c0212ec2ce251eaecc5d2d",
+    "sig": "3045022100a79efb9e4ea9d55ebbd0f031a63c1b5cead14ced01b875127faab3a5f50c4883022064ac4052191583f15a8da94120b3fa0ea066157f1eca9e8485beed00333f1e6e",
+    "ts": 1779083313,
+    "ct_anchor": "95df2997b96873dd5b7d5b75763ef6edcb364d532b6583a89c3239f108e3e64b",
+    "filename": "sl.reflex.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\sl.reflex.dll",
+    "size_bytes": 173032
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "1cb4bdd34b927808081dbfe99dff4d472a744f13df2960045b647c202b833964",
+    "sig": "3044022029ce231b538e1879bb5f75ca657f5da8bc6a2caae7cb1c6912f263a71aa647d602207cbd3b60a9e7b4a8218fa217158f09f8283c2b5a397961c3085b082dcbb5365a",
+    "ts": 1779083313,
+    "ct_anchor": "938a42fa4e6956409bc053f549f69bbac27a50bcac971f1d08a18933e95ba7ca",
+    "filename": "telescope.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\telescope.dll",
+    "size_bytes": 36334080
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "01852b5d837e5c66a1f4d06265074d68fd45caae73ac33cab226f154a6d4c16a",
+    "sig": "3044022027c2b3341deb58bda3c90094d0e2ceb7ffe504b97c55b39cfe0eec4ec5422950022042d0f961a9cb93e2116ca316f0c9aebcfb0b0a0066aa96fb876704ac6ac72873",
+    "ts": 1779083313,
+    "ct_anchor": "80b09d36be5745a8aa898cbb3df4c50ae62b6f42cb352faf726010f4cc8a9fb9",
+    "filename": "telescope23.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\telescope23.dll",
+    "size_bytes": 36402680
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "f0115b667aeb030ed00c32848b991d3bbf3ce3c5eecf15a4948d103a95b260a2",
+    "sig": "304402206d0ebba1ef55f211375338373da385e13167111da076ec75bc30ac64d8ac117d022014d66bf29b75d03ef7a6032683e275d79bfb9e14013fac4baeea683c7d89beee",
+    "ts": 1779083313,
+    "ct_anchor": "66389a766916d9d891eb8198d620255c9f98179655685916bbacf5c052ba9cc3",
+    "filename": "telescope24.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\telescope24.dll",
+    "size_bytes": 35482104
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "209b1210042e8e3edbb8a428acfce3f2676ad03b004c576376a8eb436db25143",
+    "sig": "30460221009e0d4e86dd720132b52df909c8fe7cbae24aa8557183ea3ca5595686519140c5022100e8c9a6eee6307d2b7a95e51cae546131c3fd9ee8b8aaa830bdb6ad69645e4e13",
+    "ts": 1779083313,
+    "ct_anchor": "e15970599773998818e7c9f00aff8410f217c7c2f7913181ddc6c72348da2477",
+    "filename": "ucrtbase.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\ucrtbase.dll",
+    "size_bytes": 1020768
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "de21f2a928eddd5231a3dd8a3a6e824d32d59fa7087ff5dabd05a268311c2767",
+    "sig": "3045022100998769c1356caa92643a2eb7dbb708d683a2a62f79c029281c4514737baa778602206c934c53da764a09842bbff55a5f912cb598812e826efbff8508fa44a20320ae",
+    "ts": 1779083313,
+    "ct_anchor": "d8b5927440f18d38fe13d0157ac66fbca5a09e460f3e4aaa46ca8bf22a860274",
+    "filename": "vcomp140.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\vcomp140.dll",
+    "size_bytes": 191864
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "d7cf145a7b03450c2800d418a95873f636c17eb7b8572390caae1f5734438548",
+    "sig": "304402206323b94836075624f0c2e39b7acda12182c263f99e0960aa26c8f31eacb3661f02200b4deefda2e1d884397ffd96bdc5e5e5e43d853a57966a85a2da04acc5f49931",
+    "ts": 1779083313,
+    "ct_anchor": "1ddad20caa62b74c7a54baa85e080c746787d0c5426355d77028996fd9454ef3",
+    "filename": "vcruntime140.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\vcruntime140.dll",
+    "size_bytes": 109464
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "291c1290bccf1627a0405d8b5945ab07d6153083739a8a15f5414ed52ee28f0a",
+    "sig": "3045022079f491c163e3128a34d1c4e41f44fc75d722ca5b413556f743c4ed37a98b9643022100fa6519f2db6e35fc7a2453ef67884415bfd0781c91ab05dc43870374868a6393",
+    "ts": 1779083313,
+    "ct_anchor": "d117f572bf0b26f9834c8047d386bb88bfff7ef79c37068dcc13e39362dee87f",
+    "filename": "vcruntime140_1.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\vcruntime140_1.dll",
+    "size_bytes": 49528
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "6c9a840b1b0570b09ed800f6fb76b517bd2100937f06f683e2110dbd836ea3f9",
+    "sig": "304402205e9bdffed6e0a4c123c7cd2f39ea4fe45af05509e2edf5832d46154ca41aa78502204328ac810e896d202560387be29102e33906ae7877398b81d38b1862b7937825",
+    "ts": 1779083313,
+    "ct_anchor": "89e7c9803dd7f5590a75e2006a5ef1a8b10a81af51e98c9e6157f8fc6ae6f8c3",
+    "filename": "XCurl.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\sp24\\XCurl.dll",
+    "size_bytes": 194048
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "1fb142382637fd60e7286b7dea264fb247c174950bcdfa0c0cd49b3cf3366b6a",
+    "sig": "3045022044689d98f2f97168250cb8c5b0b9685c6830e090470c69f8c51d447085ffa60e022100b4e9f2c5a0839992ff9eaa0ec9900ddc0c2d88a0ae0d31507de44deccda09427",
+    "ts": 1779083314,
+    "ct_anchor": "b10a7fa50c42c78983a9008ab9c40e3b8395e8957b962f68cef5b3c9bb1ae039",
+    "filename": "telescope24.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\telescope24.dll",
+    "size_bytes": 35482096
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "8452e9aa156910c8aff544f81536ba26281c5c8499172c2eb951f82f6e663ee3",
+    "sig": "304502206350f67f46ad0cc0e036ad1f28b53619f5ff2f9fabb1cc0eb29b64908c7260c8022100e33cc18808d50777a88852e1376e4fd2d407ed06873a446b6cc1ee294bbd7c48",
+    "ts": 1779083314,
+    "ct_anchor": "e3271f32647ab882e959be4308df0b5b47134960bfa712dbddb21a94cb1faaba",
+    "filename": "telescope25.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\telescope25.dll",
+    "size_bytes": 35474936
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "0874b395a926209fb19768fd30208dc1b8e91009bb00ead82e4d3e81b4662ae6",
+    "sig": "304502210083fdde555191f5b4c00c79fe6f2711bd1a86206cf13473f5725c461966a3fd0f0220045299688c155fba325481b4e9af263546b940a26315eb43365e33dbcb48a50e",
+    "ts": 1779083314,
+    "ct_anchor": "375a8e078fb16bf77275d4b5579ad39067bb7bfab08aaeb409139967289375a4",
+    "filename": "ucrtbase.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\ucrtbase.dll",
+    "size_bytes": 1123832
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "e723aaa39e2f66c7e72fc12acaba1c1f25ac5b50120447cc882e6d744d7b19c9",
+    "sig": "3045022100fd7bc9136fd7ecc63b01d161206b8f90837fb182bcfceb58d10b8fdb7b1bbdc00220791a73272cecb9d4ae73a4029b144863d3ead04e5b8b562570cc42fb0894706d",
+    "ts": 1779083314,
+    "ct_anchor": "5306ca72d9125358b8dc6feb3fd58301b36c2a34a2bd80e8bd0e2d9c7f22b128",
+    "filename": "vcruntime140.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\vcruntime140.dll",
+    "size_bytes": 109552
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "ab33a4c92c98efa92ee1432199ea4512b0aca32c961dd908c2a7d9cd4d2949b8",
+    "sig": "3045022007f2be09506c255d19ab7789ca9342c390990d8c9711169449b747d5bdb917600221009619f225bb5f2057771ae0ee390a4e93cf3bb699ffed52af38465cdd5b4ebd73",
+    "ts": 1779083314,
+    "ct_anchor": "3a4ab0b25b270c6199493090ab38710d997ac02d56ac81b99529fc4e6dcb930f",
+    "filename": "vcruntime140_1.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\vcruntime140_1.dll",
+    "size_bytes": 38384
+  },
+  {
+    "dev_id": "ironwall-cod",
+    "mod_hash": "cb6d04c34910e4c4fef983d7de1278fb4240ac5c0b6d8da70e7f6c58cb720dd6",
+    "sig": "304502202246bcfd2f605b06c94c87cbe92785eccb2eee8e0b61a42eea354cd57ddfb884022100f87ffeb2ba4118aa21279e6f4eb0b33bc39a319d438ff3aaa5b8cc5206620eb6",
+    "ts": 1779083314,
+    "ct_anchor": "03fc19825eb3e8e587146acd0b946279d7ad931bcced37e41544f25bb89cb633",
+    "filename": "XCurl.dll",
+    "path": "C:\\XboxGames\\Call of Duty\\Content\\XCurl.dll",
+    "size_bytes": 199032
+  }
+]
