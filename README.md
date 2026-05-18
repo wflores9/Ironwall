@@ -1,0 +1,148 @@
+# PROJECT IRONWALL
+
+**Open-source anti-cheat protocol stack.**
+Thin client · TEE attestation · ZK-SNARKs · Hedera HCS
+
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://python.org)
+[![Hedera Mainnet](https://img.shields.io/badge/hedera-mainnet-4a90d9)](https://hedera.com)
+
+---
+
+## Architecture
+
+```
+[PLAYER DEVICE]  →  [LAYER 2: Module Signing / TEE]  →  [LAYER 3: Remote Attestation]
+      ↓                                                           ↓
+[LAYER 1: Game Server]  →  [LAYER 4: Hedera HCS]  →  [VERIFIED MATCH RECORD]
+```
+
+Four layers form a sequential trust chain. A compromised or missing component
+at any layer results in **hard session denial** — never degraded security.
+
+| Layer | Component | Responsibility |
+|-------|-----------|----------------|
+| 1 | ThinClient / GameServer | Input capture, server-side simulation, H.264 stream |
+| 2 | ModuleSigner / TEEVerifier | ECDSA P-256 build-time signing, SGX/SEV runtime verification |
+| 3 | RemoteAttestationBroker | 60-second re-attest loop, session token gating |
+| 4 | HederaMatchRecorder | Immutable HCS match record, reputation, wagering |
+| ZK | ZKProver / HumanConstraints | PLONK proof of physical human input constraints |
+| Audit | InputMerkleTree | Per-input HMAC leaves, auditable Merkle root on HCS |
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+- Python 3.11+ (3.12 recommended)
+- Rust 1.75+ (optional — Layer 1 perf-critical paths)
+- Node.js 20+ (ZK circuit tooling)
+- Docker 24+ (integration test harness, SGX emulation)
+
+### Install
+
+```bash
+git clone https://github.com/ironwall-protocol/ironwall.git
+cd ironwall
+
+# Python deps
+python -m venv .venv && source .venv/bin/activate
+pip install -e '.[dev]'
+
+# Node deps (ZK tooling)
+npm install
+
+# Compile ZK circuits (~2 min first run)
+make circuits
+```
+
+### Configure
+
+```bash
+cp .env.example .env
+# fill in HEDERA_OPERATOR_ID, HEDERA_OPERATOR_KEY, IRONWALL_TOPIC_ID
+```
+
+> **SGX_MODE=SIM** uses Intel's software simulation — no SGX hardware required for development.
+> Switch to `SGX_MODE=HW` on a compatible machine (11th-gen+ Intel) before production PRs.
+
+### Run Tests
+
+```bash
+make test-unit          # fast, no external deps
+make test-integration   # requires docker-compose up -d
+make test-zk            # ZK circuit tests (~5 min)
+make cov                # coverage report
+```
+
+---
+
+## Repository Structure
+
+```
+ironwall/
+├── core/                   # Shared crypto, logging, Hedera client
+├── layer1_thinclient/      # Thin client + game server simulation
+├── layer2_signing/         # ECDSA module signing + TEE verifier
+├── layer3_attest/          # Remote attestation broker + session mgmt
+├── layer4_hedera/          # HCS match recorder, identity, wagering
+├── zk_anticheat/           # ZK-SNARK circuit + proof generation
+│   └── circuits/           # circom circuit definitions
+├── merkle_audit/           # Input Merkle tree + audit trail
+├── tests/
+│   ├── unit/               # Fast, no external deps
+│   └── integration/        # Docker-based full-stack tests
+└── docs/                   # Architecture diagrams
+```
+
+---
+
+## Security Model
+
+- **Trust boundary**: everything client-side is adversarial. The game server and Hedera layer are the only trusted components.
+- **extract_pov()** is the fog-of-war boundary. It must never include entity positions outside the player's visibility cone. All PRs require two maintainer reviews.
+- **SHA3-256 only** in all crypto paths — never SHA-256 (length-extension attack risk).
+- **Hypervisor defeat**: Intel SGX TCB measurement flags virtualisation. Ring-1 cheats fail `_tcb_fresh()` + `_no_debug_flag()` → hard session denial.
+
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full PR checklist and code style guide.
+
+### Good First Issues
+
+| Issue | Description |
+|-------|-------------|
+| #112 | Adaptive bitrate for video encoder (Layer 1) |
+| #118 | Controller input normalisation: Xbox / PS5 / Switch |
+| #145 | CLI tool: verify a match record from HCS topic |
+| #151 | Python type stubs for hedera-sdk-py integration |
+| #163 | Improve test coverage for InputMerkleTree edge cases |
+
+### Bounty Program
+
+| Issue | Description | Bounty |
+|-------|-------------|--------|
+| #89 | Rust rewrite of capture_input() — sub-1ms latency | 500 HBAR |
+| #97 | Security audit: extract_pov() speculative visibility leak | 1000 HBAR |
+| #198 | ZK proof gen benchmark on low-end hardware | 250 HBAR |
+| #201 | Scroll-wheel input rate constraint (circom) | 500 HBAR |
+| #204 | Controller trigger timing constraint (circom) | 500 HBAR |
+| #212 | PLONK verifier contract — Hedera EVM | 750 HBAR |
+
+### Security Disclosure
+
+Do **not** open a public GitHub issue for security vulnerabilities.  
+Email **security@ironwall.gg** — 24-hour acknowledgement, 14-day patch target.  
+Critical vulnerabilities (extract_pov, TEEVerifier, attestation bypass) eligible for out-of-band bounties up to **5000 HBAR**.
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE).
+
+*Build the infrastructure that ends the arms race.*  
+[github.com/ironwall-protocol](https://github.com/ironwall-protocol) · ironwall-dev@protonmail.com

@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Environment
+.env
+*.env.local
+
+# Coverage / test artifacts
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ZK artifacts (large — regenerate locally)
+zk/*.ptau
+zk/*.zkey
+zk/verification_key.json
+input.json
+proof.json
+public.json
+
+# Node
+node_modules/
+package-lock.json
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

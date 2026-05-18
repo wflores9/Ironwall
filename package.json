@@ -1,0 +1,18 @@
+{
+  "name": "ironwall",
+  "version": "0.1.0",
+  "description": "ZK circuit tooling for Project Ironwall anti-cheat module",
+  "private": true,
+  "scripts": {
+    "circuits": "make circuits",
+    "test:zk": "make test-zk"
+  },
+  "dependencies": {
+    "circomlib": "^2.0.5",
+    "snarkjs": "^0.7.4"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=20"
+  }
+}

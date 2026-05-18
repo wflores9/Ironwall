@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  sgx-sim:
+    image: gramineproject/gramine:v1.7
+    container_name: ironwall-sgx-sim
+    environment:
+      - SGX_MODE=SIM
+    volumes:
+      - .:/opt/ironwall
+    working_dir: /opt/ironwall
+    command: sleep infinity
+
+  hedera-mirror:
+    image: hashgraph/hedera-mirror-node:latest
+    container_name: ironwall-hedera-mirror
+    environment:
+      - HEDERA_MIRROR_NODE_NETWORK=testnet
+    ports:
+      - "5551:5551"
+
+  game-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.gameserver
+    container_name: ironwall-gameserver
+    environment:
+      - SGX_MODE=SIM
+      - SESSION_SECRET=${SESSION_SECRET}
+    ports:
+      - "8765:8765"
+    depends_on:
+      - sgx-sim
