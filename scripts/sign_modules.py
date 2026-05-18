@@ -71,9 +71,17 @@ def sign_all(game_dir: Path, key_pem: bytes, dev_id: str) -> list[dict]:
     return records
 
 
-def build_known_hashes(records: list[dict]) -> dict[str, str]:
-    """Build filename → sha3_256 map for the Rust launcher."""
-    return {r["filename"]: r["mod_hash"] for r in records}
+def build_known_hashes(records: list[dict]) -> dict[str, list[str]]:
+    """Build filename → [sha3_256, ...] map for the Rust launcher.
+
+    When the same filename appears in multiple subdirectories with different
+    content (e.g. patched vs unpatched copies), all hashes are stored.
+    The scanner matches if ANY hash in the list matches.
+    """
+    result: dict[str, list[str]] = {}
+    for r in records:
+        result.setdefault(r["filename"], []).append(r["mod_hash"])
+    return result
 
 
 def main():

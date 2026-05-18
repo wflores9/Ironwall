@@ -37,3 +37,12 @@ package-lock.json
 # OS
 .DS_Store
 Thumbs.db
+
+# Keys and secrets
+*.pem
+
+# Logs
+*.jsonl
+
+# Rust build artifacts
+target/

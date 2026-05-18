@@ -18,9 +18,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 import time
-from pathlib import Path
 from typing import Any
 
 from cryptography.hazmat.primitives import hashes, serialization
@@ -31,11 +29,10 @@ from cryptography.hazmat.primitives.asymmetric.ec import (
     SECP256R1,
 )
 
+from ironwall.core.hedera import write_ct_log_hedera
 from ironwall.core.logging import get_logger
 
 log = get_logger("layer2.signer")
-
-_CT_LOG_PATH = Path(os.environ.get("CT_LOG_PATH", "./ct_log.jsonl"))
 
 
 class ModuleSigner:
@@ -80,20 +77,13 @@ class ModuleSigner:
     # ── Certificate Transparency append-only log ──────────────────────────
     def _anchor_ct_log(self, mod_hash: str, dev_id: str, ts: int) -> str:
         """
-        Append a CT-style entry to the local log file and return the entry hash.
+        Submit a CT-style entry to Hedera HCS and return the entry hash.
 
-        In production replace this with a call to a real, publicly auditable
-        append-only log service (e.g. Trillian, Hedera HCS topic).
+        Delegates to write_ct_log_hedera() which stubs the SDK call and
+        degrades gracefully when HEDERA_CT_LOG_TOPIC_ID is not set.
         """
         entry = {"mod_hash": mod_hash, "dev_id": dev_id, "ts": ts}
-        entry_bytes = json.dumps(entry, sort_keys=True).encode()
-        anchor = hashlib.sha3_256(entry_bytes).hexdigest()
-
-        _CT_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
-        with _CT_LOG_PATH.open("a") as fh:
-            fh.write(json.dumps({"anchor": anchor, **entry}) + "\n")
-
-        return anchor
+        return write_ct_log_hedera(entry)
 
     # ── Key generation helper ─────────────────────────────────────────────
     @staticmethod

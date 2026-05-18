@@ -46,9 +46,11 @@ pub struct ScanConfig {
     pub skip_list: Vec<String>,
 
     /// Known signature records from the ModuleSigner.
-    /// Map: filename → expected SHA3-256 hash.
-    /// Used to set ModuleEntry.has_signature.
-    pub known_hashes: std::collections::HashMap<String, String>,
+    /// Map: filename → list of valid SHA3-256 hashes.
+    /// A filename can have multiple valid hashes when the same DLL appears in
+    /// different subdirectories with different content (e.g. patched variants).
+    /// has_signature is true when the scanned hash matches ANY entry in the list.
+    pub known_hashes: std::collections::HashMap<String, Vec<String>>,
 }
 
 impl ScanConfig {
@@ -64,7 +66,7 @@ impl ScanConfig {
 
     pub fn with_known_hashes(
         mut self,
-        hashes: std::collections::HashMap<String, String>,
+        hashes: std::collections::HashMap<String, Vec<String>>,
     ) -> Self {
         self.known_hashes = hashes;
         self
@@ -172,17 +174,19 @@ impl DllScanner {
         let sha3_256 = sha3_256_file(path)?;
         debug!("Hashed {} → {}…", filename, &sha3_256[..16]);
 
-        // Check against known signature records
+        // Check against known signature records.
+        // Any hash in the list is a valid match — supports same-filename DLLs
+        // in different subdirectories with different content.
         let has_signature = known_hashes
             .get(&filename)
-            .map(|expected| expected == &sha3_256)
+            .map(|hashes| hashes.iter().any(|h| h == &sha3_256))
             .unwrap_or(false);
 
         if !has_signature && known_hashes.contains_key(&filename) {
             warn!(
-                "Hash mismatch for {}: expected {}…, got {}…",
+                "Hash mismatch for {} (path: {}): no known hash matches {}…",
                 filename,
-                &known_hashes[&filename][..16],
+                path.display(),
                 &sha3_256[..16]
             );
         }
@@ -288,7 +292,7 @@ mod tests {
 
         let expected_hash = crate::crypto::sha3_256_hex(b"signed content");
         let mut hashes = std::collections::HashMap::new();
-        hashes.insert("signed.dll".to_string(), expected_hash);
+        hashes.insert("signed.dll".to_string(), vec![expected_hash]);
 
         let config = ScanConfig::new(tmp.path()).with_known_hashes(hashes);
         let scanner = DllScanner::new(config);
@@ -298,12 +302,30 @@ mod tests {
     }
 
     #[tokio::test]
+    async fn multi_hash_any_match_accepted() {
+        let tmp = TempDir::new().unwrap();
+        make_fake_dll(tmp.path(), "shared.dll", b"variant b content");
+
+        let hash_a = crate::crypto::sha3_256_hex(b"variant a content");
+        let hash_b = crate::crypto::sha3_256_hex(b"variant b content");
+        let mut hashes = std::collections::HashMap::new();
+        hashes.insert("shared.dll".to_string(), vec![hash_a, hash_b]);
+
+        let config = ScanConfig::new(tmp.path()).with_known_hashes(hashes);
+        let scanner = DllScanner::new(config);
+        let entries = scanner.scan().await.unwrap();
+
+        // variant b is in the list → has_signature must be true
+        assert!(entries[0].has_signature);
+    }
+
+    #[tokio::test]
     async fn tampered_dll_has_signature_false() {
         let tmp = TempDir::new().unwrap();
         make_fake_dll(tmp.path(), "tampered.dll", b"tampered content");
 
         let mut hashes = std::collections::HashMap::new();
-        hashes.insert("tampered.dll".to_string(), "a".repeat(64)); // wrong hash
+        hashes.insert("tampered.dll".to_string(), vec!["a".repeat(64)]); // wrong hash
 
         let config = ScanConfig::new(tmp.path()).with_known_hashes(hashes);
         let scanner = DllScanner::new(config);

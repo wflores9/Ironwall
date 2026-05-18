@@ -24,15 +24,20 @@ from __future__ import annotations
 import asyncio
 import os
 import time
+from pathlib import Path
 from typing import Any
 
 import jwt
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric.ed25519 import (
+    Ed25519PrivateKey,
+    Ed25519PublicKey,
+)
 
 from ironwall.core.logging import get_logger
 
 log = get_logger("layer3.broker")
 
-_SESSION_SECRET = os.environ.get("SESSION_SECRET", "")
 _TOKEN_TTL = 60  # seconds — re-attest required every 60s
 
 
@@ -43,13 +48,30 @@ class RemoteAttestationBroker:
     One broker instance lives on the game server. The GameServer calls
     initialize_session() after the WebSocket handshake; subsequent ticks
     call validate_token().
+
+    JWT signing uses Ed25519 asymmetric keys. If no private key PEM is
+    supplied a fresh ephemeral keypair is generated on init.
     """
 
-    def __init__(self, server_private_key: str | None = None) -> None:
-        self.server_private_key = server_private_key or _SESSION_SECRET
-        if not self.server_private_key:
-            raise ValueError("SESSION_SECRET must be set")
+    def __init__(self, private_key_pem: bytes | None = None) -> None:
+        if private_key_pem is not None:
+            self._private_key: Ed25519PrivateKey = serialization.load_pem_private_key(  # type: ignore[assignment]
+                private_key_pem, password=None
+            )
+        else:
+            self._private_key = Ed25519PrivateKey.generate()
+
+        self._public_key: Ed25519PublicKey = self._private_key.public_key()
         self._active_tasks: dict[str, asyncio.Task[None]] = {}
+
+        # Register the module-signing publisher public key with TEEVerifier
+        # so it can verify ECDSA P-256 module signatures at attestation time.
+        _pub_pem_path = Path("signing_key.pub.pem")
+        if _pub_pem_path.exists():
+            from ironwall.layer2_signing.tee_verifier import register_public_key
+            _dev_id = os.environ.get("PUBLISHER_DEV_ID", "ironwall-cod")
+            register_public_key(_dev_id, _pub_pem_path.read_bytes())
+            log.info("Registered publisher public key dev_id=%s", _dev_id)
 
     # ── Public API ────────────────────────────────────────────────────────
 
@@ -76,7 +98,7 @@ class RemoteAttestationBroker:
         Returns False if expired or tampered — caller must drop the connection.
         """
         try:
-            claims = jwt.decode(token, self.server_private_key, algorithms=["HS256"])
+            claims = jwt.decode(token, self._public_key, algorithms=["EdDSA"])
             return claims.get("sub") == player_id
         except jwt.ExpiredSignatureError:
             log.warning("Expired token for player %s", player_id)
@@ -142,7 +164,7 @@ class RemoteAttestationBroker:
             "iat": int(time.time()),
             "exp": int(time.time()) + _TOKEN_TTL,
         }
-        return jwt.encode(payload, self.server_private_key, algorithm="HS256")
+        return jwt.encode(payload, self._private_key, algorithm="EdDSA")
 
     # ── Re-attestation loop ───────────────────────────────────────────────
 
