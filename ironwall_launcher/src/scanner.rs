@@ -8,8 +8,7 @@
 //! A 10 GB game directory with ~200 DLLs typically scans in < 2 seconds on
 //! an NVMe drive.
 //!
-//! This is the core of issue #89 — the Rust rewrite for sub-1ms per-file
-//! hashing latency.
+//! Performance target: sub-1ms per-file hashing latency on NVMe.
 
 use crate::crypto::sha3_256_file;
 use crate::error::LauncherError;
@@ -123,7 +122,7 @@ impl DllScanner {
     fn hash_module(
         path: &Path,
         max_size: u64,
-        known_hashes: &std::collections::HashMap<String, String>,
+        known_hashes: &std::collections::HashMap<String, Vec<String>>,
         skip_list: &[String],
     ) -> Result<ModuleEntry, LauncherError> {
         let filename = path

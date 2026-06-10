@@ -52,7 +52,7 @@ struct Args {
     broker_url: String,
 
     /// Path to JSON file containing known module hashes (from ModuleSigner)
-    /// Format: {"filename.dll": "sha3_256_hex", ...}
+    /// Format: {"filename.dll": ["sha3_256_hex", ...], ...}
     #[arg(long)]
     known_hashes: Option<PathBuf>,
 
@@ -95,7 +95,7 @@ async fn main() -> Result<()> {
     info!("Broker:    {}", args.broker_url);
 
     // ── Step 1: Load known hashes (if provided) ───────────────────────
-    let known_hashes: HashMap<String, String> = if let Some(ref path) = args.known_hashes {
+    let known_hashes: HashMap<String, Vec<String>> = if let Some(ref path) = args.known_hashes {
         let json = std::fs::read_to_string(path)?;
         serde_json::from_str(&json)?
     } else {
