@@ -1,7 +1,6 @@
 """Unit tests for ModuleSigner and TEEVerifier (SGX_MODE=SIM)."""
 
 import os
-import pathlib
 import pytest
 
 os.environ.setdefault("SGX_MODE", "SIM")
@@ -55,20 +54,10 @@ class TestModuleSigner:
 
 class TestTEEVerifier:
     def test_valid_module_attested(self, keypair, tmp_path, monkeypatch):
-        import ironwall.layer2_signing.signer as smod
-        import ironwall.layer2_signing.tee_verifier as tmod
-
         priv_pem, pub_pem = keypair
         register_public_key("test_dev2", pub_pem)
 
-        ct_log = tmp_path / "ct_log.jsonl"
-        monkeypatch.setattr(smod, "_CT_LOG_PATH", ct_log)
-
-        orig_path = tmod.Path
-        monkeypatch.setattr(
-            tmod, "Path",
-            lambda p: ct_log if "ct_log" in str(p) else orig_path(p)
-        )
+        monkeypatch.setenv("IRONWALL_CT_LOG_PATH", str(tmp_path / "ct_log.jsonl"))
 
         s = ModuleSigner(priv_pem)
         code = b"legit game module"
@@ -79,10 +68,9 @@ class TestTEEVerifier:
         assert result["verified"] is True
 
     def test_tampered_binary_banned(self, keypair, tmp_path, monkeypatch):
-        import ironwall.layer2_signing.signer as smod
         priv_pem, pub_pem = keypair
         register_public_key("dev_tamper", pub_pem)
-        monkeypatch.setattr(smod, "_CT_LOG_PATH", tmp_path / "ct_log.jsonl")
+        monkeypatch.setenv("IRONWALL_CT_LOG_PATH", str(tmp_path / "ct_log.jsonl"))
         s = ModuleSigner(priv_pem)
         code = b"legit module"
         record = s.sign_module(code, "dev_tamper")
@@ -92,9 +80,8 @@ class TestTEEVerifier:
         assert result["reason"] == "HASH_MISMATCH"
 
     def test_unknown_dev_id_banned(self, keypair, tmp_path, monkeypatch):
-        import ironwall.layer2_signing.signer as smod
         priv_pem, _ = keypair
-        monkeypatch.setattr(smod, "_CT_LOG_PATH", tmp_path / "ct_log2.jsonl")
+        monkeypatch.setenv("IRONWALL_CT_LOG_PATH", str(tmp_path / "ct_log2.jsonl"))
         s = ModuleSigner(priv_pem)
         code = b"module"
         record = s.sign_module(code, "unknown_dev_999")

@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -96,7 +97,7 @@ class TEEVerifier:
         In production: query a real Trillian / Hedera-backed CT log.
         Stub: checks the local ct_log.jsonl file.
         """
-        ct_log_path = Path("./ct_log.jsonl")
+        ct_log_path = Path(os.environ.get("IRONWALL_CT_LOG_PATH", "./ct_log.jsonl"))
         if not ct_log_path.exists():
             return False
         with ct_log_path.open() as fh:

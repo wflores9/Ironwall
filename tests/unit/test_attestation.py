@@ -21,7 +21,7 @@ INVALID_ATTEST = {
 
 @pytest.fixture
 def broker():
-    return RemoteAttestationBroker(server_private_key="testsecret_32bytesexactlyXXXXXX!")
+    return RemoteAttestationBroker()
 
 
 class TestInitializeSession:

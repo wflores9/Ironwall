@@ -43,7 +43,7 @@ class HederaMatchRecorder:
 
     def __init__(self, client: Any, topic_id: str) -> None:
         self.client = client
-        self.topic_id = TopicId.from_string(topic_id) if _SDK_AVAILABLE else topic_id
+        self.topic_id = TopicId.fromString(topic_id) if _SDK_AVAILABLE else topic_id
 
     async def commit_match_record(
         self, result: dict[str, Any], attest: dict[str, Any]
@@ -74,14 +74,14 @@ class HederaMatchRecorder:
         msg = json.dumps(record).encode()
         log.info("Committing match %s to HCS topic %s", result["id"], self.topic_id)
 
-        if not _SDK_AVAILABLE:
+        if not _SDK_AVAILABLE or self.client is None:
             log.warning("hedera-sdk-py not installed — HCS commit skipped (stub)")
             return {"consensus_timestamp": "STUB", "record": record}
 
         tx = (
             TopicMessageSubmitTransaction()
-            .set_topic_id(self.topic_id)
-            .set_message(msg)
+            .setTopicId(self.topic_id)
+            .setMessage(msg)
         )
         receipt = await tx.execute(self.client)
         log.info("HCS consensus_timestamp=%s", receipt.consensus_timestamp)

@@ -76,6 +76,10 @@ def write_ct_log_hedera(entry: dict) -> str:
     entry_bytes = json.dumps(entry, sort_keys=True).encode()
     anchor = hashlib.sha3_256(entry_bytes).hexdigest()
 
+    ct_log_path = os.environ.get("IRONWALL_CT_LOG_PATH", "./ct_log.jsonl")
+    with open(ct_log_path, "a") as fh:
+        fh.write(json.dumps({"anchor": anchor, **entry}) + "\n")
+
     topic_id = os.environ.get("HEDERA_CT_LOG_TOPIC_ID", "")
     if not topic_id or not _SDK_AVAILABLE:
         return anchor
