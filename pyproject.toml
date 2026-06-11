@@ -15,7 +15,11 @@ dependencies = [
     "hedera-sdk-py>=2.0",
     "pyjwt>=2.8",
     "web3>=6.0",
+    "xrpl-py>=3.0",
 ]
+
+[project.scripts]
+ironwall-verify = "ironwall.cli.verify:main"
 
 [project.optional-dependencies]
 dev = [
