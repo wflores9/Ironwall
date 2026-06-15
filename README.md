@@ -126,13 +126,14 @@ tests/
 - **Trust boundary**: everything client-side is adversarial. The game server and on-chain layer are the only trusted components.
 - **extract_pov()** is the fog-of-war boundary. It must never include entity positions outside the player's visibility cone.
 - **SHA3-256 only** in all crypto paths — never SHA-256 (length-extension attack risk).
+- **Pinned MRENCLAVE**: set `IRONWALL_EXPECTED_MRENCLAVE` or `IRONWALL_MRENCLAVE_FILE` from a reproducible-build artifact before running `SGX_MODE=HW`.
 - **Hypervisor defeat**: Intel SGX TCB measurement flags virtualisation. Ring-1 cheats fail `_tcb_fresh()` + `_no_debug_flag()` → hard session denial.
 - **Hard deny, never degrade**: missing attestation, stale token, or CT log mismatch all terminate the session. There is no "reduced trust" mode.
 
 ## Roadmap
 
 - [ ] Production Intel IAS / AMD KDS quote verification (replacing SIM stubs)
-- [ ] Pinned MRENCLAVE verification from reproducible builds
+- [x] Pinned MRENCLAVE verification from reproducible builds
 - [ ] PLONK verifier contract (Hedera EVM + XRPL Hooks)
 - [ ] Unreal / Unity sample game integration
 - [x] Public match-record verification CLI (`ironwall-verify record.json`)

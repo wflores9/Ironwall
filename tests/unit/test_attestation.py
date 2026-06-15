@@ -62,3 +62,52 @@ class TestValidateToken:
 
     def test_empty_token_fails(self, broker):
         assert not broker.validate_token("player_x", "")
+
+
+class TestPinnedMrenclave:
+    def test_sim_mode_without_pin_allows_dev_quote(self, broker, monkeypatch):
+        monkeypatch.setenv("SGX_MODE", "SIM")
+        monkeypatch.delenv("IRONWALL_EXPECTED_MRENCLAVE", raising=False)
+        monkeypatch.delenv("IRONWALL_MRENCLAVE_FILE", raising=False)
+
+        assert broker._verify_mrenclave("SIM_QUOTE_" + "a" * 64)
+
+    def test_matching_env_pin_passes(self, broker, monkeypatch):
+        measurement = "a" * 64
+        monkeypatch.setenv("IRONWALL_EXPECTED_MRENCLAVE", measurement)
+
+        assert broker._verify_mrenclave(f"SIM_QUOTE_{measurement}")
+
+    def test_mismatched_env_pin_fails(self, broker, monkeypatch):
+        monkeypatch.setenv("IRONWALL_EXPECTED_MRENCLAVE", "a" * 64)
+
+        assert not broker._verify_mrenclave("SIM_QUOTE_" + "b" * 64)
+
+    def test_malformed_env_pin_fails_closed(self, broker, monkeypatch):
+        monkeypatch.setenv("IRONWALL_EXPECTED_MRENCLAVE", "not-a-measurement")
+
+        assert not broker._verify_mrenclave("SIM_QUOTE_" + "a" * 64)
+
+    def test_hw_mode_requires_pin(self, broker, monkeypatch):
+        monkeypatch.setenv("SGX_MODE", "HW")
+        monkeypatch.delenv("IRONWALL_EXPECTED_MRENCLAVE", raising=False)
+        monkeypatch.delenv("IRONWALL_MRENCLAVE_FILE", raising=False)
+
+        assert not broker._verify_mrenclave("REAL_" + "a" * 64)
+
+    def test_json_measurement_file_passes(self, broker, monkeypatch, tmp_path):
+        measurement = "c" * 64
+        path = tmp_path / "mrenclave.json"
+        path.write_text(f'{{"mrenclave": "{measurement}"}}', encoding="utf-8")
+        monkeypatch.delenv("IRONWALL_EXPECTED_MRENCLAVE", raising=False)
+        monkeypatch.setenv("IRONWALL_MRENCLAVE_FILE", str(path))
+
+        assert broker._verify_mrenclave(f"SIM_QUOTE_{measurement}:extra_fields")
+
+    def test_malformed_measurement_file_fails_closed(self, broker, monkeypatch, tmp_path):
+        path = tmp_path / "mrenclave.json"
+        path.write_text('{"mrenclave": "not-a-measurement"}', encoding="utf-8")
+        monkeypatch.delenv("IRONWALL_EXPECTED_MRENCLAVE", raising=False)
+        monkeypatch.setenv("IRONWALL_MRENCLAVE_FILE", str(path))
+
+        assert not broker._verify_mrenclave("SIM_QUOTE_" + "c" * 64)
