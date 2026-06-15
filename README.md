@@ -102,6 +102,14 @@ receipt, and compact receipt hash fields used for public audit trails.
 `make verify-demo` runs the verifier against `examples/match-record-valid.json`
 and then confirms that `examples/match-record-tampered.json` is rejected.
 
+### ZK Settlement Gates
+
+`ZKProver.commit_proof()` builds a canonical `ProofCommitment` containing the
+PLONK proof hash, public signal hash, and verifier key hash. Hedera EVM uses
+`layer4_hedera/contracts/PlonkVerifierRegistry.sol` to register or verify those
+commitments against a snarkjs-generated verifier, while the XRPL Hook gates
+escrow settlement on the same proof hash.
+
 ## Repository Structure
 
 ```
@@ -136,7 +144,7 @@ tests/
 
 - [x] Production Intel IAS / AMD KDS quote verification (replacing SIM stubs)
 - [x] Pinned MRENCLAVE verification from reproducible builds
-- [ ] PLONK verifier contract (Hedera EVM + XRPL Hooks)
+- [x] PLONK verifier contract (Hedera EVM + XRPL Hooks)
 - [x] Unreal / Unity sample game integration
 - [x] Public match-record verification CLI (`ironwall-verify record.json`)
 - [x] Controller input normalisation (Xbox / PS5 / Switch)
