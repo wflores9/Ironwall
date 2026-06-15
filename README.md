@@ -136,7 +136,7 @@ tests/
 - [ ] PLONK verifier contract (Hedera EVM + XRPL Hooks)
 - [ ] Unreal / Unity sample game integration
 - [x] Public match-record verification CLI (`ironwall-verify record.json`)
-- [ ] Controller input normalisation (Xbox / PS5 / Switch)
+- [x] Controller input normalisation (Xbox / PS5 / Switch)
 
 ## Contributing
 
