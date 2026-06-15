@@ -98,20 +98,20 @@ class XRPLMatchRecorder:
             log.warning("xrpl-py not installed or no wallet — XRPL anchor skipped (stub)")
             return {"tx_hash": "STUB_XRPL_TX", "fingerprint": fingerprint}
 
-        async with AsyncJsonRpcClient(self.url) as client:
-            memo = MemoWrapper(
-                memo=Memo(
-                    memo_data=fingerprint["hex"].encode().hex(),
-                    memo_type="6972"    # "ir" = ironwall record
-                              "6f6e77616c6c5f6d617463685f7265636f7264",
-                    memo_format="6170706c69636174696f6e2f6a736f6e",  # application/json
-                )
+        client = AsyncJsonRpcClient(self.url)
+        memo = MemoWrapper(
+            memo=Memo(
+                memo_data=fingerprint["hex"].encode().hex(),
+                memo_type="6972"    # "ir" = ironwall record
+                          "6f6e77616c6c5f6d617463685f7265636f7264",
+                memo_format="6170706c69636174696f6e2f6a736f6e",  # application/json
             )
-            tx = AccountSet(
-                account=self.wallet.classic_address,
-                memos=[memo],
-            )
-            response = await submit_and_wait(tx, client, self.wallet)
+        )
+        tx = AccountSet(
+            account=self.wallet.classic_address,
+            memos=[memo],
+        )
+        response = await submit_and_wait(tx, client, self.wallet)
 
         result_dict = {
             "tx_hash": response.result.get("hash"),

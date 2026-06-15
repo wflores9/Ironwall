@@ -36,4 +36,4 @@ researcher. Open an issue with empirical data citations before submitting a circ
 ## Security Disclosure
 
 **Do not open a public GitHub issue for security vulnerabilities.**  
-Email security@ironwall.gg — 24h acknowledgement, 14-day patch target.
+Use [GitHub private vulnerability reporting](https://github.com/wflores9/Ironwall/security/advisories/new) — 24h acknowledgement, 14-day patch target.

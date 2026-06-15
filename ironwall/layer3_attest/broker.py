@@ -22,6 +22,7 @@ Contributing: adding new attestation providers
 from __future__ import annotations
 
 import asyncio
+import json
 import os
 import time
 from pathlib import Path
@@ -35,10 +36,12 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import (
 )
 
 from ironwall.core.logging import get_logger
+from ironwall.layer3_attest.quotes import verify_quote_signature
 
 log = get_logger("layer3.broker")
 
 _TOKEN_TTL = 60  # seconds — re-attest required every 60s
+_QUOTE_PREFIXES = ("SIM_QUOTE_", "REAL_")
 
 
 class RemoteAttestationBroker:
@@ -127,22 +130,96 @@ class RemoteAttestationBroker:
             return False
 
         return (
-            self._verify_quote_sig(quote)    # genuine Intel/AMD hardware
+            self._verify_quote_sig(attest)    # genuine Intel/AMD hardware
             and self._verify_mrenclave(quote) # correct enclave binary
             and self._no_debug_flag(quote)    # not debug/sim mode in prod
             and self._tcb_fresh(quote)        # firmware up-to-date
         )
 
-    def _verify_quote_sig(self, quote: str) -> bool:
+    def _verify_quote_sig(self, attest: dict[str, Any]) -> bool:
         """Verify the attestation quote was signed by genuine Intel IAS or AMD KDS."""
-        # TODO: call Intel IAS /report or AMD KDS verify endpoint
-        # Stub: accept SIM quotes in SIM mode
-        return quote.startswith("SIM_QUOTE_") or quote.startswith("REAL_")
+        result = verify_quote_signature(attest, sgx_mode=os.environ.get("SGX_MODE", "SIM"))
+        if not result.ok:
+            log.warning("Quote verification failed provider=%s reason=%s", result.provider, result.reason)
+        return result.ok
 
     def _verify_mrenclave(self, quote: str) -> bool:
         """Verify the enclave measurement matches the expected binary hash."""
-        # TODO: compare against pinned MRENCLAVE value from build system
-        return True  # stub
+        expected = self._expected_mrenclave()
+        observed = self._extract_mrenclave(quote)
+        sgx_mode = os.environ.get("SGX_MODE", "SIM")
+
+        if expected is None:
+            if self._mrenclave_pin_configured():
+                log.error("Configured MRENCLAVE pin is missing or malformed")
+                return False
+            if sgx_mode == "HW":
+                log.error("IRONWALL_EXPECTED_MRENCLAVE is required in SGX_MODE=HW")
+                return False
+            log.warning("No pinned MRENCLAVE configured; accepting SIM quote")
+            return True
+
+        if observed is None:
+            log.warning("Attestation quote does not contain an enclave measurement")
+            return False
+
+        if observed != expected:
+            log.warning("MRENCLAVE mismatch observed=%s expected=%s", observed, expected)
+            return False
+
+        return True
+
+    def _expected_mrenclave(self) -> str | None:
+        """Load the pinned MRENCLAVE from env or a reproducible-build artifact."""
+        env_value = os.environ.get("IRONWALL_EXPECTED_MRENCLAVE", "").strip().lower()
+        if env_value:
+            return env_value if self._is_mrenclave(env_value) else None
+
+        file_path = os.environ.get("IRONWALL_MRENCLAVE_FILE", "").strip()
+        if not file_path:
+            return None
+
+        path = Path(file_path)
+        if not path.exists():
+            log.error("Pinned MRENCLAVE file not found: %s", path)
+            return None
+
+        raw = path.read_text(encoding="utf-8").strip()
+        if not raw:
+            return None
+
+        try:
+            data = json.loads(raw)
+        except json.JSONDecodeError:
+            value = raw.lower()
+            return value if self._is_mrenclave(value) else None
+
+        if isinstance(data, dict):
+            value = data.get("mrenclave") or data.get("expected_mrenclave")
+            if isinstance(value, str):
+                measurement = value.strip().lower()
+                if self._is_mrenclave(measurement):
+                    return measurement
+
+        log.error("Pinned MRENCLAVE file must be text or JSON with mrenclave")
+        return None
+
+    def _mrenclave_pin_configured(self) -> bool:
+        return bool(
+            os.environ.get("IRONWALL_EXPECTED_MRENCLAVE", "").strip()
+            or os.environ.get("IRONWALL_MRENCLAVE_FILE", "").strip()
+        )
+
+    def _is_mrenclave(self, value: str) -> bool:
+        return len(value) == 64 and all(c in "0123456789abcdef" for c in value)
+
+    def _extract_mrenclave(self, quote: str) -> str | None:
+        """Extract the enclave measurement encoded in SIM/REAL quote fixtures."""
+        for prefix in _QUOTE_PREFIXES:
+            if quote.startswith(prefix):
+                measurement = quote.removeprefix(prefix).split(":", 1)[0].lower()
+                return measurement or None
+        return None
 
     def _no_debug_flag(self, quote: str) -> bool:
         """Reject debug/simulation-mode quotes in production."""

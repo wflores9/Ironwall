@@ -26,6 +26,7 @@ from pathlib import Path
 from typing import Any
 
 from ironwall.core.logging import get_logger
+from ironwall.zk_anticheat.commitment import ProofCommitment, build_proof_commitment
 
 log = get_logger("zk_anticheat.prover")
 
@@ -129,6 +130,22 @@ class ZKProver:
             ok = b"OK" in result.stdout
             log.debug("Proof verify result: %s", "OK" if ok else "FAIL")
             return ok
+
+    def commit_proof(
+        self,
+        *,
+        match_id: str,
+        proof: dict[str, Any],
+        public_signals: list[Any],
+    ) -> ProofCommitment:
+        """Build the proof commitment used by Hedera EVM and XRPL gates."""
+        verification_key = json.loads(self.vkey.read_text(encoding="utf-8"))
+        return build_proof_commitment(
+            match_id=match_id,
+            proof=proof,
+            public_signals=public_signals,
+            verification_key=verification_key,
+        )
 
     # ── Padding helpers ───────────────────────────────────────────────────
 

@@ -111,7 +111,7 @@ class XRPLEscrow:
             match_id, player_a, player_b, amount_xrp,
         )
 
-        if not _SDK_AVAILABLE:
+        if not _SDK_AVAILABLE or self.wallet is None:
             return {
                 "escrow_sequence": 0,
                 "condition": condition_hex,
@@ -119,15 +119,15 @@ class XRPLEscrow:
                 "stub": True,
             }
 
-        async with AsyncJsonRpcClient(self.url) as client:
-            tx = EscrowCreate(
-                account=self.wallet.classic_address,
-                amount=drops,
-                destination=player_a,          # winner receives from escrow
-                condition=condition_hex,
-                cancel_after=cancel_after,
-            )
-            response = await submit_and_wait(tx, client, self.wallet)
+        client = AsyncJsonRpcClient(self.url)
+        tx = EscrowCreate(
+            account=self.wallet.classic_address,
+            amount=drops,
+            destination=player_a,          # winner receives from escrow
+            condition=condition_hex,
+            cancel_after=cancel_after,
+        )
+        response = await submit_and_wait(tx, client, self.wallet)
 
         seq = response.result.get("Sequence", 0)
         log.info("XRPL escrow created seq=%s condition=%s…", seq, condition_hex[:16])
@@ -175,20 +175,20 @@ class XRPLEscrow:
             escrow_sequence, winner_address, preimage_hex[:16],
         )
 
-        if not _SDK_AVAILABLE:
+        if not _SDK_AVAILABLE or self.wallet is None:
             return {"status": "STUB_FINISHED", "winner": winner_address}
 
-        async with AsyncJsonRpcClient(self.url) as client:
-            tx = EscrowFinish(
-                account=self.wallet.classic_address,
-                owner=escrow_owner,
-                offer_sequence=escrow_sequence,
-                fulfillment=preimage_hex,
-                condition=self._build_condition(match_id, placeholder=False,
-                    hedera_consensus_ts=hedera_consensus_ts,
-                    merkle_root=merkle_root)[0],
-            )
-            response = await submit_and_wait(tx, client, self.wallet)
+        client = AsyncJsonRpcClient(self.url)
+        tx = EscrowFinish(
+            account=self.wallet.classic_address,
+            owner=escrow_owner,
+            offer_sequence=escrow_sequence,
+            fulfillment=preimage_hex,
+            condition=self._build_condition(match_id, placeholder=False,
+                hedera_consensus_ts=hedera_consensus_ts,
+                merkle_root=merkle_root)[0],
+        )
+        response = await submit_and_wait(tx, client, self.wallet)
 
         log.info("XRPL escrow finished tx=%s", response.result.get("hash"))
         return {

@@ -52,7 +52,7 @@ struct Args {
     broker_url: String,
 
     /// Path to JSON file containing known module hashes (from ModuleSigner)
-    /// Format: {"filename.dll": "sha3_256_hex", ...}
+    /// Format: {"filename.dll": ["sha3_256_hex", ...], ...}
     #[arg(long)]
     known_hashes: Option<PathBuf>,
 
@@ -95,9 +95,23 @@ async fn main() -> Result<()> {
     info!("Broker:    {}", args.broker_url);
 
     // ── Step 1: Load known hashes (if provided) ───────────────────────
-    let known_hashes: HashMap<String, String> = if let Some(ref path) = args.known_hashes {
+    // Accepts both flat {"file.dll": "hash"} and multi-hash {"file.dll": ["h1","h2"]} formats.
+    let known_hashes: HashMap<String, Vec<String>> = if let Some(ref path) = args.known_hashes {
         let json = std::fs::read_to_string(path)?;
-        serde_json::from_str(&json)?
+        let raw: HashMap<String, serde_json::Value> = serde_json::from_str(&json)?;
+        raw.into_iter()
+            .map(|(k, v)| {
+                let hashes = match v {
+                    serde_json::Value::String(s) => vec![s],
+                    serde_json::Value::Array(a) => a
+                        .into_iter()
+                        .filter_map(|x| x.as_str().map(String::from))
+                        .collect(),
+                    _ => vec![],
+                };
+                (k, hashes)
+            })
+            .collect()
     } else {
         warn!("No --known-hashes provided — all modules will be flagged as unsigned");
         HashMap::new()
