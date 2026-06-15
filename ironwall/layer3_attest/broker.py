@@ -36,6 +36,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import (
 )
 
 from ironwall.core.logging import get_logger
+from ironwall.layer3_attest.quotes import verify_quote_signature
 
 log = get_logger("layer3.broker")
 
@@ -129,17 +130,18 @@ class RemoteAttestationBroker:
             return False
 
         return (
-            self._verify_quote_sig(quote)    # genuine Intel/AMD hardware
+            self._verify_quote_sig(attest)    # genuine Intel/AMD hardware
             and self._verify_mrenclave(quote) # correct enclave binary
             and self._no_debug_flag(quote)    # not debug/sim mode in prod
             and self._tcb_fresh(quote)        # firmware up-to-date
         )
 
-    def _verify_quote_sig(self, quote: str) -> bool:
+    def _verify_quote_sig(self, attest: dict[str, Any]) -> bool:
         """Verify the attestation quote was signed by genuine Intel IAS or AMD KDS."""
-        # TODO: call Intel IAS /report or AMD KDS verify endpoint
-        # Stub: accept SIM quotes in SIM mode
-        return quote.startswith("SIM_QUOTE_") or quote.startswith("REAL_")
+        result = verify_quote_signature(attest, sgx_mode=os.environ.get("SGX_MODE", "SIM"))
+        if not result.ok:
+            log.warning("Quote verification failed provider=%s reason=%s", result.provider, result.reason)
+        return result.ok
 
     def _verify_mrenclave(self, quote: str) -> bool:
         """Verify the enclave measurement matches the expected binary hash."""
