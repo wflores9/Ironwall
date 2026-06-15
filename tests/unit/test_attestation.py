@@ -1,17 +1,24 @@
 """Unit tests for RemoteAttestationBroker (mocked TEE)."""
 
 import os
+import base64
 import pytest
+
+from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.primitives.asymmetric import padding, rsa
 
 os.environ.setdefault("SESSION_SECRET", "testsecret_32bytesexactlyXXXXXX!")
 os.environ.setdefault("SGX_MODE", "SIM")
 
 from ironwall.layer3_attest.broker import RemoteAttestationBroker
+from ironwall.layer3_attest.quotes import canonical_report_bytes
 
 VALID_ATTEST = {
     "sgx_quote": "SIM_QUOTE_abc123",
     "verified": True,
 }
+
+VALID_MEASUREMENT = "a" * 64
 
 INVALID_ATTEST = {
     "sgx_quote": "BAD_QUOTE",
@@ -24,6 +31,30 @@ def broker():
     return RemoteAttestationBroker()
 
 
+def intel_hw_attest() -> dict[str, object]:
+    private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+    public_key_pem = private_key.public_key().public_bytes(
+        serialization.Encoding.PEM,
+        serialization.PublicFormat.SubjectPublicKeyInfo,
+    ).decode()
+    report = {
+        "isvEnclaveQuoteStatus": "OK",
+        "isvEnclaveQuoteBody": base64.b64encode(b"quote").decode(),
+    }
+    signature = private_key.sign(
+        canonical_report_bytes(report),
+        padding.PKCS1v15(),
+        hashes.SHA256(),
+    )
+    return {
+        "sgx_quote": "REAL_" + VALID_MEASUREMENT,
+        "ias_report": report,
+        "ias_signature": base64.b64encode(signature).decode(),
+        "ias_signing_cert": public_key_pem,
+        "verified": True,
+    }
+
+
 class TestInitializeSession:
     @pytest.mark.asyncio
     async def test_valid_attest_returns_token(self, broker):
@@ -34,6 +65,27 @@ class TestInitializeSession:
     @pytest.mark.asyncio
     async def test_missing_quote_denied(self, broker):
         token = await broker.initialize_session("player_2", {})
+        assert token is None
+
+    @pytest.mark.asyncio
+    async def test_hw_intel_quote_with_matching_pin_returns_token(self, broker, monkeypatch):
+        monkeypatch.setenv("SGX_MODE", "HW")
+        monkeypatch.setenv("IRONWALL_EXPECTED_MRENCLAVE", VALID_MEASUREMENT)
+
+        token = await broker.initialize_session("player_hw", intel_hw_attest())
+
+        assert token is not None
+
+    @pytest.mark.asyncio
+    async def test_hw_real_quote_without_provider_report_denied(self, broker, monkeypatch):
+        monkeypatch.setenv("SGX_MODE", "HW")
+        monkeypatch.setenv("IRONWALL_EXPECTED_MRENCLAVE", VALID_MEASUREMENT)
+
+        token = await broker.initialize_session(
+            "player_hw",
+            {"sgx_quote": "REAL_" + VALID_MEASUREMENT, "verified": True},
+        )
+
         assert token is None
 
     @pytest.mark.asyncio
