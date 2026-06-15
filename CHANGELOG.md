@@ -23,6 +23,7 @@
 - **Verification demo fixtures** (`examples/`, `make verify-demo`): adds a valid match record and a tampered record so the audit path can be demonstrated locally in one command.
 - **Controller input normalisation** (`layer1_thinclient/controller.py`): canonicalises Xbox, PS5, and Switch axes, triggers, and buttons into deterministic payload bytes for HMAC signing and Merkle audit.
 - **Unity / Unreal integration samples** (`samples/`): adds engine sample clients plus canonical engine input bridge payload helpers for launcher-injected session tokens.
+- **PLONK verifier commitments** (`zk_anticheat/commitment.py`, `layer4_hedera/contracts/PlonkVerifierRegistry.sol`): adds a shared proof commitment format plus a Hedera EVM registry/adapter for snarkjs-generated PLONK verifiers and XRPL Hook proof-hash gates.
 
 ## [0.1.0] — 2026-05-17
 
