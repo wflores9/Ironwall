@@ -32,6 +32,12 @@ class IronwallConfig:
     zk_trusted_setup: str = field(
         default_factory=lambda: os.environ.get("ZK_TRUSTED_SETUP", "./zk/pot18_final.ptau")
     )
+    expected_mrenclave: str = field(
+        default_factory=lambda: os.environ.get("IRONWALL_EXPECTED_MRENCLAVE", "")
+    )
+    mrenclave_file: str = field(
+        default_factory=lambda: os.environ.get("IRONWALL_MRENCLAVE_FILE", "")
+    )
 
 
 # ── Attestation provider registry ──────────────────────────────────────────

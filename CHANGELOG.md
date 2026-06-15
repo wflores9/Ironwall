@@ -4,6 +4,7 @@
 
 ### Security
 - **Ed25519 asymmetric JWT signing** (`layer3_attest/broker.py`): replaced symmetric HS256 `SESSION_SECRET` with ephemeral or supplied Ed25519 keypair. Tokens are signed with the private key and verified with the public key — symmetric-key forgery is no longer possible.
+- **Pinned MRENCLAVE verification** (`layer3_attest/broker.py`): `_verify_mrenclave()` now checks the quote measurement against `IRONWALL_EXPECTED_MRENCLAVE` or `IRONWALL_MRENCLAVE_FILE`; `SGX_MODE=HW` requires a configured pin.
 - **Publisher public key auto-registration** (`layer3_attest/broker.py`): on broker init, `signing_key.pub.pem` is loaded and registered with `TEEVerifier` under `PUBLISHER_DEV_ID` (default `ironwall-cod`), eliminating a manual bootstrap step.
 - **CT log → Hedera HCS** (`layer2_signing/signer.py`, `core/hedera.py`): `_anchor_ct_log()` no longer writes to `ct_log.jsonl`. It now calls `write_ct_log_hedera()` which submits the entry to a Hedera HCS topic (`HEDERA_CT_LOG_TOPIC_ID`) as a `TopicMessageSubmitTransaction`. The SDK call is stubbed but the interface is fully wired; set the env var to activate in production.
 - **`.gitignore` hardening**: added `*.pem`, `*.jsonl`, `target/` to prevent accidental commits of private keys, CT logs, and Rust build artefacts.
