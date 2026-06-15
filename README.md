@@ -116,6 +116,7 @@ ironwall/
 │   └── circuits/           # circom circuit definitions
 ├── merkle_audit/           # Input Merkle tree + audit trail
 ironwall_launcher/          # Rust launcher: manifest verify + module scan
+samples/                    # Unity / Unreal integration examples
 tests/
 ├── unit/                   # Fast, no external deps
 └── integration/            # Docker-based full-stack tests
@@ -135,7 +136,7 @@ tests/
 - [ ] Production Intel IAS / AMD KDS quote verification (replacing SIM stubs)
 - [x] Pinned MRENCLAVE verification from reproducible builds
 - [ ] PLONK verifier contract (Hedera EVM + XRPL Hooks)
-- [ ] Unreal / Unity sample game integration
+- [x] Unreal / Unity sample game integration
 - [x] Public match-record verification CLI (`ironwall-verify record.json`)
 - [x] Controller input normalisation (Xbox / PS5 / Switch)
 
