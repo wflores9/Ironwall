@@ -35,7 +35,7 @@ log = get_logger("layer4.xrpl.recorder")
 
 try:
     from xrpl.asyncio.clients import AsyncJsonRpcClient  # type: ignore[import]
-    from xrpl.models.transactions import AccountSet, Memo, MemoWrapper  # type: ignore[import]
+    from xrpl.models.transactions import AccountSet, Memo  # type: ignore[import]
     from xrpl.asyncio.transaction import submit_and_wait  # type: ignore[import]
     from xrpl.wallet import Wallet  # type: ignore[import]
 
@@ -99,13 +99,11 @@ class XRPLMatchRecorder:
             return {"tx_hash": "STUB_XRPL_TX", "fingerprint": fingerprint}
 
         client = AsyncJsonRpcClient(self.url)
-        memo = MemoWrapper(
-            memo=Memo(
-                memo_data=fingerprint["hex"].encode().hex(),
-                memo_type="6972"    # "ir" = ironwall record
-                          "6f6e77616c6c5f6d617463685f7265636f7264",
-                memo_format="6170706c69636174696f6e2f6a736f6e",  # application/json
-            )
+        memo = Memo(
+            memo_data=fingerprint["hex"].encode().hex(),
+            memo_type="6972"    # "ir" = ironwall record
+                      "6f6e77616c6c5f6d617463685f7265636f7264",
+            memo_format="6170706c69636174696f6e2f6a736f6e",  # application/json
         )
         tx = AccountSet(
             account=self.wallet.classic_address,
