@@ -1,0 +1,14 @@
+{
+  "match_id": "demo-match-0001",
+  "players": [
+    "player-red",
+    "player-blue"
+  ],
+  "outcome_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "merkle_root": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "tee_receipt": {
+    "status": "ATTESTED",
+    "sgx_quote": "SIM_QUOTE_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "ts": 1781510400000
+}

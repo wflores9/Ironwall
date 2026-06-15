@@ -273,7 +273,7 @@ mod tests {
     #[tokio::test]
     async fn hash_matches_known_vector() {
         let tmp = TempDir::new().unwrap();
-        let path = make_fake_dll(tmp.path(), "module.dll", b"ironwall test");
+        make_fake_dll(tmp.path(), "module.dll", b"ironwall test");
 
         let config = ScanConfig::new(tmp.path());
         let scanner = DllScanner::new(config);
