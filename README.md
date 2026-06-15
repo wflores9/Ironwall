@@ -87,6 +87,21 @@ make test-zk            # ZK circuit tests (~5 min)
 make cov                # coverage report
 ```
 
+### Verify Match Records
+
+```bash
+ironwall-verify record.json
+ironwall-verify record.json --json
+make verify-demo
+```
+
+The verifier accepts full Hedera match records, Hedera stub receipts, and XRPL
+fingerprints. It validates the match id, SHA3-256 Merkle root, attested TEE
+receipt, and compact receipt hash fields used for public audit trails.
+
+`make verify-demo` runs the verifier against `examples/match-record-valid.json`
+and then confirms that `examples/match-record-tampered.json` is rejected.
+
 ## Repository Structure
 
 ```
@@ -120,7 +135,7 @@ tests/
 - [ ] Pinned MRENCLAVE verification from reproducible builds
 - [ ] PLONK verifier contract (Hedera EVM + XRPL Hooks)
 - [ ] Unreal / Unity sample game integration
-- [ ] Public match-record verification CLI (`ironwall verify <match-id>`)
+- [x] Public match-record verification CLI (`ironwall-verify record.json`)
 - [ ] Controller input normalisation (Xbox / PS5 / Switch)
 
 ## Contributing
