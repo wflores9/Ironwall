@@ -48,6 +48,8 @@ Thumbs.db
 demo/audit.json
 demo/audit_tampered.json
 demo/receipt.json
+demo/match_record.json
+demo/match_record_tampered.json
 
 # Rust build artifacts
 target/

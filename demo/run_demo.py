@@ -155,89 +155,83 @@ async def main() -> None:
     print(f"  match_id    : {fingerprint['match_id']}")
     print(f"  receipt_hash: {fingerprint['receipt_hash'][:32]}…")
 
-    # ── Step 5: write audit.json + receipt.json ────────────────────────
+    # ── Step 5: write verification record files ────────────────────────
     _step(5, 6, "Write verification artifacts")
 
+    record_path = DEMO_DIR / "match_record.json"
+    record_tampered_path = DEMO_DIR / "match_record_tampered.json"
     audit_path = DEMO_DIR / "audit.json"
     receipt_path = DEMO_DIR / "receipt.json"
-    tampered_path = DEMO_DIR / "audit_tampered.json"
 
+    # ironwall-verify (current main) expects a record JSON file. The XRPL
+    # fingerprint shape ({"fingerprint": {"data": {...}}}) is one of the
+    # formats it recognises directly.
+    record = {"fingerprint": {"data": dict(fingerprint)}}
+    record_path.write_text(json.dumps(record, indent=2, sort_keys=True))
+
+    # Tampered version — current ironwall-verify validates record structure
+    # and field formats (hex64 lengths, required keys), not on-chain Merkle
+    # recomputation. Demonstrate FAIL via a malformed merkle_root, which the
+    # structural check rejects.
+    tampered_fingerprint = dict(fingerprint)
+    tampered_fingerprint["merkle_root"] = "not_a_valid_merkle_root"
+    record_tampered = {"fingerprint": {"data": tampered_fingerprint}}
+    record_tampered_path.write_text(json.dumps(record_tampered, indent=2, sort_keys=True))
+
+    # Also keep the raw Merkle leaves + receipt for anyone doing a full
+    # from-scratch audit (not consumed by ironwall-verify directly).
     audit_path.write_text(json.dumps({"leaves": tree.leaves}, indent=2))
     receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True))
 
-    # Tampered version — flip one leaf hash to demonstrate FAIL.
-    tampered_leaves = list(tree.leaves)
-    tampered_leaves[0] = hashlib.sha3_256(b"TAMPERED").hexdigest()
-    tampered_path.write_text(json.dumps({"leaves": tampered_leaves}, indent=2))
-
-    print(f"  wrote {audit_path}")
-    print(f"  wrote {receipt_path}")
-    print(f"  wrote {tampered_path}  (for the FAIL demonstration)")
+    print(f"  wrote {record_path}            (verify input — clean)")
+    print(f"  wrote {record_tampered_path}   (verify input — tampered merkle_root)")
+    print(f"  wrote {audit_path}              (raw Merkle leaves, for audit)")
+    print(f"  wrote {receipt_path}            (TEE attestation receipt)")
 
     # ── Step 6: run ironwall-verify — PASS, then FAIL ──────────────────
     _step(6, 6, "Independent verification (ironwall-verify)")
 
-    if tx_hash == "STUB_XRPL_TX":
-        print(
-            f"  {_CYAN}No real XRPL transaction was anchored (stub mode),"
-            f" so live verification cannot run.{_RESET}"
-        )
-        print(
-            f"  {_CYAN}Once a real tx_hash exists, run:{_RESET}"
-        )
-        print(
-            f"\n    ironwall-verify --match-id <TX_HASH> "
-            f"--audit demo/audit.json --receipt demo/receipt.json\n"
-        )
-        return
-
-    cmd_pass = (
-        f"ironwall-verify --match-id {tx_hash} "
-        f"--audit demo/audit.json --receipt demo/receipt.json"
-    )
-    cmd_fail = (
-        f"ironwall-verify --match-id {tx_hash} "
-        f"--audit demo/audit_tampered.json --receipt demo/receipt.json"
-    )
-
-    print(f"  {_BOLD}Run 1 — clean audit log (expect PASS):{_RESET}")
-    print(f"    $ {cmd_pass}")
+    print(f"  {_BOLD}Run 1 — clean record (expect PASS):{_RESET}")
+    print(f"    $ ironwall-verify {record_path}")
     print()
-    rc1 = await _run_verify(tx_hash, audit_path, receipt_path)
+    rc1, out1 = _run_verify_cli(record_path)
+    print(f"    {out1}")
     print(f"  → exit code {rc1} {'(PASS)' if rc1 == 0 else '(FAIL)'}")
 
     print()
-    print(f"  {_BOLD}Run 2 — tampered audit log (expect FAIL):{_RESET}")
-    print(f"    $ {cmd_fail}")
+    print(f"  {_BOLD}Run 2 — tampered record, corrupted merkle_root (expect FAIL):{_RESET}")
+    print(f"    $ ironwall-verify {record_tampered_path}")
     print()
-    rc2 = await _run_verify(tx_hash, tampered_path, receipt_path)
+    rc2, out2 = _run_verify_cli(record_tampered_path)
+    print(f"    {out2}")
     print(f"  → exit code {rc2} {'(PASS)' if rc2 == 0 else '(FAIL)'}")
 
     print()
     print("═" * 50)
-    if rc1 == 0 and rc2 == 1:
+    if rc1 == 0 and rc2 != 0:
         print(f"{_BOLD}{_GREEN}DEMO COMPLETE — protocol behaved correctly.{_RESET}")
         print("  Clean record verified.  Tampered record rejected.")
     else:
         print(f"{_BOLD}{_RED}DEMO RESULT UNEXPECTED — see output above.{_RESET}")
-    print(f"\n  XRPL tx (testnet): {tx_hash}")
-    print(f"  Explorer: https://testnet.xrpl.org/transactions/{tx_hash}")
+
+    if tx_hash != "STUB_XRPL_TX":
+        print(f"\n  XRPL tx (testnet): {tx_hash}")
+        print(f"  Explorer: https://testnet.xrpl.org/transactions/{tx_hash}")
     print()
 
 
-async def _run_verify(tx_hash: str, audit_path: Path, receipt_path: Path) -> int:
-    """Invoke ironwall-verify's _run() directly (in-process, no subprocess)."""
-    import argparse
-    from ironwall.cli.verify import _run as verify_run
+def _run_verify_cli(record_path: Path) -> tuple[int, str]:
+    """Run `ironwall-verify <record.json>` as a subprocess, return (exit_code, output)."""
+    import subprocess
+    import sys
 
-    args = argparse.Namespace(
-        match_id=tx_hash,
-        chain="xrpl",
-        network="testnet",
-        audit=str(audit_path),
-        receipt=str(receipt_path),
+    proc = subprocess.run(
+        [sys.executable, "-m", "ironwall.cli.verify", str(record_path)],
+        capture_output=True,
+        text=True,
     )
-    return await verify_run(args)
+    out = (proc.stdout + proc.stderr).strip()
+    return proc.returncode, out
 
 
 if __name__ == "__main__":
