@@ -44,5 +44,10 @@ Thumbs.db
 # Logs
 *.jsonl
 
+# Demo artifacts (regenerated on each run)
+demo/audit.json
+demo/audit_tampered.json
+demo/receipt.json
+
 # Rust build artifacts
 target/

@@ -94,8 +94,8 @@ class XRPLMatchRecorder:
             result["id"], result["input_merkle_root"][:16],
         )
 
-        if not _SDK_AVAILABLE:
-            log.warning("xrpl-py not installed — XRPL anchor skipped (stub)")
+        if not _SDK_AVAILABLE or self.wallet is None:
+            log.warning("xrpl-py not installed or no wallet — XRPL anchor skipped (stub)")
             return {"tx_hash": "STUB_XRPL_TX", "fingerprint": fingerprint}
 
         async with AsyncJsonRpcClient(self.url) as client:
