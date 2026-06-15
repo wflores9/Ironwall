@@ -26,6 +26,11 @@ import aiohttp
 
 from ironwall.core.crypto import hmac_sign
 from ironwall.core.logging import get_logger
+from ironwall.layer1_thinclient.controller import (
+    RawControllerState,
+    normalize_controller_state,
+    serialize_controller_input,
+)
 
 log = get_logger("layer1.client")
 
@@ -60,10 +65,12 @@ async def capture_input() -> bytes:
     Returns a compact binary blob — format TBD by platform layer.
 
     TODO #89: Rust rewrite for sub-1ms latency.
-    TODO #118: Controller normalisation for Xbox / PS5 / Switch.
+    Platform integrations should pass raw gamepad state through
+    normalize_controller_state() before serialising it into this payload.
     """
     await asyncio.sleep(1 / 60)  # 60 Hz polling stub
-    return b"\x00" * 8           # placeholder — replace with real capture
+    normalized = normalize_controller_state(RawControllerState(kind="xbox"))
+    return serialize_controller_input(normalized)
 
 
 # ── Frame rendering (stub) ─────────────────────────────────────────────────
