@@ -22,6 +22,7 @@
 - **Public match-record verifier** (`ironwall.cli.verify`): adds the `ironwall-verify record.json` CLI for validating full Hedera records, Hedera stub receipts, and XRPL fingerprints before dispute review or public audit.
 - **Verification demo fixtures** (`examples/`, `make verify-demo`): adds a valid match record and a tampered record so the audit path can be demonstrated locally in one command.
 - **Controller input normalisation** (`layer1_thinclient/controller.py`): canonicalises Xbox, PS5, and Switch axes, triggers, and buttons into deterministic payload bytes for HMAC signing and Merkle audit.
+- **Unity / Unreal integration samples** (`samples/`): adds engine sample clients plus canonical engine input bridge payload helpers for launcher-injected session tokens.
 
 ## [0.1.0] — 2026-05-17
 
