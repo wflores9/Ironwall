@@ -1,7 +1,6 @@
 //! Module manifest — the signed inventory of DLLs sent to the TEE broker.
 
 use serde::{Deserialize, Serialize};
-use std::path::PathBuf;
 
 /// A single scanned module entry.
 #[derive(Debug, Clone, Serialize, Deserialize)]

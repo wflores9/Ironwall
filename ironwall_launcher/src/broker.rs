@@ -16,7 +16,7 @@
 use crate::error::LauncherError;
 use crate::manifest::{AttestationResponse, ModuleManifest};
 use reqwest::Client;
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 use std::time::Duration;
 use tracing::{error, info, warn};
 
