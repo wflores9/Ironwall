@@ -12,20 +12,25 @@ Flow:
   2. Simulate a match: generate input events, build an InputMerkleTree.
   3. Run TEEVerifier.verify_and_attest() in SIM mode — produces an
      attestation receipt (sgx_quote = "SIM_QUOTE_...").
-  4. Build the match fingerprint (merkle_root + receipt_hash) and anchor
-     it to XRPL testnet via a freshly-funded faucet wallet.
-  5. Write audit.json (Merkle leaves) and receipt.json (attestation
-     receipt) — the same files `ironwall-verify` consumes.
-  6. Print the XRPL tx hash and the exact `ironwall-verify` commands to
-     run — once for a clean PASS, once after tampering for a FAIL.
+  4. Dual-anchor: commit to Hedera HCS + XRPL testnet via DualAnchorRecorder.
+     Falls back to XRPL-only (with warning) if Hedera env vars are missing.
+  5. Write match_record.json and match_record_tampered.json for ironwall-verify.
+  6. Run ironwall-verify on both — expect PASS then FAIL.
 
 Run:
     python demo/run_demo.py
 
+Environment (optional — load via .env or export directly):
+    HEDERA_OPERATOR_ID   — 0.0.XXXXXX
+    HEDERA_OPERATOR_KEY  — ED25519 private key hex
+    IRONWALL_TOPIC_ID    — 0.0.YYYYYY  (HCS match-record topic)
+    HEDERA_NETWORK       — testnet | mainnet  (default: testnet)
+
 Output:
+    demo/match_record.json
+    demo/match_record_tampered.json
     demo/audit.json
     demo/receipt.json
-    demo/audit_tampered.json   (for the FAIL demonstration)
 """
 
 from __future__ import annotations
@@ -37,10 +42,12 @@ import os
 import time
 from pathlib import Path
 
+from ironwall.core.crypto import sha3_256_hex
 from ironwall.layer2_signing.signer import ModuleSigner
 from ironwall.layer2_signing.tee_verifier import TEEVerifier, register_public_key
 from ironwall.merkle_audit.tree import InputMerkleTree
-from ironwall.layer4_xrpl.recorder import XRPLMatchRecorder
+from ironwall.layer4_hedera.recorder import HederaMatchRecorder
+from ironwall.layer4_xrpl.recorder import XRPLMatchRecorder, DualAnchorRecorder
 
 DEMO_DIR = Path(__file__).parent
 CT_LOG_PATH = DEMO_DIR / "ct_log.jsonl"
@@ -48,6 +55,7 @@ CT_LOG_PATH = DEMO_DIR / "ct_log.jsonl"
 _GREEN = "\033[92m"
 _RED = "\033[91m"
 _CYAN = "\033[96m"
+_YELLOW = "\033[93m"
 _BOLD = "\033[1m"
 _RESET = "\033[0m"
 
@@ -58,14 +66,61 @@ def _step(n: int, total: int, title: str) -> None:
     print("─" * 50)
 
 
+def _try_load_dotenv() -> None:
+    try:
+        from dotenv import load_dotenv  # type: ignore[import]
+        load_dotenv()
+    except ImportError:
+        pass  # python-dotenv not installed; rely on os.environ
+
+
+class _StubHederaRecorder:
+    """Minimal stand-in for HederaMatchRecorder when env vars are absent."""
+    async def commit_match_record(self, result: dict, attest: dict) -> dict:
+        return {"consensus_timestamp": "STUB", "record": {}}
+
+
+async def _build_hedera_recorder() -> tuple[object, bool]:
+    """
+    Attempt to build a HederaMatchRecorder from env vars.
+    Returns (recorder, is_live). Falls back to _StubHederaRecorder when
+    env vars are missing (avoids constructing HederaMatchRecorder with an
+    invalid topic_id that the JVM-backed SDK would reject).
+    """
+    op_id = os.environ.get("HEDERA_OPERATOR_ID", "")
+    op_key = os.environ.get("HEDERA_OPERATOR_KEY", "")
+    topic_id = os.environ.get("IRONWALL_TOPIC_ID", "")
+
+    if not (op_id and op_key and topic_id):
+        missing = [v for v, k in [
+            ("HEDERA_OPERATOR_ID", op_id),
+            ("HEDERA_OPERATOR_KEY", op_key),
+            ("IRONWALL_TOPIC_ID", topic_id),
+        ] if not k]
+        print(f"  {_YELLOW}⚠ Hedera env vars missing ({', '.join(missing)}) — HCS anchor will stub{_RESET}")
+        return _StubHederaRecorder(), False
+
+    try:
+        from ironwall.core.hedera import build_hedera_client
+        client = build_hedera_client(operator_id=op_id, operator_key=op_key)
+        print(f"  hedera_op : {op_id}")
+        print(f"  topic_id  : {topic_id}")
+        return HederaMatchRecorder(client=client, topic_id=topic_id), True
+    except Exception as exc:
+        print(f"  {_YELLOW}⚠ Could not build Hedera client: {exc} — HCS anchor will stub{_RESET}")
+        return _StubHederaRecorder(), False
+
+
 async def main() -> None:
+    _try_load_dotenv()
+
     # Fresh CT log per demo run.
     os.environ["IRONWALL_CT_LOG_PATH"] = str(CT_LOG_PATH)
     if CT_LOG_PATH.exists():
         CT_LOG_PATH.unlink()
 
     print(f"{_BOLD}{_CYAN}IRONWALL END-TO-END DEMO (SIM mode){_RESET}")
-    print("Launch → Attest → Capture → Anchor (XRPL testnet) → Verify")
+    print("Launch → Attest → Capture → Dual-Anchor (Hedera HCS + XRPL) → Verify")
 
     # ── Step 1: developer keypair + sign the "game module" ─────────────
     _step(1, 6, "Sign game module (Layer 2 — ECDSA P-256 + CT log)")
@@ -76,7 +131,6 @@ async def main() -> None:
     dev_id = "studio-demo-001"
     register_public_key(dev_id, pub_pem)
 
-    # Synthetic "game binary" — in production this is the real launcher/exe.
     game_module = b"IRONWALL_DEMO_GAME_BINARY_v1.0" + os.urandom(256)
 
     sig_record = signer.sign_module(game_module, dev_id)
@@ -96,7 +150,6 @@ async def main() -> None:
 
     for i in range(n_events):
         player = players[i % 2]
-        # Synthetic input: keypress/mouse-move payload
         data = f"{player}:input_event_{i}".encode()
         ts = base_ts + i * 16_666_667  # ~60Hz tick
         tree.record_input(ts=ts, data=data, session_key=session_key)
@@ -120,18 +173,30 @@ async def main() -> None:
     print(f"  sgx_quote : {receipt['sgx_quote']}")
     print(f"  verified  : {receipt['verified']}")
 
-    # ── Step 4: build fingerprint + anchor to XRPL testnet ─────────────
-    _step(4, 6, "Anchor match record to XRPL testnet")
+    # ── Step 4: dual-anchor to Hedera HCS + XRPL testnet ───────────────
+    _step(4, 6, "Dual-anchor match record (Hedera HCS + XRPL testnet)")
 
     match_id = f"demo-match-{int(time.time())}"
     end_time = int(time.time() * 1000)
 
+    # outcome_hash: SHA3-256 of sorted player list + merkle root (privacy-preserving)
+    outcome_hash = sha3_256_hex(
+        json.dumps({"players": sorted(players), "merkle_root": merkle_root}, sort_keys=True).encode()
+    )
+
     result = {
         "id": match_id,
+        "player_ids": players,
+        "outcome_hash": outcome_hash,
         "input_merkle_root": merkle_root,
         "end_time": end_time,
     }
 
+    # Hedera recorder
+    print("  Building Hedera HCS recorder…")
+    hedera_recorder, hedera_live = await _build_hedera_recorder()
+
+    # XRPL faucet wallet
     print("  Requesting funded wallet from XRPL testnet faucet…")
     try:
         from xrpl.asyncio.wallet import generate_faucet_wallet
@@ -139,21 +204,36 @@ async def main() -> None:
 
         faucet_client = AsyncJsonRpcClient(XRPLMatchRecorder.TESTNET)
         wallet = await generate_faucet_wallet(faucet_client, debug=False)
-        print(f"  wallet      : {wallet.classic_address}")
+        print(f"  xrpl_wallet : {wallet.classic_address}")
     except Exception as exc:
-        print(f"  {_RED}✗ Could not fund testnet wallet: {exc}{_RESET}")
-        print(f"  {_CYAN}Falling back to STUB anchor (no real XRPL tx).{_RESET}")
+        print(f"  {_YELLOW}⚠ Could not fund testnet wallet: {exc} — XRPL anchor will stub{_RESET}")
         wallet = None
 
-    recorder = XRPLMatchRecorder(wallet, network="testnet")
-    anchor = await recorder.commit_match_record(result, receipt)
+    xrpl_recorder = XRPLMatchRecorder(wallet, network="testnet")
+    dual = DualAnchorRecorder(hedera_recorder, xrpl_recorder)
 
-    tx_hash = anchor.get("tx_hash", "STUB_XRPL_TX")
-    fingerprint = anchor["fingerprint"]["data"]
+    anchors = await dual.commit(result, receipt)
 
-    print(f"  tx_hash     : {tx_hash}")
-    print(f"  match_id    : {fingerprint['match_id']}")
-    print(f"  receipt_hash: {fingerprint['receipt_hash'][:32]}…")
+    hedera_anchor = anchors["hedera"]
+    xrpl_anchor = anchors["xrpl"]
+    fingerprint = xrpl_anchor["fingerprint"]["data"]
+
+    hedera_ts = (
+        hedera_anchor.get("consensus_timestamp")
+        or getattr(hedera_anchor, "consensus_timestamp", "STUB")
+    )
+    xrpl_tx = xrpl_anchor.get("tx_hash", "STUB_XRPL_TX")
+
+    print()
+    print(f"  {'✓' if hedera_live else '~'} Hedera consensus_timestamp : {hedera_ts}")
+    print(f"  {'✓' if wallet else '~'} XRPL tx_hash              : {xrpl_tx}")
+    print(f"  match_id                   : {fingerprint['match_id']}")
+    print(f"  receipt_hash               : {fingerprint['receipt_hash'][:32]}…")
+
+    if not hedera_live and wallet is None:
+        print(f"  {_YELLOW}Both anchors in stub mode — set env vars for live anchoring.{_RESET}")
+    elif not hedera_live:
+        print(f"  {_YELLOW}Hedera HCS stub — set HEDERA_OPERATOR_ID / KEY / IRONWALL_TOPIC_ID for live.{_RESET}")
 
     # ── Step 5: write verification record files ────────────────────────
     _step(5, 6, "Write verification artifacts")
@@ -163,23 +243,14 @@ async def main() -> None:
     audit_path = DEMO_DIR / "audit.json"
     receipt_path = DEMO_DIR / "receipt.json"
 
-    # ironwall-verify (current main) expects a record JSON file. The XRPL
-    # fingerprint shape ({"fingerprint": {"data": {...}}}) is one of the
-    # formats it recognises directly.
     record = {"fingerprint": {"data": dict(fingerprint)}}
     record_path.write_text(json.dumps(record, indent=2, sort_keys=True))
 
-    # Tampered version — current ironwall-verify validates record structure
-    # and field formats (hex64 lengths, required keys), not on-chain Merkle
-    # recomputation. Demonstrate FAIL via a malformed merkle_root, which the
-    # structural check rejects.
     tampered_fingerprint = dict(fingerprint)
     tampered_fingerprint["merkle_root"] = "not_a_valid_merkle_root"
     record_tampered = {"fingerprint": {"data": tampered_fingerprint}}
     record_tampered_path.write_text(json.dumps(record_tampered, indent=2, sort_keys=True))
 
-    # Also keep the raw Merkle leaves + receipt for anyone doing a full
-    # from-scratch audit (not consumed by ironwall-verify directly).
     audit_path.write_text(json.dumps({"leaves": tree.leaves}, indent=2))
     receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True))
 
@@ -214,9 +285,9 @@ async def main() -> None:
     else:
         print(f"{_BOLD}{_RED}DEMO RESULT UNEXPECTED — see output above.{_RESET}")
 
-    if tx_hash != "STUB_XRPL_TX":
-        print(f"\n  XRPL tx (testnet): {tx_hash}")
-        print(f"  Explorer: https://testnet.xrpl.org/transactions/{tx_hash}")
+    if xrpl_tx != "STUB_XRPL_TX":
+        print(f"\n  XRPL tx (testnet): {xrpl_tx}")
+        print(f"  Explorer: https://testnet.xrpl.org/transactions/{xrpl_tx}")
     print()
 
 
