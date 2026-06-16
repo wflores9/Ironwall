@@ -48,13 +48,13 @@ def build_hedera_client(
 
     match net:
         case "mainnet":
-            client = Client.for_mainnet()
+            client = Client.forMainnet()
         case "previewnet":
-            client = Client.for_previewnet()
+            client = Client.forPreviewnet()
         case _:
-            client = Client.for_testnet()
+            client = Client.forTestnet()
 
-    client.set_operator(AccountId.from_string(op_id), PrivateKey.from_string(op_key))
+    client.setOperator(AccountId.fromString(op_id), PrivateKey.fromString(op_key))
     return client
 
 
@@ -90,8 +90,8 @@ def write_ct_log_hedera(entry: dict) -> str:
         # from hedera import TopicMessageSubmitTransaction, TopicId
         # (
         #     TopicMessageSubmitTransaction()
-        #     .set_topic_id(TopicId.from_string(topic_id))
-        #     .set_message(json.dumps({"anchor": anchor, **entry}))
+        #     .setTopicId(TopicId.fromString(topic_id))
+        #     .setMessage(json.dumps({"anchor": anchor, **entry}))
         #     .execute(client)
         # )
         _ = client  # suppress unused-variable warning until stub is wired
