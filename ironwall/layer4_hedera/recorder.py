@@ -85,4 +85,7 @@ class HederaMatchRecorder:
         )
         receipt = await tx.execute(self.client)
         log.info("HCS consensus_timestamp=%s", receipt.consensusTimestamp)
-        return receipt
+        return {
+            "consensus_timestamp": str(receipt.consensusTimestamp),
+            "record": record,
+        }

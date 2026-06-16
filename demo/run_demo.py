@@ -218,10 +218,7 @@ async def main() -> None:
     xrpl_anchor = anchors["xrpl"]
     fingerprint = xrpl_anchor["fingerprint"]["data"]
 
-    hedera_ts = (
-        hedera_anchor.get("consensus_timestamp")
-        or getattr(hedera_anchor, "consensus_timestamp", "STUB")
-    )
+    hedera_ts = hedera_anchor.get("consensus_timestamp", "STUB")
     xrpl_tx = xrpl_anchor.get("tx_hash", "STUB_XRPL_TX")
 
     print()
