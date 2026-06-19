@@ -40,6 +40,8 @@ Thumbs.db
 
 # Keys and secrets
 *.pem
+*.key
+.env.*
 
 # Logs
 *.jsonl

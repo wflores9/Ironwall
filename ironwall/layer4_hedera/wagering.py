@@ -10,8 +10,8 @@ auto-releases funds to the winner — no manual adjudication.
 
 Will not settle an unattested match.
 
-Open issues:
-  #212 — PLONK verifier contract on Hedera EVM  [bounty: 750 HBAR]
+Pending enhancements:
+  - PLONK verifier contract on Hedera EVM
 """
 
 from __future__ import annotations

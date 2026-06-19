@@ -11,9 +11,9 @@ Prerequisites:
   • `npm install` — installs snarkjs
   • `make circuits` — compiles the circom circuit + generates .zkey
 
-Open issues:
-  #198 — Benchmark proof generation time on low-end hardware  [bounty: 250 HBAR]
-  #212 — PLONK verifier contract on Hedera EVM                [bounty: 750 HBAR]
+Pending enhancements:
+  - Benchmark proof generation time on low-end hardware
+  - PLONK verifier contract on Hedera EVM
 """
 
 from __future__ import annotations

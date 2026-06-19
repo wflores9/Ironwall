@@ -4,7 +4,7 @@
  * XLS-30 Hook: validate a ZK proof hash before allowing escrow settlement.
  *
  * Why Hooks-based ZK verification hardens the system:
- *   The PLONK verifier is currently stubbed for Hedera EVM (issue #212).
+ *   The PLONK verifier is currently stubbed for Hedera EVM.
  *   An XLS-30 Hook runs at the ledger layer — before any funds move —
  *   with less attack surface than a Solidity contract (no EVM, no ABI
  *   encoding bugs, no reentrancy). The Hook rejects EscrowFinish
@@ -30,9 +30,9 @@
  * Deploy:
  *   See scripts/deploy_hook.ts
  *
- * Open issues:
- *   #212 — Complete PLONK verifier integration (Hedera EVM + XRPL Hook)  [750 HBAR bounty]
- *   #303 — Benchmark Hook execution cost (fee units) on Hooks v3 testnet
+ * Pending enhancements:
+ *   - Complete PLONK verifier integration (Hedera EVM + XRPL Hook)
+ *   - Benchmark Hook execution cost (fee units) on Hooks v3 testnet
  */
 
 // ── Hook API types (from @xrplf/hooks-toolkit) ────────────────────────────

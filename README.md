@@ -43,7 +43,7 @@ at any layer results in **hard session denial** — never degraded security.
 ### Install
 
 ```bash
-git clone https://github.com/ironwall-protocol/ironwall.git
+git clone https://github.com/wflores9/Ironwall.git
 cd ironwall
 
 # Python deps
@@ -154,7 +154,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full PR checklist and code style 
 ### Security Disclosure
 
 Do **not** open a public GitHub issue for security vulnerabilities.  
-Email **security@ironwall.gg** — 24-hour acknowledgement, 14-day patch target.  
+Report via [GitHub private vulnerability reporting](https://github.com/wflores9/Ironwall/security/advisories/new) — 24-hour acknowledgement, 14-day patch target.  
 Critical vulnerabilities (extract_pov, TEEVerifier, attestation bypass) eligible for out-of-band bounties up to **5000 HBAR**.
 
 ---
@@ -164,4 +164,4 @@ Critical vulnerabilities (extract_pov, TEEVerifier, attestation bypass) eligible
 MIT — see [LICENSE](LICENSE).
 
 *Build the infrastructure that ends the arms race.*  
-[github.com/ironwall-protocol](https://github.com/ironwall-protocol) · ironwall-dev@protonmail.com
+[github.com/wflores9/Ironwall](https://github.com/wflores9/Ironwall)

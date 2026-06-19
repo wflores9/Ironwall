@@ -25,9 +25,9 @@ Crypto-condition scheme:
 Dependencies:
   pip install xrpl-py
 
-Open issues:
-  #301 — Add CancelAfter timeout for abandoned matches
-  #302 — Multi-player escrow (N-way split on tournament completion)
+Pending enhancements:
+  - Add CancelAfter timeout for abandoned matches
+  - Multi-player escrow (N-way split on tournament completion)
 """
 
 from __future__ import annotations

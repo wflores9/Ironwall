@@ -7,11 +7,11 @@ the game server over WebSocket, and renders the returned H.264 video frame.
 NO game logic lives here. Any PR that moves game state computation client-side
 will be rejected.
 
-Open issues / good-first tasks:
-  #112 — Adaptive bitrate control for video encoder
-  #118 — Controller input normalisation (Xbox / PS5 / Switch)
-  #89  — Rust rewrite of capture_input() for sub-1ms latency  [bounty: 500 HBAR]
-  #134 — IPv6 dual-stack support for WebSocket transport
+Good-first tasks:
+  - Adaptive bitrate control for video encoder
+  - Controller input normalisation (Xbox / PS5 / Switch)
+  - Rust rewrite of capture_input() for sub-1ms latency
+  - IPv6 dual-stack support for WebSocket transport
 """
 
 from __future__ import annotations
@@ -64,7 +64,7 @@ async def capture_input() -> bytes:
     Capture one frame of raw input (mouse delta, keys, controller).
     Returns a compact binary blob — format TBD by platform layer.
 
-    TODO #89: Rust rewrite for sub-1ms latency.
+    Target: Rust rewrite for sub-1ms latency.
     Platform integrations should pass raw gamepad state through
     normalize_controller_state() before serialising it into this payload.
     """
@@ -76,7 +76,7 @@ async def capture_input() -> bytes:
 # ── Frame rendering (stub) ─────────────────────────────────────────────────
 def render_frame(frame: bytes) -> None:
     """Decode H.264 frame and display it. Stub — integrate opencv or platform SDK."""
-    # TODO #112: add adaptive bitrate negotiation here
+    # TODO: add adaptive bitrate negotiation here
     pass
 
 

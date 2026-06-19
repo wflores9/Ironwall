@@ -54,7 +54,7 @@
 - **`XRPLMatchRecorder`** — anchors match fingerprint (match_id | merkle_root | sha3_256(tee_receipt) | ts) to XRPL as AccountSet + Memo transaction.
 - **`XRPLEscrow`** — native protocol-level escrow (EscrowCreate / EscrowFinish) with zero bytecode attack surface. Condition keyed on Hedera consensus timestamp — funds cannot release without a valid HCS record (cross-chain dependency, no bridge).
 - **`XRPLPlayerIdentity`** — device-bound XRPL account creation + XLS-20 non-transferable (soulbound) reputation NFT minting. Compatible with Ward Protocol / XLS-66.
-- **`hooks/zk_verifier.ts`** — XLS-30 Hook (TypeScript / WASM) that validates a ZK proof hash in Hook state before allowing EscrowFinish. Replaces Hedera EVM PLONK verifier stub (#212) with a protocol-level gate.
+- **`hooks/zk_verifier.ts`** — XLS-30 Hook (TypeScript / WASM) that validates a ZK proof hash in Hook state before allowing EscrowFinish. Replaces the Hedera EVM PLONK verifier stub with a protocol-level gate.
 - Unit tests for all XRPL components (stub mode, xrpl-py not required): 13 new tests, 65 total passing.
 
 ### Security rationale
