@@ -157,6 +157,32 @@ Do **not** open a public GitHub issue for security vulnerabilities.
 Report via [GitHub private vulnerability reporting](https://github.com/wflores9/Ironwall/security/advisories/new) — 24-hour acknowledgement, 14-day patch target.  
 Critical vulnerabilities (extract_pov, TEEVerifier, attestation bypass) eligible for out-of-band bounties up to **5000 HBAR**.
 
+## FAQ
+
+See [docs/faq.md](docs/faq.md) for the full FAQ.
+
+**What does Ironwall actually do?**
+
+Ironwall runs across the full game lifecycle — not just at ban time.
+
+Pre-game: the Rust launcher scans every game module DLL/binary, verifies SHA3-256 hashes against `known_hashes.json`, checks ECDSA signatures against the developer's public key, and confirms the scan ran inside a tamper-proof TEE enclave. Any mismatch = hard deny before the player ever connects.
+
+In-game: TEE attestation re-verifies the session every 60 seconds. A compromised session is terminated immediately.
+
+Post-game: every enforcement decision produces a cryptographic receipt — Merkle-committed inputs, TEE attestation quote, dual-anchored to XRPL and Hedera HCS. Anyone can run `ironwall-verify <match-id>` from their own machine to confirm the ban was legitimate without trusting Ironwall's servers.
+
+**How is this different from kernel-level anti-cheat?**
+
+Kernel anti-cheat (Vanguard, EAC, BattlEye) wins on runtime detection depth — ring-0 access sees everything during a match. Ironwall doesn't replace that.
+
+Ironwall wins on provability. Every ban produces a cryptographic receipt anyone can independently verify. Vanguard can't prove a ban was legitimate. Ironwall can.
+
+Used together: Ironwall catches file tampering before launch, kernel anti-cheat handles runtime detection, Ironwall anchors the enforcement decision on-chain permanently.
+
+**Does Ironwall require kernel access?**
+
+No. The launcher operates at user-space + TEE level. No ring-0 driver, no permanent background process, no compatibility issues with Linux or security software.
+
 ---
 
 ## License
