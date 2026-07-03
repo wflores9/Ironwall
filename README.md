@@ -123,6 +123,7 @@ ironwall/
 - [ ] Run quote verification against real SGX/SEV-enabled hardware
 - [ ] PLONK proof verification circuit — the registry contract currently accepts an external `IPlonkVerifier`; the verifier implementation itself (trusted setup + circuit) is not yet built
 - [ ] End-to-end demo: launch → attest → capture → anchor → verify, recorded on real (non-SIM) hardware where possible
+- [ ] C++ SDK for AAA engine integration (Unreal/CoD-engine compatible) — session handshake, binary verification, match record submission
 
 ---
 
