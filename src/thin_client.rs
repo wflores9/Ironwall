@@ -1,11 +1,12 @@
 use anyhow::Result;
-use tracing::info;
+use tracing::{info, warn};
 use tokio::time::{sleep, Duration};
 
 use crate::tee::TeeAttestationResult;
 use crate::zk::ZkMovementValidator;
 use crate::anchors::DualAnchor;
 use crate::config::IronwallConfig;
+use crate::error::IronwallError;
 
 pub struct ThinClient {
     pub cfg: IronwallConfig,
@@ -47,24 +48,29 @@ impl ThinClient {
                 from.2 + 0.08,
             );
 
-            let proof = self.zk.prove_valid_movement(
+            match self.zk.prove_valid_movement(
                 &self.cfg.player_id,
                 from,
                 to,
                 tick_ms,
-            ).await?;
+            ).await {
+                Ok(proof) => {
+                    info!(
+                        "tick={} pos=({:.2},{:.2},{:.2}) speed={:.2} proof={}",
+                        tick, to.0, to.1, to.2, proof.speed, proof.proof_id
+                    );
 
-            info!(
-                "tick={} pos=({:.2},{:.2},{:.2}) speed={:.2} proof={}",
-                tick, to.0, to.1, to.2, proof.speed, proof.proof_id
-            );
+                    let receipt = self.anchors.anchor_proof(&self.attestation, &proof).await?;
+                    info!("anchored combined_hash={}", receipt.combined_hash);
+                    self.position = to;
+                }
+                Err(IronwallError::InvalidMovement(msg)) => {
+                    warn!("movement rejected: {}", msg);
+                }
+                Err(e) => return Err(e.into()),
+            }
 
-            let receipt = self.anchors.anchor_proof(&self.attestation, &proof).await?;
-            info!("anchored combined_hash={}", receipt.combined_hash);
-
-            self.position = to;
             tick += 1;
-
             sleep(Duration::from_millis(tick_ms as u64)).await;
         }
 

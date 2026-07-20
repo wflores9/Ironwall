@@ -1,8 +1,9 @@
-use anyhow::{bail, Result};
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use uuid::Uuid;
+
+use crate::error::{IronwallError, IronwallResult};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZkMovementProof {
@@ -32,9 +33,11 @@ impl ZkMovementValidator {
         from: (f32, f32, f32),
         to: (f32, f32, f32),
         delta_t_ms: u32,
-    ) -> Result<ZkMovementProof> {
+    ) -> IronwallResult<ZkMovementProof> {
         if delta_t_ms == 0 {
-            bail!("delta_t_ms cannot be zero");
+            return Err(IronwallError::InvalidMovement(
+                "delta_t_ms cannot be zero".into(),
+            ));
         }
 
         let dx = to.0 - from.0;
@@ -45,11 +48,10 @@ impl ZkMovementValidator {
         let speed = dist / dt_sec;
 
         if speed > self.max_speed {
-            bail!(
+            return Err(IronwallError::InvalidMovement(format!(
                 "movement speed {:.2} exceeds max {:.2} (possible speedhack)",
-                speed,
-                self.max_speed
-            );
+                speed, self.max_speed
+            )));
         }
 
         let proof_id = Uuid::new_v4().to_string();

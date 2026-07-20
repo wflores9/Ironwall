@@ -10,6 +10,14 @@ readme = "README.md"
 keywords = ["anti-cheat", "tee", "zk-snark", "hedera", "xrpl", "gaming"]
 categories = ["game-development", "cryptography", "security"]
 
+[lib]
+name = "ironwall"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ironwall_thin_client"
+path = "src/main.rs"
+
 [dependencies]
 tokio = { version = "1.40", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
