@@ -5,10 +5,14 @@ mod anchors;
 mod config;
 mod error;
 mod challenge;
+mod protocol;
+mod session;
+mod net;
 
 use anyhow::Result;
 use tracing::{info, Level};
 use tracing_subscriber::FmtSubscriber;
+use tokio::task;
 
 use crate::thin_client::ThinClient;
 use crate::tee::TeeAttestation;
@@ -16,6 +20,9 @@ use crate::zk::ZkMovementValidator;
 use crate::anchors::{HcsAnchor, XrplAnchor, DualAnchor};
 use crate::config::IronwallConfig;
 use crate::challenge::ChallengeEngine;
+use crate::protocol::{ClientMessage, ServerMessage};
+use crate::session::Session;
+use crate::net::create_loopback;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -32,36 +39,85 @@ async fn main() -> Result<()> {
         cfg.player_id, cfg.tick_rate_hz, cfg.max_speed_units_per_sec
     );
 
+    // Network loopback
+    let (mut net, server) = create_loopback();
+    let server_handle = task::spawn(async move {
+        server.run_demo().await;
+    });
+
     let tee = TeeAttestation::new();
     let attestation = tee.generate_attestation().await?;
     info!("TEE attestation generated: {}", attestation.quote_hash);
+
+    // Session
+    let mut session = Session::new(&cfg, attestation.clone());
+    info!("Session created: {}", session.session_id);
+
+    // Hello over net
+    let hello = ClientMessage::Hello {
+        player_id: cfg.player_id.clone(),
+        client_version: env!("CARGO_PKG_VERSION").to_string(),
+        attestation: attestation.clone(),
+    };
+    net.send(hello).await?;
+    if let Some(ServerMessage::Welcome { session_id, .. }) = net.recv().await {
+        info!("Received Welcome, session_id={}", session_id);
+    }
 
     let zk = ZkMovementValidator::new(cfg.max_speed_units_per_sec);
     let hcs = HcsAnchor::new(&cfg.hcs_topic_id);
     let xrpl = XrplAnchor::new(&cfg.xrpl_account);
     let dual = DualAnchor::new(hcs, xrpl);
 
-    let mut client = ThinClient::new(cfg, attestation.clone(), zk, dual);
+    let mut client = ThinClient::new(cfg.clone(), attestation.clone(), zk, dual);
     client.run().await?;
 
-    // Demo challenge-response
+    // Send last proof over net
+    let last_proof = client.zk.prove_valid_movement(
+        &cfg.player_id,
+        (0.48, 0.0, 0.32),
+        (0.60, 0.0, 0.40),
+        16,
+    ).await?;
+    let anchor = client.anchors.anchor_proof(&attestation, &last_proof).await?;
+    net.send(ClientMessage::MovementProof {
+        proof: last_proof.clone(),
+        anchor,
+    }).await?;
+    if let Some(ServerMessage::Ack { proof_id, accepted, .. }) = net.recv().await {
+        info!("Ack for proof {}: accepted={}", proof_id, accepted);
+        session.record_proof();
+    }
+
+    // Challenge-response over net
     let engine = ChallengeEngine::new();
-    let ch = engine.issue_challenge("demo-proof-id", "suspicious velocity spike");
-    info!("Challenge issued: {} reason={}", ch.challenge_id, ch.reason);
+    let ch = engine.issue_challenge(&last_proof.proof_id, "suspicious velocity spike");
+    session.record_challenge();
 
     let fresh_attestation = tee.generate_attestation().await?;
     let fresh_proof = client.zk.prove_valid_movement(
-        &client.cfg.player_id,
+        &cfg.player_id,
         (0.0, 0.0, 0.0),
         (0.05, 0.0, 0.0),
         50,
     ).await?;
-
     let response = engine.respond(&ch, fresh_attestation, fresh_proof).await?;
+    net.send(ClientMessage::ChallengeResponse { response }).await?;
+    if let Some(ServerMessage::Ack { accepted, reason, .. }) = net.recv().await {
+        info!("Challenge Ack: accepted={} reason={:?}", accepted, reason);
+    }
+
+    let hb = session.heartbeat((0.60, 0.0, 0.40));
+    net.send(hb).await?;
+
     info!(
-        "Challenge response submitted: challenge={} responded_at={}",
-        response.challenge_id, response.responded_at
+        "Session final: proofs={} challenges={} pos={:?}",
+        session.proofs_submitted, session.challenges_received, session.position
     );
 
+    drop(net);
+    let _ = server_handle.await;
+
+    info!("Ironwall Thin Client shut down cleanly");
     Ok(())
 }
