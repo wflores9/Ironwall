@@ -8,6 +8,7 @@ mod challenge;
 mod protocol;
 mod session;
 mod net;
+mod store;
 
 use anyhow::Result;
 use tracing::{info, Level};
@@ -23,6 +24,7 @@ use crate::challenge::ChallengeEngine;
 use crate::protocol::{ClientMessage, ServerMessage};
 use crate::session::Session;
 use crate::net::create_loopback;
+use crate::store::ProofStore;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -39,7 +41,8 @@ async fn main() -> Result<()> {
         cfg.player_id, cfg.tick_rate_hz, cfg.max_speed_units_per_sec
     );
 
-    // Network loopback
+    let store = ProofStore::new();
+
     let (mut net, server) = create_loopback();
     let server_handle = task::spawn(async move {
         server.run_demo().await;
@@ -49,11 +52,9 @@ async fn main() -> Result<()> {
     let attestation = tee.generate_attestation().await?;
     info!("TEE attestation generated: {}", attestation.quote_hash);
 
-    // Session
     let mut session = Session::new(&cfg, attestation.clone());
     info!("Session created: {}", session.session_id);
 
-    // Hello over net
     let hello = ClientMessage::Hello {
         player_id: cfg.player_id.clone(),
         client_version: env!("CARGO_PKG_VERSION").to_string(),
@@ -72,7 +73,6 @@ async fn main() -> Result<()> {
     let mut client = ThinClient::new(cfg.clone(), attestation.clone(), zk, dual);
     client.run().await?;
 
-    // Send last proof over net
     let last_proof = client.zk.prove_valid_movement(
         &cfg.player_id,
         (0.48, 0.0, 0.32),
@@ -80,6 +80,8 @@ async fn main() -> Result<()> {
         16,
     ).await?;
     let anchor = client.anchors.anchor_proof(&attestation, &last_proof).await?;
+    store.insert(last_proof.clone(), anchor.clone(), &attestation).await;
+
     net.send(ClientMessage::MovementProof {
         proof: last_proof.clone(),
         anchor,
@@ -89,7 +91,6 @@ async fn main() -> Result<()> {
         session.record_proof();
     }
 
-    // Challenge-response over net
     let engine = ChallengeEngine::new();
     let ch = engine.issue_challenge(&last_proof.proof_id, "suspicious velocity spike");
     session.record_challenge();
@@ -111,8 +112,11 @@ async fn main() -> Result<()> {
     net.send(hb).await?;
 
     info!(
-        "Session final: proofs={} challenges={} pos={:?}",
-        session.proofs_submitted, session.challenges_received, session.position
+        "Session final: proofs={} challenges={} pos={:?} store_len={}",
+        session.proofs_submitted,
+        session.challenges_received,
+        session.position,
+        store.len().await
     );
 
     drop(net);

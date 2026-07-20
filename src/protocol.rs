@@ -50,6 +50,7 @@ pub enum ServerMessage {
 }
 
 impl ClientMessage {
+    #[allow(dead_code)]
     pub fn to_json(&self) -> Result<String, serde_json::Error> {
         serde_json::to_string(self)
     }
@@ -61,6 +62,7 @@ impl ClientMessage {
 }
 
 impl ServerMessage {
+    #[allow(dead_code)]
     pub fn to_json(&self) -> Result<String, serde_json::Error> {
         serde_json::to_string(self)
     }

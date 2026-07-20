@@ -52,6 +52,7 @@ impl Session {
         self.challenges_received += 1;
     }
 
+    #[allow(dead_code)]
     pub fn welcome_msg(&self) -> ServerMessage {
         ServerMessage::Welcome {
             session_id: self.session_id.clone(),

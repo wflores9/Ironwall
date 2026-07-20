@@ -18,6 +18,10 @@ path = "src/lib.rs"
 name = "ironwall_thin_client"
 path = "src/main.rs"
 
+[[bin]]
+name = "ironwall_verifier"
+path = "src/bin/verifier.rs"
+
 [dependencies]
 tokio = { version = "1.40", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
