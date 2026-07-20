@@ -2,6 +2,7 @@ mod thin_client;
 mod tee;
 mod zk;
 mod anchors;
+mod config;
 
 use anyhow::Result;
 use tracing::{info, Level};
@@ -11,6 +12,7 @@ use crate::thin_client::ThinClient;
 use crate::tee::TeeAttestation;
 use crate::zk::ZkMovementValidator;
 use crate::anchors::{HcsAnchor, XrplAnchor, DualAnchor};
+use crate::config::IronwallConfig;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -21,27 +23,19 @@ async fn main() -> Result<()> {
 
     info!("Ironwall Thin Client starting...");
 
+    let cfg = IronwallConfig::default();
+    info!("Config loaded: player={}, tick={}Hz", cfg.player_id, cfg.tick_rate_hz);
+
     let tee = TeeAttestation::new();
     let attestation = tee.generate_attestation().await?;
     info!("TEE attestation generated: {}", attestation.quote_hash);
 
-    let zk = ZkMovementValidator::new();
-    let movement_proof = zk.prove_valid_movement(
-        "player_001",
-        (0.0, 0.0, 0.0),
-        (1.5, 0.0, 2.3),
-        16,
-    ).await?;
-    info!("ZK movement proof generated: {}", movement_proof.proof_id);
-
-    let hcs = HcsAnchor::new("0.0.123456");
-    let xrpl = XrplAnchor::new("rIronwallAnchorXXXXXXXXXXXXXXXXXX");
+    let zk = ZkMovementValidator::new(cfg.max_speed_units_per_sec);
+    let hcs = HcsAnchor::new(&cfg.hcs_topic_id);
+    let xrpl = XrplAnchor::new(&cfg.xrpl_account);
     let dual = DualAnchor::new(hcs, xrpl);
 
-    let anchor_receipt = dual.anchor_proof(&attestation, &movement_proof).await?;
-    info!("Dual-anchored to HCS + XRPL: {:?}", anchor_receipt);
-
-    let mut client = ThinClient::new(attestation, zk, dual);
+    let mut client = ThinClient::new(cfg, attestation, zk, dual);
     client.run().await?;
 
     Ok(())

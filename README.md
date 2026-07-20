@@ -1,18 +1,40 @@
 # Ironwall
 
-**Open-source anti-cheat protocol stack** — thin client, TEE attestation, ZK-SNARKs, Hedera HCS + XRPL dual-anchor.
+Open-source anti-cheat protocol stack.
 
-## Vision
-Verifiable fairness for games and agents with privacy-first design.
+## Thin Client (Rust)
 
-## Features
-- Thin client (low overhead)
-- Hardware TEE attestation
-- Zero-knowledge behavior proofs
-- Dual ledger anchoring (Hedera HCS for ordering + XRPL for settlement)
+- TEE attestation placeholder (SGX / SEV / Nitro / TrustZone ready)
+- ZK-SNARK movement validation stub (physics-plausible movement proofs)
+- Dual anchoring: Hedera HCS + XRPL
 
-## Quick Start
-...
+### Quick start
 
-## Architecture
-(See docs/architecture.md)
+    cargo run
+
+### Architecture
+
+    src/
+    ├── main.rs          # entrypoint
+    ├── thin_client.rs   # client loop
+    ├── tee.rs           # TEE quote generation
+    ├── zk.rs            # ZK movement proofs
+    ├── anchors.rs       # HCS + XRPL dual anchor
+    └── config.rs        # runtime config
+
+### Roadmap
+
+- [x] Thin client skeleton
+- [x] TEE attestation placeholder
+- [x] ZK movement proof stub
+- [x] HCS + XRPL dual anchor
+- [ ] Real TEE integration (DCAP / SEV-SNP)
+- [ ] arkworks / Halo2 movement circuit
+- [ ] Live HCS topic submission
+- [ ] XRPL memo / NFToken anchor
+- [ ] Challenge-response dispute protocol
+- [ ] Game engine SDKs (Unreal / Unity / custom)
+
+### License
+
+MIT OR Apache-2.0
