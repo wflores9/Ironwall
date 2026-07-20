@@ -2,39 +2,66 @@
 
 Open-source anti-cheat protocol stack.
 
-## Thin Client (Rust)
+## Components
+
+| Binary | Description |
+|--------|-------------|
+| ironwall_thin_client | Player-side thin client (TEE + ZK + dual anchor + net) |
+| ironwall_verifier    | Verifier / server-side stub |
+
+## Features (current)
 
 - TEE attestation placeholder (SGX / SEV / Nitro / TrustZone ready)
-- ZK-SNARK movement validation stub (physics-plausible movement proofs)
-- Dual anchoring: Hedera HCS + XRPL
+- ZK-SNARK movement validation stub + speedhack rejection
+- Hedera HCS + XRPL dual anchoring
+- Challenge-response dispute protocol
+- Wire protocol (ClientMessage / ServerMessage)
+- Session tracking
+- In-memory proof store
+- Loopback net transport (mpsc) for local client-server demo
+- Library + two binaries
 
-### Quick start
+## Quick start
 
-    cargo run
+    cargo run --bin ironwall_thin_client
+    cargo run --bin ironwall_verifier
+    cargo test
 
-### Architecture
+## Architecture
 
     src/
-    ├── main.rs          # entrypoint
-    ├── thin_client.rs   # client loop
+    ├── lib.rs           # public API (ironwall)
+    ├── main.rs          # thin client binary
+    ├── bin/verifier.rs  # verifier binary
     ├── tee.rs           # TEE quote generation
-    ├── zk.rs            # ZK movement proofs
+    ├── zk.rs            # ZK movement proofs + speed checks
     ├── anchors.rs       # HCS + XRPL dual anchor
-    └── config.rs        # runtime config
+    ├── challenge.rs     # challenge-response
+    ├── protocol.rs      # wire messages
+    ├── session.rs       # session state
+    ├── net.rs           # loopback transport
+    ├── store.rs         # proof store
+    ├── config.rs
+    ├── error.rs
+    └── thin_client.rs   # movement simulation loop
 
-### Roadmap
+## Roadmap
 
 - [x] Thin client skeleton
 - [x] TEE attestation placeholder
-- [x] ZK movement proof stub
+- [x] ZK movement proof stub + speedhack detect
 - [x] HCS + XRPL dual anchor
-- [ ] Real TEE integration (DCAP / SEV-SNP)
-- [ ] arkworks / Halo2 movement circuit
-- [ ] Live HCS topic submission
-- [ ] XRPL memo / NFToken anchor
-- [ ] Challenge-response dispute protocol
-- [ ] Game engine SDKs (Unreal / Unity / custom)
+- [x] Challenge-response
+- [x] Wire protocol
+- [x] Session + proof store
+- [x] Loopback net + verifier binary
+- [ ] Real TEE (DCAP / SEV-SNP)
+- [ ] arkworks / Halo2 circuit
+- [ ] Live HCS + XRPL submission
+- [ ] QUIC / WebSocket transport
+- [ ] Persistent store (sled / sqlite)
+- [ ] Game engine SDKs
 
-### License
+## License
 
 MIT OR Apache-2.0
