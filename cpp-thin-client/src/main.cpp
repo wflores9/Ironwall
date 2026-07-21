@@ -1,5 +1,6 @@
 #include "ironwall/ironwall.hpp"
 #include "ironwall/config_file.hpp"
+#include "ironwall/recorder.hpp"
 #include <iostream>
 #include <string>
 #include <cstring>
@@ -25,6 +26,7 @@ int main(int argc, char** argv) {
               << " max_speed=" << cfg.max_speed << "\n";
 
     ProofStore store;
+    MatchRecorder recorder("ironwall_match.tsv");
     NetLoopback net;
 
     TeeAttestation tee;
@@ -33,6 +35,7 @@ int main(int argc, char** argv) {
 
     auto session = Session::create(cfg, att);
     std::cout << "Session created: " << session.session_id << "\n";
+    recorder.record_attest(session.session_id, cfg.player_id, att);
 
     net.client_send(HelloMsg{cfg.player_id, "0.1.0", att});
     net.run_server_once();
@@ -51,6 +54,7 @@ int main(int argc, char** argv) {
     auto last = client.zk().prove(cfg.player_id, {0.48f,0,0.32f}, {0.60f,0,0.40f}, 16);
     auto anchor = client.anchors().anchor(att, last);
     store.insert(last, anchor, att);
+    recorder.record_proof(session.session_id, last, anchor);
 
     net.client_send(MovementProofMsg{last, anchor});
     net.run_server_once();
@@ -64,6 +68,7 @@ int main(int argc, char** argv) {
     ChallengeEngine engine;
     auto ch = engine.issue(last.proof_id, "suspicious velocity spike");
     session.record_challenge();
+    recorder.record_challenge(session.session_id, ch.challenge_id);
 
     auto fresh_att = tee.generate();
     auto fresh_proof = client.zk().prove(cfg.player_id, {0,0,0}, {0.05f,0,0}, 50);
@@ -78,12 +83,14 @@ int main(int argc, char** argv) {
     }
 
     auto hb = session.heartbeat({0.60f, 0, 0.40f});
+    recorder.record_heartbeat(session.session_id, {0.60f,0,0.40f});
     net.client_send(hb);
     net.run_server_once();
 
     std::cout << "Session final: proofs=" << session.proofs_submitted
               << " challenges=" << session.challenges_received
               << " store_len=" << store.size() << "\n";
+    std::cout << "Recorder events=" << recorder.count() << " file=" << recorder.path() << "\n";
     std::cout << "Ironwall C++ Thin Client shut down cleanly\n";
     return 0;
 }

@@ -26,6 +26,7 @@ set(IRONWALL_SOURCES
     src/tcp_net.cpp
     src/c_api.cpp
     src/chain_submit.cpp
+    src/recorder.cpp
 )
 
 add_library(ironwall_static STATIC ${IRONWALL_SOURCES})

@@ -14,3 +14,4 @@
 #include "tcp_net.hpp"
 #include "wire.hpp"
 #include "chain_submit.hpp"
+#include "recorder.hpp"
