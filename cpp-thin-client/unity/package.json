@@ -1,0 +1,9 @@
+{
+  "name": "com.ironwall.anticheat",
+  "version": "0.1.0",
+  "displayName": "Ironwall Anti-Cheat",
+  "description": "Ironwall thin-client anti-cheat (TEE + ZK + HCS/XRPL) for Unity",
+  "unity": "2021.3",
+  "keywords": ["anti-cheat", "tee", "zk", "hedera", "xrpl"],
+  "author": { "name": "Ironwall" }
+}
