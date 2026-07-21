@@ -59,3 +59,19 @@
 
 ### Security rationale
 Dual-anchoring requires an attacker to corrupt two independent ledgers with different consensus mechanisms to erase or forge a match record. XRPL native escrow eliminates the Solidity bytecode attack surface present in the Hedera EVM wagering contract.
+
+## [0.2.0] - 2026-07-21
+
+### Added
+- Rust + C++ thin clients (TEE, ZK movement, HCS/XRPL dual-anchor)
+- Shared `libironwall` + C ABI for Unity/Unreal
+- Unity package (P/Invoke) and Unreal plugin skeleton
+- IWAL binary wire protocol + HMAC frame auth (both languages)
+- MatchRecorder (TSV) + replay tool
+- ModerationEngine (rate-limit + bans) + persistent BanStore (JSONL)
+- Lobby HMAC session tickets
+- Matchmaker service (enqueue tickets → form matches)
+- ChainSubmitter + `ironwall_chain_smoke`
+- GitHub Actions CI (Rust: Linux/macOS/Windows, C++: Linux/macOS/Windows)
+- `scripts/demo_thin_stack.sh` end-to-end smoke
+
