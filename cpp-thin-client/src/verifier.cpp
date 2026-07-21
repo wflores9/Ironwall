@@ -38,3 +38,18 @@ int main() {
     std::cout << "Ironwall C++ Verifier shut down\n";
     return 0;
 }
+
+// --- live chain demo (runs after existing verifier body if linked) ---
+#include "ironwall/chain_submit.hpp"
+namespace {
+struct ChainDemo {
+    ChainDemo() {
+        ironwall::ChainConfig cc;
+        ironwall::ChainSubmitter sub(cc);
+        ironwall::Bytes payload = {0x49,0x57,0x41,0x4c}; // "IWAL"
+        auto rec = sub.submit_dual(payload);
+        std::cout << "Chain dual-anchor demo combined=" << rec.combined_hash << "\n";
+    }
+};
+// static ChainDemo _chain_demo; // uncomment to auto-run
+}

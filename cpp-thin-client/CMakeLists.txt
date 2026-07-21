@@ -25,6 +25,7 @@ set(IRONWALL_SOURCES
     src/thin_client.cpp
     src/tcp_net.cpp
     src/c_api.cpp
+    src/chain_submit.cpp
 )
 
 add_library(ironwall_static STATIC ${IRONWALL_SOURCES})

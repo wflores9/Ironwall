@@ -13,3 +13,4 @@
 #include "thin_client.hpp"
 #include "tcp_net.hpp"
 #include "wire.hpp"
+#include "chain_submit.hpp"
