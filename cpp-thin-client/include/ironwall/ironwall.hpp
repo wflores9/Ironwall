@@ -16,3 +16,4 @@
 #include "chain_submit.hpp"
 #include "recorder.hpp"
 #include "hmac.hpp"
+#include "wire_auth.hpp"

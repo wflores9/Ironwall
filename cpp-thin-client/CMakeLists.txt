@@ -78,3 +78,7 @@ target_link_libraries(ironwall_chain_smoke PRIVATE ironwall_static)
 
 add_executable(ironwall_replay src/replay.cpp)
 target_link_libraries(ironwall_replay PRIVATE ironwall_static)
+
+add_executable(wire_auth_test tests/wire_auth_test.cpp)
+target_link_libraries(wire_auth_test PRIVATE ironwall_static)
+add_test(NAME wire_auth_test COMMAND wire_auth_test)
