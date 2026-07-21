@@ -70,3 +70,6 @@ if(IRONWALL_BUILD_SHARED)
         LIBRARY DESTINATION lib ARCHIVE DESTINATION lib RUNTIME DESTINATION bin)
 endif()
 install(DIRECTORY include/ DESTINATION include)
+
+add_executable(ironwall_chain_smoke src/chain_smoke.cpp)
+target_link_libraries(ironwall_chain_smoke PRIVATE ironwall_static)

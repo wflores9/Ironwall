@@ -27,58 +27,65 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-      - name: Build
-        run: cargo build --release --all-targets
-      - name: Test
-        run: cargo test --release
-      - name: Smoke thin client
-        run: cargo run --release --bin ironwall_thin_client
-      - name: Smoke verifier
-        run: cargo run --release --bin ironwall_verifier
+      - run: cargo build --release --all-targets
+      - run: cargo test --release
+      - run: cargo run --release --bin ironwall_thin_client
+      - run: cargo run --release --bin ironwall_verifier
 
-  cpp:
+  cpp-unix:
     name: C++ (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        # windows-latest needs MSVC generator tweaks; add later
     defaults:
       run:
         working-directory: cpp-thin-client
     steps:
       - uses: actions/checkout@v4
-
       - name: Install deps (Linux)
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y cmake g++ build-essential
-
       - name: Install deps (macOS)
         if: runner.os == 'macOS'
         run: brew install cmake || true
-
-      - name: Configure
-        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
-
-      - name: Build
-        run: cmake --build build -j 4
-
-      - name: Test
-        run: cd build && ctest --output-on-failure
-
-      - name: Smoke thin client
-        run: ./build/ironwall_thin_client
-
-      - name: Smoke verifier
-        run: ./build/ironwall_verifier
-
-      - name: Upload lib artifacts
-        uses: actions/upload-artifact@v4
+      - run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build build -j 4
+      - run: cd build && ctest --output-on-failure
+      - run: ./build/ironwall_thin_client
+      - run: ./build/ironwall_verifier
+      - uses: actions/upload-artifact@v4
         with:
           name: ironwall-lib-${{ matrix.os }}
           path: |
             cpp-thin-client/build/libironwall.a
             cpp-thin-client/build/libironwall.so
             cpp-thin-client/build/libironwall.dylib
+          if-no-files-found: ignore
+
+  cpp-windows:
+    name: C++ (windows-latest)
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: cpp-thin-client
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure (MSVC)
+        run: cmake -B build -G "Visual Studio 17 2022" -A x64
+      - name: Build
+        run: cmake --build build --config Release -j 4
+      - name: Test
+        run: cd build && ctest -C Release --output-on-failure
+      - name: Smoke thin client
+        run: ./build/Release/ironwall_thin_client.exe
+      - name: Smoke verifier
+        run: ./build/Release/ironwall_verifier.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ironwall-lib-windows
+          path: |
+            cpp-thin-client/build/Release/ironwall.lib
+            cpp-thin-client/build/Release/ironwall.dll
           if-no-files-found: ignore
