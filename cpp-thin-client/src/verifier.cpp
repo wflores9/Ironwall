@@ -60,6 +60,14 @@ int main() {
               << " strikes=" << mod.strike_count("speedy_joe") << "\n";
     std::cout << "Ban store: " << bans.path() << "\n";
 
+        // Lobby handshake demo
+    Lobby lobby;
+    auto ticket = lobby.issue_ticket("player_001", att);
+    auto sid = lobby.open_session(ticket);
+    std::cout << "Lobby session=" << sid << " active=" << lobby.active_count()
+              << " ticket_ok=" << lobby.validate_ticket(ticket) << "\n";
+    lobby.close_session(sid);
+
     std::cout << "Ironwall C++ Verifier shut down\n";
     return 0;
 }

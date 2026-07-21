@@ -30,6 +30,7 @@ set(IRONWALL_SOURCES
     src/hmac.cpp
     src/moderation.cpp
     src/ban_store.cpp
+    src/lobby.cpp
 )
 
 add_library(ironwall_static STATIC ${IRONWALL_SOURCES})
@@ -88,3 +89,7 @@ add_test(NAME wire_auth_test COMMAND wire_auth_test)
 add_executable(moderation_test tests/moderation_test.cpp)
 target_link_libraries(moderation_test PRIVATE ironwall_static)
 add_test(NAME moderation_test COMMAND moderation_test)
+
+add_executable(lobby_test tests/lobby_test.cpp)
+target_link_libraries(lobby_test PRIVATE ironwall_static)
+add_test(NAME lobby_test COMMAND lobby_test)

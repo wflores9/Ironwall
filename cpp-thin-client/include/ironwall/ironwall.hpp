@@ -19,3 +19,4 @@
 #include "wire_auth.hpp"
 #include "moderation.hpp"
 #include "ban_store.hpp"
+#include "lobby.hpp"
