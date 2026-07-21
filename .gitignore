@@ -55,3 +55,10 @@ demo/match_record_tampered.json
 
 # Rust build artifacts
 target/
+
+# Thin client builds
+cpp-thin-client/build/
+rust-thin-client/target/
+**/libironwall.so
+**/libironwall.dylib
+**/ironwall.dll

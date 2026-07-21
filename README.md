@@ -192,3 +192,47 @@ MIT — see [LICENSE](LICENSE).
 
 *Build the infrastructure that ends the arms race.*  
 [github.com/wflores9/Ironwall](https://github.com/wflores9/Ironwall)
+
+---
+
+## Thin Clients (Rust + C++)
+
+Modern anti-cheat thin-client stack with TEE attestation, ZK movement proofs, and Hedera HCS + XRPL dual anchoring.
+
+| Path | Language | Binaries |
+|------|----------|----------|
+| rust-thin-client/ | Rust 2021 | ironwall_thin_client, ironwall_verifier |
+| cpp-thin-client/ | C++20 | ironwall_thin_client, ironwall_verifier, ironwall_chain_smoke |
+
+### C++ quick start
+
+    cd cpp-thin-client
+    cmake -B build -DCMAKE_BUILD_TYPE=Release
+    cmake --build build -j
+    ./build/ironwall_thin_client
+    ./build/ironwall_verifier
+    ./build/ironwall_chain_smoke
+
+Artifacts: build/libironwall.a , build/libironwall.so (P/Invoke for Unity/Unreal).
+
+### Rust quick start
+
+    cd rust-thin-client
+    cargo run --release --bin ironwall_thin_client
+    cargo run --release --bin ironwall_verifier
+    cargo test
+
+### Engine plugins
+
+- Unreal — cpp-thin-client/unreal/Ironwall/ (wired to C ABI)
+- Unity — cpp-thin-client/unity/ (P/Invoke to libironwall)
+
+### Wire + chains
+
+- Binary protocol: IWAL frames (cpp-thin-client/include/ironwall/wire.hpp)
+- TCP transport + loopback net
+- ChainSubmitter — HCS + XRPL (simulation default; live when HEDERA_OPERATOR_ID / XRPL_SEED set)
+
+### CI
+
+GitHub Actions: Rust on Linux/macOS/Windows · C++ on Linux/macOS/Windows (MSVC).
