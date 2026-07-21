@@ -21,6 +21,7 @@ pub mod protocol;
 pub mod session;
 pub mod net;
 pub mod store;
+pub mod wire;
 
 pub use thin_client::ThinClient;
 pub use tee::{TeeAttestation, TeeAttestationResult};
