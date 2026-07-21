@@ -5,11 +5,7 @@ use anyhow::Result;
 use tracing::{info, Level};
 use tracing_subscriber::FmtSubscriber;
 
-use ironwall::{
-    ModerationEngine, RateLimitConfig, BanStore,
-    TeeAttestation, ZkMovementValidator, HcsAnchor, XrplAnchor, DualAnchor,
-    ChallengeEngine, IronwallConfig,
-};
+use ironwall::{ ModerationEngine, RateLimitConfig, BanStore, TeeAttestation, ZkMovementValidator, HcsAnchor, XrplAnchor, DualAnchor, ChallengeEngine, IronwallConfig, Lobby, LobbyConfig };
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -70,6 +66,11 @@ async fn main() -> Result<()> {
         mod_eng.is_banned("speedy_joe"), mod_eng.strike_count("speedy_joe"));
     info!("Ban store: {}", bans.path().display());
 
+    let mut lobby = Lobby::new(LobbyConfig::default());
+    let ticket = lobby.issue_ticket("player_001", "demo-quote");
+    let sid = lobby.open_session(&ticket).unwrap_or_default();
+    info!("Lobby session={sid} active={} ticket_ok={}", lobby.active_count(), lobby.validate_ticket(&ticket));
+    lobby.close_session(&sid);
     info!("Ironwall Verifier shut down");
     Ok(())
 }
