@@ -1,0 +1,19 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "0.1.0",
+  "FriendlyName": "Ironwall Anti-Cheat",
+  "Description": "Ironwall thin-client anti-cheat (TEE + ZK + HCS/XRPL)",
+  "Category": "Networking",
+  "CreatedBy": "Ironwall",
+  "EnabledByDefault": true,
+  "CanContainContent": false,
+  "IsBetaVersion": true,
+  "Modules": [
+    {
+      "Name": "Ironwall",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ]
+}
