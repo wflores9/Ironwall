@@ -20,3 +20,4 @@
 #include "moderation.hpp"
 #include "ban_store.hpp"
 #include "lobby.hpp"
+#include "matchmaker.hpp"
