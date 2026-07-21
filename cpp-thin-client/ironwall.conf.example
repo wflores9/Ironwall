@@ -1,0 +1,7 @@
+# Ironwall thin client config
+player_id: player_001
+hcs_topic_id: 0.0.123456
+xrpl_account: rIronwallAnchorXXXXXXXXXXXXXXXXXX
+tick_rate_hz: 60
+max_speed: 10.0
+demo_ticks: 5

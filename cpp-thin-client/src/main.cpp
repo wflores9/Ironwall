@@ -1,13 +1,24 @@
 #include "ironwall/ironwall.hpp"
+#include "ironwall/config_file.hpp"
 #include <iostream>
-#include <thread>
+#include <string>
+#include <cstring>
 
-int main() {
+int main(int argc, char** argv) {
     using namespace ironwall;
 
-    std::cout << "Ironwall C++ Thin Client starting...\n";
+    std::string config_path = "ironwall.conf";
+    for (int i = 1; i < argc; ++i) {
+        if ((std::strcmp(argv[i], "--config") == 0 || std::strcmp(argv[i], "-c") == 0) && i + 1 < argc) {
+            config_path = argv[++i];
+        } else if (std::strcmp(argv[i], "--help") == 0 || std::strcmp(argv[i], "-h") == 0) {
+            std::cout << "Usage: ironwall_thin_client [--config path] [--help]\n";
+            return 0;
+        }
+    }
 
-    Config cfg;
+    std::cout << "Ironwall C++ Thin Client starting...\n";
+    Config cfg = load_config(config_path);
     std::cout << "Config: player=" << cfg.player_id
               << " ticks=" << cfg.demo_ticks
               << " tick=" << cfg.tick_rate_hz << "Hz"
@@ -23,7 +34,6 @@ int main() {
     auto session = Session::create(cfg, att);
     std::cout << "Session created: " << session.session_id << "\n";
 
-    // Hello
     net.client_send(HelloMsg{cfg.player_id, "0.1.0", att});
     net.run_server_once();
     if (auto msg = net.client_recv()) {
@@ -33,14 +43,11 @@ int main() {
     }
 
     ZkMovementValidator zk(cfg.max_speed);
-    HcsAnchor hcs(cfg.hcs_topic_id);
-    XrplAnchor xrpl(cfg.xrpl_account);
-    DualAnchor dual(std::move(hcs), std::move(xrpl));
+    DualAnchor dual(HcsAnchor(cfg.hcs_topic_id), XrplAnchor(cfg.xrpl_account));
 
     ThinClient client(cfg, att, zk, dual);
     client.run();
 
-    // Final proof + store + net
     auto last = client.zk().prove(cfg.player_id, {0.48f,0,0.32f}, {0.60f,0,0.40f}, 16);
     auto anchor = client.anchors().anchor(att, last);
     store.insert(last, anchor, att);
@@ -54,7 +61,6 @@ int main() {
         }
     }
 
-    // Challenge
     ChallengeEngine engine;
     auto ch = engine.issue(last.proof_id, "suspicious velocity spike");
     session.record_challenge();
