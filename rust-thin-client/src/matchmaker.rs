@@ -38,6 +38,7 @@ pub struct Matchmaker {
     cfg: MatchmakerConfig,
     lobby: Lobby,
     mod_eng: ModerationEngine,
+    #[allow(dead_code)]
     bans: BanStore,
     queue: VecDeque<String>,
     matches: HashMap<String, Match>,
