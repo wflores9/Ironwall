@@ -70,10 +70,6 @@ name = "ironwall_matchmaker"
 path = "src/bin/matchmaker.rs"
 
 # QUIC
-quinn = "0.11"
-rustls = { version = "0.23", default-features = false, features = ["ring", "std"] }
-rcgen = "0.13"
-tokio-util = { version = "0.7", features = ["codec"] }
 
 [[bin]]
 name = "ironwall_quic_demo"
