@@ -6,7 +6,7 @@ use tracing::{info, Level};
 use tracing_subscriber::FmtSubscriber;
 
 use ironwall::{
-    ModerationEngine, RateLimitConfig,
+    ModerationEngine, RateLimitConfig, BanStore,
     TeeAttestation, ZkMovementValidator, HcsAnchor, XrplAnchor, DualAnchor,
     ChallengeEngine, IronwallConfig,
 };
@@ -50,19 +50,25 @@ async fn main() -> Result<()> {
 
     
     // Moderation demo
+    let bans = BanStore::new("ironwall_bans.jsonl");
     let mut mod_eng = ModerationEngine::new(RateLimitConfig {
         max_events: 5,
         window: std::time::Duration::from_secs(2),
         ban_after_violations: 2,
         ban_duration: std::time::Duration::from_secs(60),
     });
+    bans.load_into(&mut mod_eng);
     let mut allowed = 0;
     let mut denied = 0;
     for _ in 0..12 {
         if mod_eng.allow("speedy_joe", "proof") { allowed += 1; } else { denied += 1; }
     }
+    if mod_eng.is_banned("speedy_joe") {
+        bans.save_ban("speedy_joe", "rate_limit", 60);
+    }
     info!("Moderation demo: allowed={allowed} denied={denied} banned={} strikes={}",
         mod_eng.is_banned("speedy_joe"), mod_eng.strike_count("speedy_joe"));
+    info!("Ban store: {}", bans.path().display());
 
     info!("Ironwall Verifier shut down");
     Ok(())

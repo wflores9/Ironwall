@@ -24,6 +24,7 @@ pub mod store;
 pub mod wire;
 pub mod recorder;
 pub mod moderation;
+pub mod ban_store;
 
 pub use thin_client::ThinClient;
 pub use tee::{TeeAttestation, TeeAttestationResult};
@@ -38,3 +39,4 @@ pub use net::{NetHandle, NetServer, create_loopback};
 pub use store::{ProofStore, StoredProof};
 pub use recorder::MatchRecorder;
 pub use moderation::{ModerationEngine, RateLimitConfig};
+pub use ban_store::BanStore;
