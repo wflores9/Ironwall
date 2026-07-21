@@ -53,3 +53,7 @@ strip = true
 
 [profile.dev]
 opt-level = 1
+
+[[bin]]
+name = "ironwall_matchmaker"
+path = "src/bin/matchmaker.rs"

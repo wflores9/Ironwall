@@ -26,6 +26,7 @@ pub mod recorder;
 pub mod moderation;
 pub mod ban_store;
 pub mod lobby;
+pub mod matchmaker;
 
 pub use thin_client::ThinClient;
 pub use tee::{TeeAttestation, TeeAttestationResult};
@@ -42,3 +43,4 @@ pub use recorder::MatchRecorder;
 pub use moderation::{ModerationEngine, RateLimitConfig};
 pub use ban_store::BanStore;
 pub use lobby::{Lobby, LobbyConfig, SessionTicket};
+pub use matchmaker::{Matchmaker, MatchmakerConfig, Match};
