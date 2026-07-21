@@ -27,6 +27,7 @@ pub mod moderation;
 pub mod ban_store;
 pub mod lobby;
 pub mod matchmaker;
+pub mod quic_net;
 
 pub use thin_client::ThinClient;
 pub use tee::{TeeAttestation, TeeAttestationResult};

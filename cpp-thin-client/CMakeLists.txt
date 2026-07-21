@@ -32,6 +32,7 @@ set(IRONWALL_SOURCES
     src/ban_store.cpp
     src/lobby.cpp
     src/matchmaker.cpp
+    src/udp_net.cpp
 )
 
 add_library(ironwall_static STATIC ${IRONWALL_SOURCES})
@@ -101,3 +102,7 @@ target_link_libraries(ironwall_matchmaker PRIVATE ironwall_static)
 add_executable(matchmaker_test tests/matchmaker_test.cpp)
 target_link_libraries(matchmaker_test PRIVATE ironwall_static)
 add_test(NAME matchmaker_test COMMAND matchmaker_test)
+
+add_executable(udp_test tests/udp_test.cpp)
+target_link_libraries(udp_test PRIVATE ironwall_static)
+add_test(NAME udp_test COMMAND udp_test)
