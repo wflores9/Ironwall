@@ -6,6 +6,7 @@ use tracing::{info, Level};
 use tracing_subscriber::FmtSubscriber;
 
 use ironwall::{
+    ModerationEngine, RateLimitConfig,
     TeeAttestation, ZkMovementValidator, HcsAnchor, XrplAnchor, DualAnchor,
     ChallengeEngine, IronwallConfig,
 };
@@ -47,6 +48,24 @@ async fn main() -> Result<()> {
     let ch = engine.issue_challenge("some-proof", "anomaly detected");
     info!("Verifier issued challenge: {}", ch.challenge_id);
 
+    
+    // Moderation demo
+    let mut mod_eng = ModerationEngine::new(RateLimitConfig {
+        max_events: 5,
+        window: std::time::Duration::from_secs(2),
+        ban_after_violations: 2,
+        ban_duration: std::time::Duration::from_secs(60),
+    });
+    let mut allowed = 0;
+    let mut denied = 0;
+    for _ in 0..12 {
+        if mod_eng.allow("speedy_joe", "proof") { allowed += 1; } else { denied += 1; }
+    }
+    info!("Moderation demo: allowed={allowed} denied={denied} banned={} strikes={}",
+        mod_eng.is_banned("speedy_joe"), mod_eng.strike_count("speedy_joe"));
+
     info!("Ironwall Verifier shut down");
     Ok(())
 }
+
+// moderation demo at end of main — append before final Ok
