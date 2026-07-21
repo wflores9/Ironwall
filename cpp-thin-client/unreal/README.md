@@ -1,11 +1,8 @@
-# Ironwall Unreal Engine Plugin
+# Unreal Sample
 
-Minimal UE5 plugin skeleton wrapping the Ironwall C++ thin client.
+1. Copy `unreal/Ironwall` to your UE project `Plugins/`
+2. Enable plugin
+3. Add `UIronwallClient` to GameInstance or PlayerController
+4. Call `StartSession` on login, `SubmitMovement` each tick, `StopSession` on disconnect.
 
-## Setup
-1. Build standalone lib:
-       cd cpp-thin-client && mkdir build && cd build
-       cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build . -j
-2. Copy unreal/Ironwall into your project's Plugins/ folder
-3. Enable plugin in editor
-4. Use UIronwallClient from Blueprint or C++
+See `IronwallClient.h/cpp` for native calls.

@@ -1,0 +1,5 @@
+# Unreal Blueprint stub - copy this folder structure into your UE project
+# BP_IronwallClient (ActorComponent or Actor)
+#   - StartSession (Input: PlayerId)
+#   - SubmitMovement (Input: FromVector, ToVector, DeltaSeconds)
+#   - StopSession
