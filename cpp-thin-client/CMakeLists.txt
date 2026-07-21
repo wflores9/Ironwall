@@ -27,6 +27,7 @@ set(IRONWALL_SOURCES
     src/c_api.cpp
     src/chain_submit.cpp
     src/recorder.cpp
+    src/hmac.cpp
 )
 
 add_library(ironwall_static STATIC ${IRONWALL_SOURCES})
@@ -74,3 +75,6 @@ install(DIRECTORY include/ DESTINATION include)
 
 add_executable(ironwall_chain_smoke src/chain_smoke.cpp)
 target_link_libraries(ironwall_chain_smoke PRIVATE ironwall_static)
+
+add_executable(ironwall_replay src/replay.cpp)
+target_link_libraries(ironwall_replay PRIVATE ironwall_static)

@@ -15,3 +15,4 @@
 #include "wire.hpp"
 #include "chain_submit.hpp"
 #include "recorder.hpp"
+#include "hmac.hpp"
