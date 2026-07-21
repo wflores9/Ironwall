@@ -13,6 +13,7 @@
 pub mod thin_client;
 pub mod tee;
 pub mod zk;
+pub mod zk_circuit;
 pub mod anchors;
 pub mod config;
 pub mod error;
@@ -28,10 +29,12 @@ pub mod ban_store;
 pub mod lobby;
 pub mod matchmaker;
 pub mod quic_net;
+pub mod quic_iwal;
 
 pub use thin_client::ThinClient;
 pub use tee::{TeeAttestation, TeeAttestationResult};
 pub use zk::{ZkMovementValidator, ZkMovementProof};
+pub use zk_circuit::{CircuitKeys, Groth16MovementProof, prove_movement, verify_movement};
 pub use anchors::{HcsAnchor, XrplAnchor, DualAnchor, DualAnchorReceipt};
 pub use config::IronwallConfig;
 pub use error::{IronwallError, IronwallResult};

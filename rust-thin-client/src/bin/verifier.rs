@@ -5,7 +5,7 @@ use anyhow::Result;
 use tracing::{info, Level};
 use tracing_subscriber::FmtSubscriber;
 
-use ironwall::{ ModerationEngine, RateLimitConfig, BanStore, TeeAttestation, ZkMovementValidator, HcsAnchor, XrplAnchor, DualAnchor, ChallengeEngine, IronwallConfig, Lobby, LobbyConfig };
+use ironwall::{ ModerationEngine, RateLimitConfig, BanStore, TeeAttestation, ZkMovementValidator, HcsAnchor, XrplAnchor, DualAnchor, ChallengeEngine, IronwallConfig, Lobby, LobbyConfig, CircuitKeys, prove_movement, verify_movement };
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -71,6 +71,16 @@ async fn main() -> Result<()> {
     let sid = lobby.open_session(&ticket).unwrap_or_default();
     info!("Lobby session={sid} active={} ticket_ok={}", lobby.active_count(), lobby.validate_ticket(&ticket));
     lobby.close_session(&sid);
+    // Groth16 circuit demo
+    info!("Groth16 setup...");
+    let keys = CircuitKeys::setup().expect("circuit setup");
+    match prove_movement(&keys, (0.0, 0.0, 0.0), (0.1, 0.0, 0.0), 50, 10.0) {
+        Ok(p) => {
+            let ok = verify_movement(&keys, &p).unwrap_or(false);
+            info!("Groth16 proof ok={ok} speed={:.3} proof_len={}", p.speed, p.proof_hex.len());
+        }
+        Err(e) => info!("Groth16 prove err={e}"),
+    }
     info!("Ironwall Verifier shut down");
     Ok(())
 }

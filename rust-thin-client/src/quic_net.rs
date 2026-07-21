@@ -41,7 +41,7 @@ fn make_client_config(server_cert: CertificateDer<'static>) -> Result<ClientConf
 /// One-shot QUIC uni-stream echo: server binds on `bind` (port 0 ok), client sends payload, returns ACK||payload.
 pub async fn quic_echo_demo(bind: SocketAddr, payload: &[u8]) -> Result<Vec<u8>> {
     let (server_config, cert) = make_server_config()?;
-    let mut server_ep = Endpoint::server(server_config, bind).context("bind quic server")?;
+    let server_ep = Endpoint::server(server_config, bind).context("bind quic server")?;
     let addr = server_ep.local_addr()?;
     info!(%addr, "QUIC server listening");
 
