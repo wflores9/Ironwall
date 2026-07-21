@@ -15,8 +15,12 @@ on:
 
 jobs:
   rust:
-    name: Rust thin-client
-    runs-on: ubuntu-latest
+    name: Rust (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
     defaults:
       run:
         working-directory: rust-thin-client
@@ -27,28 +31,54 @@ jobs:
         run: cargo build --release --all-targets
       - name: Test
         run: cargo test --release
-      - name: Run thin client (smoke)
+      - name: Smoke thin client
         run: cargo run --release --bin ironwall_thin_client
-      - name: Run verifier (smoke)
+      - name: Smoke verifier
         run: cargo run --release --bin ironwall_verifier
 
   cpp:
-    name: C++ thin-client
-    runs-on: ubuntu-latest
+    name: C++ (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        # windows-latest needs MSVC generator tweaks; add later
     defaults:
       run:
         working-directory: cpp-thin-client
     steps:
       - uses: actions/checkout@v4
-      - name: Install deps
+
+      - name: Install deps (Linux)
+        if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y cmake g++ build-essential
+
+      - name: Install deps (macOS)
+        if: runner.os == 'macOS'
+        run: brew install cmake || true
+
       - name: Configure
         run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
       - name: Build
-        run: cmake --build build -j$(nproc)
+        run: cmake --build build -j 4
+
       - name: Test
         run: cd build && ctest --output-on-failure
-      - name: Run thin client (smoke)
+
+      - name: Smoke thin client
         run: ./build/ironwall_thin_client
-      - name: Run verifier (smoke)
+
+      - name: Smoke verifier
         run: ./build/ironwall_verifier
+
+      - name: Upload lib artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ironwall-lib-${{ matrix.os }}
+          path: |
+            cpp-thin-client/build/libironwall.a
+            cpp-thin-client/build/libironwall.so
+            cpp-thin-client/build/libironwall.dylib
+          if-no-files-found: ignore
