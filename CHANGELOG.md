@@ -75,3 +75,16 @@ Dual-anchoring requires an attacker to corrupt two independent ledgers with diff
 - GitHub Actions CI (Rust: Linux/macOS/Windows, C++: Linux/macOS/Windows)
 - `scripts/demo_thin_stack.sh` end-to-end smoke
 
+
+## [0.3.0] - 2026-07-21
+
+### Added
+- arkworks Groth16 SpeedCircuit (BLS12-381) — real SNARK prove/verify for movement bounds
+- QUIC transport (quinn) + IWAL signed Hello/Welcome over QUIC
+- C++ UDP transport for signed IWAL datagrams
+- Matchmaker services (Rust + C++)
+- Lobby HMAC session tickets
+- Full-stack demo script
+
+### Changed
+- Verifier and thin_client demonstrate Groth16 proofs end-to-end

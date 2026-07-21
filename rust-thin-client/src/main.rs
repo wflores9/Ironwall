@@ -1,3 +1,4 @@
+use ironwall::{CircuitKeys, prove_movement, verify_movement};
 mod thin_client;
 mod tee;
 mod zk;
@@ -122,6 +123,17 @@ async fn main() -> Result<()> {
     drop(net);
     let _ = server_handle.await;
 
+    // Optional Groth16 proof on final segment
+    info!("Groth16 setup (one-time)...");
+    if let Ok(keys) = CircuitKeys::setup() {
+        match prove_movement(&keys, (0.48, 0.0, 0.32), (0.60, 0.0, 0.40), 16, 10.0) {
+            Ok(gp) => {
+                let v = verify_movement(&keys, &gp).unwrap_or(false);
+                info!("Groth16 movement proof verified={v} speed={:.2} bytes={}", gp.speed, gp.proof_hex.len()/2);
+            }
+            Err(e) => info!("Groth16 skipped: {e}"),
+        }
+    }
     info!("Ironwall Thin Client shut down cleanly");
     Ok(())
 }
