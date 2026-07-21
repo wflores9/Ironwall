@@ -15,7 +15,6 @@ int main() {
     try {
         auto ok = zk.prove("player_001", {0,0,0}, {0.1f,0,0}, 50);
         std::cout << "Clean proof accepted: true\n";
-
         HcsAnchor hcs(cfg.hcs_topic_id);
         XrplAnchor xrpl(cfg.xrpl_account);
         DualAnchor dual(std::move(hcs), std::move(xrpl));
@@ -35,21 +34,25 @@ int main() {
     ChallengeEngine engine;
     auto ch = engine.issue("some-proof", "anomaly detected");
     std::cout << "Verifier issued challenge: " << ch.challenge_id << "\n";
+
+    // Moderation demo
+    RateLimitConfig rc;
+    rc.max_events = 5;
+    rc.window_sec = 2.0;
+    rc.ban_after_violations = 2;
+    rc.ban_duration_sec = 60.0;
+    ModerationEngine mod(rc);
+
+    int allowed = 0, denied = 0;
+    for (int i = 0; i < 12; ++i) {
+        if (mod.allow("speedy_joe", "proof")) ++allowed;
+        else ++denied;
+    }
+    std::cout << "Moderation demo: allowed=" << allowed
+              << " denied=" << denied
+              << " banned=" << (mod.is_banned("speedy_joe") ? "yes" : "no")
+              << " strikes=" << mod.strike_count("speedy_joe") << "\n";
+
     std::cout << "Ironwall C++ Verifier shut down\n";
     return 0;
-}
-
-// --- live chain demo (runs after existing verifier body if linked) ---
-#include "ironwall/chain_submit.hpp"
-namespace {
-struct ChainDemo {
-    ChainDemo() {
-        ironwall::ChainConfig cc;
-        ironwall::ChainSubmitter sub(cc);
-        ironwall::Bytes payload = {0x49,0x57,0x41,0x4c}; // "IWAL"
-        auto rec = sub.submit_dual(payload);
-        std::cout << "Chain dual-anchor demo combined=" << rec.combined_hash << "\n";
-    }
-};
-// static ChainDemo _chain_demo; // uncomment to auto-run
 }

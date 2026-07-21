@@ -17,3 +17,4 @@
 #include "recorder.hpp"
 #include "hmac.hpp"
 #include "wire_auth.hpp"
+#include "moderation.hpp"

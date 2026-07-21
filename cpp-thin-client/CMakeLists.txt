@@ -28,6 +28,7 @@ set(IRONWALL_SOURCES
     src/chain_submit.cpp
     src/recorder.cpp
     src/hmac.cpp
+    src/moderation.cpp
 )
 
 add_library(ironwall_static STATIC ${IRONWALL_SOURCES})
@@ -82,3 +83,7 @@ target_link_libraries(ironwall_replay PRIVATE ironwall_static)
 add_executable(wire_auth_test tests/wire_auth_test.cpp)
 target_link_libraries(wire_auth_test PRIVATE ironwall_static)
 add_test(NAME wire_auth_test COMMAND wire_auth_test)
+
+add_executable(moderation_test tests/moderation_test.cpp)
+target_link_libraries(moderation_test PRIVATE ironwall_static)
+add_test(NAME moderation_test COMMAND moderation_test)
