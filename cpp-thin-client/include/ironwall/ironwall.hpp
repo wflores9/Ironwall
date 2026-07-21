@@ -12,3 +12,4 @@
 #include "store.hpp"
 #include "thin_client.hpp"
 #include "tcp_net.hpp"
+#include "wire.hpp"

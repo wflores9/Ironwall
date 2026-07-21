@@ -1,4 +1,5 @@
 #include "ironwall/tcp_net.hpp"
+#include "ironwall/wire.hpp"
 #include "util.hpp"
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -8,17 +9,6 @@
 #include <vector>
 
 namespace ironwall {
-
-namespace {
-std::vector<uint8_t> serialize_client(const ClientMessage&) { return {0x01}; }
-std::optional<ServerMessage> deserialize_server(const std::vector<uint8_t>&) {
-    return WelcomeMsg{util::uuid4(), util::now()};
-}
-std::vector<uint8_t> serialize_server(const ServerMessage&) { return {0x02}; }
-std::optional<ClientMessage> deserialize_client(const std::vector<uint8_t>&) {
-    return HelloMsg{"remote", "0.1.0", {}};
-}
-}
 
 TcpClient::~TcpClient() { disconnect(); }
 
@@ -40,21 +30,22 @@ void TcpClient::disconnect() {
 
 bool TcpClient::send(const ClientMessage& msg) {
     if (sock_ < 0) return false;
-    auto buf = serialize_client(msg);
-    uint32_t len = htonl(static_cast<uint32_t>(buf.size()));
-    if (::send(sock_, &len, 4, 0) != 4) return false;
+    auto buf = wire::encode_client(msg);
     return ::send(sock_, buf.data(), buf.size(), 0) == static_cast<ssize_t>(buf.size());
 }
 
 std::optional<ServerMessage> TcpClient::recv(int) {
     if (sock_ < 0) return std::nullopt;
-    uint32_t len_n = 0;
-    if (::recv(sock_, &len_n, 4, MSG_WAITALL) != 4) return std::nullopt;
-    uint32_t len = ntohl(len_n);
-    if (len > 1<<20) return std::nullopt;
-    std::vector<uint8_t> buf(len);
-    if (::recv(sock_, buf.data(), len, MSG_WAITALL) != static_cast<ssize_t>(len)) return std::nullopt;
-    return deserialize_server(buf);
+    uint8_t hdr[10];
+    if (::recv(sock_, hdr, 10, MSG_WAITALL) != 10) return std::nullopt;
+    uint32_t plen = hdr[6] | (hdr[7]<<8) | (hdr[8]<<16) | (hdr[9]<<24);
+    if (plen > 1<<20) return std::nullopt;
+    std::vector<uint8_t> buf(10 + plen);
+    std::memcpy(buf.data(), hdr, 10);
+    if (plen && ::recv(sock_, buf.data()+10, plen, MSG_WAITALL) != static_cast<ssize_t>(plen))
+        return std::nullopt;
+    size_t consumed = 0;
+    return wire::decode_server(buf.data(), buf.size(), consumed);
 }
 
 TcpServer::~TcpServer() { stop(); }
@@ -92,21 +83,25 @@ void TcpServer::accept_loop() {
         socklen_t len = sizeof(ca);
         int cs = accept(listen_sock_, reinterpret_cast<sockaddr*>(&ca), &len);
         if (cs < 0) continue;
-        uint32_t len_n = 0;
-        if (::recv(cs, &len_n, 4, MSG_WAITALL) == 4) {
-            uint32_t blen = ntohl(len_n);
-            if (blen < 1<<20) {
-                std::vector<uint8_t> buf(blen);
-                if (::recv(cs, buf.data(), blen, MSG_WAITALL) == static_cast<ssize_t>(blen)) {
-                    auto msg = deserialize_client(buf);
-                    if (msg && handler_) {
-                        handler_(*msg, [cs](ServerMessage reply) {
-                            auto out = serialize_server(reply);
-                            uint32_t l = htonl(static_cast<uint32_t>(out.size()));
-                            ::send(cs, &l, 4, 0);
-                            ::send(cs, out.data(), out.size(), 0);
-                        });
-                    }
+
+        uint8_t hdr[10];
+        if (::recv(cs, hdr, 10, MSG_WAITALL) == 10) {
+            uint32_t plen = hdr[6] | (hdr[7]<<8) | (hdr[8]<<16) | (hdr[9]<<24);
+            if (plen < 1<<20) {
+                std::vector<uint8_t> buf(10 + plen);
+                std::memcpy(buf.data(), hdr, 10);
+                bool ok = plen == 0 || ::recv(cs, buf.data()+10, plen, MSG_WAITALL) == static_cast<ssize_t>(plen);
+                if (ok) {
+                    try {
+                        size_t consumed = 0;
+                        auto msg = wire::decode_client(buf.data(), buf.size(), consumed);
+                        if (msg && handler_) {
+                            handler_(*msg, [cs](ServerMessage reply) {
+                                auto out = wire::encode_server(reply);
+                                ::send(cs, out.data(), out.size(), 0);
+                            });
+                        }
+                    } catch (...) {}
                 }
             }
         }
