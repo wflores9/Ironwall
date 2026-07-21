@@ -21,6 +21,7 @@ add_library(ironwall
     src/store.cpp
     src/config.cpp
     src/thin_client.cpp
+    src/tcp_net.cpp
 )
 
 target_include_directories(ironwall
