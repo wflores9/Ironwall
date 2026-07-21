@@ -1,0 +1,16 @@
+/target/
+**/*.rs.bk
+*.pdb
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+.env
+.env.*
+*.pem
+*.key
+dist/
+build/
