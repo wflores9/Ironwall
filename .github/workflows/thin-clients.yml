@@ -1,0 +1,54 @@
+name: Thin Clients CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'rust-thin-client/**'
+      - 'cpp-thin-client/**'
+      - '.github/workflows/thin-clients.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'rust-thin-client/**'
+      - 'cpp-thin-client/**'
+
+jobs:
+  rust:
+    name: Rust thin-client
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rust-thin-client
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build
+        run: cargo build --release --all-targets
+      - name: Test
+        run: cargo test --release
+      - name: Run thin client (smoke)
+        run: cargo run --release --bin ironwall_thin_client
+      - name: Run verifier (smoke)
+        run: cargo run --release --bin ironwall_verifier
+
+  cpp:
+    name: C++ thin-client
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cpp-thin-client
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install deps
+        run: sudo apt-get update && sudo apt-get install -y cmake g++ build-essential
+      - name: Configure
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build -j$(nproc)
+      - name: Test
+        run: cd build && ctest --output-on-failure
+      - name: Run thin client (smoke)
+        run: ./build/ironwall_thin_client
+      - name: Run verifier (smoke)
+        run: ./build/ironwall_verifier
