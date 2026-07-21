@@ -1,4 +1,5 @@
 #include "ironwall/ironwall.hpp"
+#include "ironwall/ban_store.hpp"
 #include <iostream>
 
 int main() {
@@ -41,17 +42,23 @@ int main() {
     rc.window_sec = 2.0;
     rc.ban_after_violations = 2;
     rc.ban_duration_sec = 60.0;
+    BanStore bans("ironwall_bans.jsonl");
     ModerationEngine mod(rc);
+    bans.load_into(mod);
 
     int allowed = 0, denied = 0;
     for (int i = 0; i < 12; ++i) {
         if (mod.allow("speedy_joe", "proof")) ++allowed;
         else ++denied;
     }
+    if (mod.is_banned("speedy_joe")) {
+        bans.save_ban("speedy_joe", "rate_limit", rc.ban_duration_sec);
+    }
     std::cout << "Moderation demo: allowed=" << allowed
               << " denied=" << denied
               << " banned=" << (mod.is_banned("speedy_joe") ? "yes" : "no")
               << " strikes=" << mod.strike_count("speedy_joe") << "\n";
+    std::cout << "Ban store: " << bans.path() << "\n";
 
     std::cout << "Ironwall C++ Verifier shut down\n";
     return 0;

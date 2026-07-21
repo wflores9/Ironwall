@@ -18,3 +18,4 @@
 #include "hmac.hpp"
 #include "wire_auth.hpp"
 #include "moderation.hpp"
+#include "ban_store.hpp"

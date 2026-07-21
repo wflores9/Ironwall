@@ -29,6 +29,7 @@ set(IRONWALL_SOURCES
     src/recorder.cpp
     src/hmac.cpp
     src/moderation.cpp
+    src/ban_store.cpp
 )
 
 add_library(ironwall_static STATIC ${IRONWALL_SOURCES})
