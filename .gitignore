@@ -64,3 +64,4 @@ rust-thin-client/target/
 **/ironwall.dll
 dist/
 ironwall-demo-linux-x64.tar.gz
+cpp-thin-client/chain.conf

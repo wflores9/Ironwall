@@ -1,13 +1,6 @@
-# Copy to chain.conf and fill secrets (DO NOT COMMIT secrets)
-# Hedera
-hedera_network: testnet
-hedera_operator_id: 0.0.YOUR_ID
-hedera_operator_key_pem: /path/to/operator.pem
-hcs_topic_id: 0.0.YOUR_TOPIC
-hedera_mirror: https://testnet.mirrornode.hedera.com
-
-# XRPL
-xrpl_network: testnet
-xrpl_rpc: https://s.altnet.rippletest.net:51234
-xrpl_account: rYOURADDRESS
-xrpl_seed: sYOURSEED
+# Copy to chain.conf and fill testnet values (never commit secrets)
+HEDERA_OPERATOR_ID=0.0.XXXXX
+HEDERA_OPERATOR_KEY_PEM=/path/to/operator.pem
+HCS_TOPIC_ID=0.0.YYYY
+XRPL_SEED=sXXXXXXXX
+XRPL_ACCOUNT=rXXXXXXXX
