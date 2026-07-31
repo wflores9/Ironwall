@@ -49,6 +49,6 @@ pub use ban_store::BanStore;
 pub use lobby::{Lobby, LobbyConfig, SessionTicket};
 pub use matchmaker::{Matchmaker, MatchmakerConfig, Match};
 pub mod halo2_circuit;
-pub use halo2_circuit::{SpeedHalo2, prove_speed_halo2};
+pub use halo2_circuit::{SpeedHalo2, prove_speed_halo2, verify_movement_halo2};
 pub mod banner;
 pub use banner::print_banner;

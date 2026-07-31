@@ -272,3 +272,28 @@ mod tests {
         println!("Halo2 speedhack rejected: {err}");
     }
 }
+
+/// Run MockProver end-to-end for a movement sample (API stable until real keygen).
+pub fn verify_movement_halo2(
+    dx: u64,
+    dy: u64,
+    dz: u64,
+    max_speed: u64,
+    dt: u64,
+) -> Result<(), String> {
+    prove_speed_halo2(dx, dy, dz, max_speed, dt)?;
+    let circuit = SpeedHalo2 {
+        dx: Some(dx),
+        dy: Some(dy),
+        dz: Some(dz),
+        max_speed: Some(max_speed),
+        dt: Some(dt),
+    };
+    let k = 8;
+    let prover = halo2_proofs::dev::MockProver::run(k, &circuit, vec![])
+        .map_err(|e| format!("MockProver: {e:?}"))?;
+    prover
+        .verify()
+        .map_err(|e| format!("verify: {e:?}"))?;
+    Ok(())
+}
