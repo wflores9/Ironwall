@@ -49,3 +49,4 @@ pub use ban_store::BanStore;
 pub use lobby::{Lobby, LobbyConfig, SessionTicket};
 pub use matchmaker::{Matchmaker, MatchmakerConfig, Match};
 pub mod halo2_circuit;
+pub use halo2_circuit::{SpeedHalo2, prove_speed_halo2};

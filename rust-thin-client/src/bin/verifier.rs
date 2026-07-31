@@ -5,7 +5,7 @@ use anyhow::Result;
 use tracing::{info, Level};
 use tracing_subscriber::FmtSubscriber;
 
-use ironwall::{ ModerationEngine, RateLimitConfig, BanStore, TeeAttestation, ZkMovementValidator, HcsAnchor, XrplAnchor, DualAnchor, ChallengeEngine, IronwallConfig, Lobby, LobbyConfig, CircuitKeys, prove_movement, verify_movement };
+use ironwall::{SpeedHalo2, prove_speed_halo2,  ModerationEngine, RateLimitConfig, BanStore, TeeAttestation, ZkMovementValidator, HcsAnchor, XrplAnchor, DualAnchor, ChallengeEngine, IronwallConfig, Lobby, LobbyConfig, CircuitKeys, prove_movement, verify_movement };
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -81,6 +81,29 @@ async fn main() -> Result<()> {
         }
         Err(e) => info!("Groth16 prove err={e}"),
     }
+    
+    // Halo2 circuit demo
+    match prove_speed_halo2(100, 0, 0, 1000, 100) {
+        Ok(()) => {
+            let circuit = SpeedHalo2 {
+                dx: Some(100),
+                dy: Some(0),
+                dz: Some(0),
+                max_speed: Some(1000),
+                dt: Some(100),
+            };
+            match halo2_proofs::dev::MockProver::run(8, &circuit, vec![]) {
+                Ok(prover) => info!("Halo2 MockProver verify={:?}", prover.verify()),
+                Err(e) => info!("Halo2 MockProver err={e}"),
+            }
+        }
+        Err(e) => info!("Halo2 native reject={e}"),
+    }
+    match prove_speed_halo2(50_000, 0, 0, 10, 16) {
+        Ok(()) => info!("Halo2 speedhack unexpectedly accepted"),
+        Err(e) => info!("Halo2 speedhack rejected: {e}"),
+    }
+
     info!("Ironwall Verifier shut down");
     Ok(())
 }
