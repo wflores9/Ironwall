@@ -1,4 +1,4 @@
-use ironwall::{print_banner, CircuitKeys, prove_movement, verify_movement};
+use ironwall::{verify_movement_halo2, print_banner, CircuitKeys, prove_movement, verify_movement};
 mod thin_client;
 mod tee;
 mod zk;
@@ -135,6 +135,13 @@ async fn main() -> Result<()> {
             Err(e) => info!("Groth16 skipped: {e}"),
         }
     }
+    
+    // Halo2 movement check on final segment (MockProver)
+    match verify_movement_halo2(100, 0, 0, 1000, 100) {
+        Ok(()) => info!("Halo2 movement verified"),
+        Err(e) => info!("Halo2 movement err={e}"),
+    }
+
     info!("Ironwall Thin Client shut down cleanly");
     Ok(())
 }
