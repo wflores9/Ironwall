@@ -1,7 +1,7 @@
 //! Minimal Halo2 speed-bound circuit stub (MockProver only).
+use halo2_proofs::arithmetic::Field;
 use halo2_proofs::circuit::{Layouter, SimpleFloorPlanner};
 use halo2_proofs::plonk::{Circuit, ConstraintSystem};
-use halo2_proofs::arithmetic::Field;
 use halo2curves::bn256::Fr as Fp;
 
 #[derive(Clone, Debug)]
@@ -29,9 +29,7 @@ impl Circuit<Fp> for SpeedHalo2 {
 
     fn configure(meta: &mut ConstraintSystem<Fp>) -> Self::Config {
         let advice = meta.advice_column();
-        let instance = meta.instance_column();
         meta.enable_equality(advice);
-        meta.enable_equality(instance);
         ()
     }
 
@@ -40,7 +38,6 @@ impl Circuit<Fp> for SpeedHalo2 {
         _config: Self::Config,
         _layouter: impl Layouter<Fp>,
     ) -> Result<(), halo2_proofs::plonk::Error> {
-        // Stub: real constraints (dx²+dy²+dz² ≤ max²·dt²) come later
         Ok(())
     }
 }
