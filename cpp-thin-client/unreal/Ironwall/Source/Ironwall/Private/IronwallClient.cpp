@@ -1,97 +1,77 @@
 #include "IronwallClient.h"
 
-// C ABI from libironwall
 extern "C" {
-    struct ironwall_client;
-    ironwall_client* ironwall_client_create(const char* player_id, float max_speed);
-    void ironwall_client_destroy(ironwall_client* c);
-    int ironwall_client_attest(ironwall_client* c, char* out_quote_hash, size_t out_len);
-    int ironwall_client_prove_movement(
-        ironwall_client* c,
-        float from_x, float from_y, float from_z,
-        float to_x, float to_y, float to_z,
-        uint32_t delta_t_ms,
-        char* out_proof_id, size_t proof_id_len,
-        char* out_combined_hash, size_t hash_len);
-    const char* ironwall_version(void);
+	void* ironwall_create(const char* player_id);
+	int   ironwall_attest(void* handle, char* out_quote_hex, int out_len);
+	int   ironwall_prove_movement(void* handle, float x0, float y0, float z0,
+	                              float x1, float y1, float z1, float dt,
+	                              char* out_proof_id, int out_len);
+	void  ironwall_destroy(void* handle);
 }
 
-UIronwallClient::UIronwallClient() {}
-
-void UIronwallClient::BeginDestroy()
+UIronwallClient::UIronwallClient()
 {
-    StopSession();
-    Super::BeginDestroy();
+	PrimaryComponentTick.bCanEverTick = false;
 }
 
-void UIronwallClient::StartSession(const FString& PlayerId)
+void UIronwallClient::BeginPlay()
 {
-    StopSession();
-
-    NativeClient = ironwall_client_create(TCHAR_TO_UTF8(*PlayerId), MaxSpeed);
-    if (!NativeClient)
-    {
-        UE_LOG(LogTemp, Error, TEXT("Ironwall: failed to create native client (is libironwall linked?)"));
-        SessionId = FGuid::NewGuid().ToString();
-        return;
-    }
-
-    char quote[128] = {};
-    int rc = ironwall_client_attest(static_cast<ironwall_client*>(NativeClient), quote, sizeof(quote));
-    if (rc != 0)
-    {
-        UE_LOG(LogTemp, Error, TEXT("Ironwall: attest failed rc=%d"), rc);
-        return;
-    }
-
-    LastQuoteHash = UTF8_TO_TCHAR(quote);
-    SessionId = FGuid::NewGuid().ToString();
-    UE_LOG(LogTemp, Log, TEXT("Ironwall: session started quote=%s"), *LastQuoteHash);
+	Super::BeginPlay();
 }
 
-void UIronwallClient::SubmitMovement(FVector From, FVector To, float DeltaSeconds)
+void UIronwallClient::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-    if (!NativeClient)
-    {
-        LastProofId = FGuid::NewGuid().ToString();
-        return;
-    }
+	StopSession();
+	Super::EndPlay(EndPlayReason);
+}
 
-    uint32_t dtMs = (uint32_t)FMath::Max(1, FMath::RoundToInt(DeltaSeconds * 1000.f));
-    char proofId[80] = {};
-    char hash[80] = {};
+bool UIronwallClient::StartSession(const FString& PlayerId)
+{
+	StopSession();
+	FTCHARToUTF8 Utf8(*PlayerId);
+	NativeHandle = ironwall_create(Utf8.Get());
+	if (!NativeHandle)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Ironwall: create failed"));
+		return false;
+	}
+	char Quote[128] = {};
+	if (ironwall_attest(NativeHandle, Quote, sizeof(Quote)) != 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Ironwall: attest soft-fail"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("Ironwall: attest %s"), UTF8_TO_TCHAR(Quote));
+	}
+	return true;
+}
 
-    int rc = ironwall_client_prove_movement(
-        static_cast<ironwall_client*>(NativeClient),
-        From.X, From.Y, From.Z,
-        To.X, To.Y, To.Z,
-        dtMs,
-        proofId, sizeof(proofId),
-        hash, sizeof(hash));
-
-    if (rc == -3)
-    {
-        UE_LOG(LogTemp, Warning, TEXT("Ironwall: movement REJECTED (speedhack?)"));
-        return;
-    }
-    if (rc != 0)
-    {
-        UE_LOG(LogTemp, Error, TEXT("Ironwall: prove failed rc=%d"), rc);
-        return;
-    }
-
-    LastProofId = UTF8_TO_TCHAR(proofId);
-    LastCombinedHash = UTF8_TO_TCHAR(hash);
-    UE_LOG(LogTemp, Verbose, TEXT("Ironwall: proof=%s anchor=%s"), *LastProofId, *LastCombinedHash);
+bool UIronwallClient::SubmitMovement(FVector From, FVector To, float DeltaSeconds)
+{
+	if (!NativeHandle) return false;
+	char ProofId[128] = {};
+	const int Rc = ironwall_prove_movement(
+		NativeHandle,
+		From.X, From.Y, From.Z,
+		To.X, To.Y, To.Z,
+		DeltaSeconds,
+		ProofId, sizeof(ProofId));
+	if (Rc != 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Ironwall: prove_movement rejected rc=%d"), Rc);
+		return false;
+	}
+	LastProofId = UTF8_TO_TCHAR(ProofId);
+	UE_LOG(LogTemp, Log, TEXT("Ironwall: proof %s"), *LastProofId);
+	return true;
 }
 
 void UIronwallClient::StopSession()
 {
-    if (NativeClient)
-    {
-        ironwall_client_destroy(static_cast<ironwall_client*>(NativeClient));
-        NativeClient = nullptr;
-    }
-    UE_LOG(LogTemp, Log, TEXT("Ironwall: session %s stopped"), *SessionId);
-    SessionId.Empty();
+	if (NativeHandle)
+	{
+		ironwall_destroy(NativeHandle);
+		NativeHandle = nullptr;
+	}
 }

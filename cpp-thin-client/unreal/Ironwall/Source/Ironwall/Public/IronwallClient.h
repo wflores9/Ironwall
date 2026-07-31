@@ -1,40 +1,32 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
 #include "IronwallClient.generated.h"
 
-UCLASS(BlueprintType)
-class IRONWALL_API UIronwallClient : public UObject
+UCLASS(ClassGroup=(Ironwall), meta=(BlueprintSpawnableComponent))
+class IRONWALL_API UIronwallClient : public UActorComponent
 {
-    GENERATED_BODY()
+	GENERATED_BODY()
 public:
-    UIronwallClient();
-    virtual void BeginDestroy() override;
+	UIronwallClient();
 
-    UFUNCTION(BlueprintCallable, Category = "Ironwall")
-    void StartSession(const FString& PlayerId);
+	UFUNCTION(BlueprintCallable, Category="Ironwall")
+	bool StartSession(const FString& PlayerId);
 
-    UFUNCTION(BlueprintCallable, Category = "Ironwall")
-    void SubmitMovement(FVector From, FVector To, float DeltaSeconds);
+	UFUNCTION(BlueprintCallable, Category="Ironwall")
+	bool SubmitMovement(FVector From, FVector To, float DeltaSeconds);
 
-    UFUNCTION(BlueprintCallable, Category = "Ironwall")
-    void StopSession();
+	UFUNCTION(BlueprintCallable, Category="Ironwall")
+	void StopSession();
 
-    UPROPERTY(BlueprintReadOnly, Category = "Ironwall")
-    FString SessionId;
+	UFUNCTION(BlueprintCallable, Category="Ironwall")
+	FString GetLastProofId() const { return LastProofId; }
 
-    UPROPERTY(BlueprintReadOnly, Category = "Ironwall")
-    FString LastProofId;
-
-    UPROPERTY(BlueprintReadOnly, Category = "Ironwall")
-    FString LastQuoteHash;
-
-    UPROPERTY(BlueprintReadOnly, Category = "Ironwall")
-    FString LastCombinedHash;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ironwall")
-    float MaxSpeed = 10.f;
+protected:
+	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 private:
-    void* NativeClient = nullptr;
+	void* NativeHandle = nullptr;
+	FString LastProofId;
 };

@@ -1,8 +1,6 @@
-# Unreal Sample
+# Ironwall Unreal Plugin
 
-1. Copy `unreal/Ironwall` to your UE project `Plugins/`
-2. Enable plugin
-3. Add `UIronwallClient` to GameInstance or PlayerController
-4. Call `StartSession` on login, `SubmitMovement` each tick, `StopSession` on disconnect.
-
-See `IronwallClient.h/cpp` for native calls.
+1. Build lib: cd cpp-thin-client && cmake -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build -j
+2. Copy unreal/Ironwall into UE project Plugins/Ironwall
+3. Enable plugin, add UIronwallClient to Pawn/PlayerController
+4. BeginPlay -> StartSession; movement -> SubmitMovement; EndPlay -> StopSession
