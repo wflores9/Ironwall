@@ -18,6 +18,7 @@ int main(int argc, char** argv) {
         }
     }
 
+    ironwall::print_banner();
     std::cout << "Ironwall C++ Thin Client starting...\n";
     Config cfg = load_config(config_path);
     std::cout << "Config: player=" << cfg.player_id

@@ -22,3 +22,4 @@
 #include "lobby.hpp"
 #include "matchmaker.hpp"
 #include "udp_net.hpp"
+namespace ironwall { void print_banner(); }

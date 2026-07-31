@@ -4,6 +4,7 @@
 
 int main() {
     using namespace ironwall;
+    ironwall::print_banner();
     std::cout << "Ironwall C++ Verifier starting...\n";
 
     Config cfg;

@@ -5,7 +5,7 @@ use anyhow::Result;
 use tracing::{info, Level};
 use tracing_subscriber::FmtSubscriber;
 
-use ironwall::{SpeedHalo2, prove_speed_halo2,  ModerationEngine, RateLimitConfig, BanStore, TeeAttestation, ZkMovementValidator, HcsAnchor, XrplAnchor, DualAnchor, ChallengeEngine, IronwallConfig, Lobby, LobbyConfig, CircuitKeys, prove_movement, verify_movement };
+use ironwall::{print_banner, SpeedHalo2, prove_speed_halo2,  ModerationEngine, RateLimitConfig, BanStore, TeeAttestation, ZkMovementValidator, HcsAnchor, XrplAnchor, DualAnchor, ChallengeEngine, IronwallConfig, Lobby, LobbyConfig, CircuitKeys, prove_movement, verify_movement };
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -14,6 +14,7 @@ async fn main() -> Result<()> {
         .finish();
     tracing::subscriber::set_global_default(subscriber)?;
 
+    print_banner();
     info!("Ironwall Verifier starting...");
 
     let cfg = IronwallConfig::default();

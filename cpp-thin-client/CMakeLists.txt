@@ -33,6 +33,7 @@ set(IRONWALL_SOURCES
     src/lobby.cpp
     src/matchmaker.cpp
     src/udp_net.cpp
+    src/banner.cpp
 )
 
 add_library(ironwall_static STATIC ${IRONWALL_SOURCES})

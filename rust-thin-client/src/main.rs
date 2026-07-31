@@ -1,4 +1,4 @@
-use ironwall::{CircuitKeys, prove_movement, verify_movement};
+use ironwall::{print_banner, CircuitKeys, prove_movement, verify_movement};
 mod thin_client;
 mod tee;
 mod zk;
@@ -34,6 +34,7 @@ async fn main() -> Result<()> {
         .finish();
     tracing::subscriber::set_global_default(subscriber)?;
 
+    print_banner();
     info!("Ironwall Thin Client starting...");
 
     let cfg = IronwallConfig::default();
