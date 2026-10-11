@@ -58,9 +58,29 @@ impl NetServer {
     /// Simple echo / ack loop for demo.
     pub async fn run_demo(mut self) {
         info!("NetServer demo loop started");
+        let mut hello_seen = false;
         while let Some(msg) = self.recv().await {
+            if !matches!(msg, ClientMessage::Hello { .. }) && !hello_seen {
+                let _ = self.send(ServerMessage::Kick {
+                    reason: "hello required before session messages".into(),
+                }).await;
+                break;
+            }
             match msg {
                 ClientMessage::Hello { player_id, .. } => {
+                    if hello_seen {
+                        let _ = self.send(ServerMessage::Kick {
+                            reason: "duplicate session hello".into(),
+                        }).await;
+                        break;
+                    }
+                    if player_id.trim().is_empty() {
+                        let _ = self.send(ServerMessage::Kick {
+                            reason: "player id required".into(),
+                        }).await;
+                        break;
+                    }
+                    hello_seen = true;
                     info!("server got Hello from {}", player_id);
                     let _ = self
                         .send(ServerMessage::Welcome {
@@ -95,5 +115,25 @@ impl NetServer {
             }
         }
         info!("NetServer demo loop ended");
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use chrono::Utc;
+
+    #[tokio::test]
+    async fn rejects_heartbeat_before_hello() {
+        let (client, server) = create_loopback();
+        let handle = tokio::spawn(server.run_demo());
+        client.send(ClientMessage::Heartbeat {
+            ts: Utc::now(),
+            position: (0.0, 0.0, 0.0),
+        }).await.unwrap();
+        let mut client = client;
+        assert!(matches!(client.recv().await, Some(ServerMessage::Kick { .. })));
+        drop(client);
+        handle.await.unwrap();
     }
 }
