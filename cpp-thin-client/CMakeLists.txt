@@ -42,8 +42,11 @@ target_include_directories(ironwall_static
            $<INSTALL_INTERFACE:include>
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
-target_compile_options(ironwall_static PRIVATE -Wall -Wextra -Wpedantic)
+target_compile_options(ironwall_static PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4> $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall;-Wextra;-Wpedantic>)
 set_target_properties(ironwall_static PROPERTIES OUTPUT_NAME ironwall)
+if(WIN32)
+    target_link_libraries(ironwall_static PUBLIC ws2_32)
+endif()
 
 if(IRONWALL_BUILD_SHARED)
     add_library(ironwall_shared SHARED ${IRONWALL_SOURCES})
@@ -52,8 +55,15 @@ if(IRONWALL_BUILD_SHARED)
                $<INSTALL_INTERFACE:include>
         PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src
     )
-    target_compile_options(ironwall_shared PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(ironwall_shared PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4> $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall;-Wextra;-Wpedantic>)
     set_target_properties(ironwall_shared PROPERTIES OUTPUT_NAME ironwall)
+    if(WIN32)
+        # Avoid overwriting the static ironwall.lib with the DLL import library.
+        set_target_properties(ironwall_shared PROPERTIES ARCHIVE_OUTPUT_NAME ironwall_shared_import)
+    endif()
+    if(WIN32)
+        target_link_libraries(ironwall_shared PRIVATE ws2_32)
+    endif()
 endif()
 
 add_executable(ironwall_thin_client src/main.cpp)

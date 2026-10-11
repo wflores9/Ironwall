@@ -1,31 +1,53 @@
 #include "ironwall/udp_net.hpp"
+#ifdef _WIN32
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#else
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <cstring>
 #include <poll.h>
+#endif
 #include <iostream>
 
 namespace ironwall {
 
+#ifdef _WIN32
+static bool winsock_init() { static const bool ok = [] { WSADATA w{}; return WSAStartup(MAKEWORD(2,2), &w)==0; }(); return ok; }
+#endif
 UdpSocket::~UdpSocket() { close(); }
 
 void UdpSocket::close() {
-    if (fd_ >= 0) { ::close(fd_); fd_ = -1; }
+    if (fd_ >= 0) {
+#ifdef _WIN32
+::closesocket(static_cast<SOCKET>(fd_));
+#else
+::close(fd_);
+#endif
+        fd_ = -1;
+    }
 }
 
 bool UdpSocket::bind(uint16_t port) {
     close();
-    fd_ = ::socket(AF_INET, SOCK_DGRAM, 0);
+#ifdef _WIN32
+    if (!winsock_init()) return false;
+#endif
+    fd_ = static_cast<std::intptr_t>(::socket(AF_INET, SOCK_DGRAM, 0));
     if (fd_ < 0) return false;
     int opt = 1;
+#ifdef _WIN32
+    setsockopt(static_cast<SOCKET>(fd_), SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<const char*>(&opt), sizeof(opt));
+#else
     setsockopt(fd_, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+#endif
     sockaddr_in addr{};
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
     addr.sin_port = htons(port);
-    if (::bind(fd_, reinterpret_cast<sockaddr*>(&addr), sizeof(addr)) < 0) {
+    if (::bind(static_cast<decltype(::socket(0,0,0))>(fd_), reinterpret_cast<sockaddr*>(&addr), sizeof(addr)) < 0) {
         close();
         return false;
     }
@@ -34,35 +56,55 @@ bool UdpSocket::bind(uint16_t port) {
 
 bool UdpSocket::connect(const std::string& host, uint16_t port) {
     if (fd_ < 0) {
-        fd_ = ::socket(AF_INET, SOCK_DGRAM, 0);
+#ifdef _WIN32
+        if (!winsock_init()) return false;
+#endif
+        fd_ = static_cast<std::intptr_t>(::socket(AF_INET, SOCK_DGRAM, 0));
         if (fd_ < 0) return false;
     }
     sockaddr_in addr{};
     addr.sin_family = AF_INET;
     addr.sin_port = htons(port);
     if (inet_pton(AF_INET, host.c_str(), &addr.sin_addr) <= 0) return false;
-    return ::connect(fd_, reinterpret_cast<sockaddr*>(&addr), sizeof(addr)) == 0;
+    return ::connect(static_cast<decltype(::socket(0,0,0))>(fd_), reinterpret_cast<sockaddr*>(&addr), sizeof(addr)) == 0;
 }
 
 uint16_t UdpSocket::local_port() const {
     if (fd_ < 0) return 0;
     sockaddr_in addr{};
+#ifdef _WIN32
+    int len = sizeof(addr);
+#else
     socklen_t len = sizeof(addr);
-    if (getsockname(fd_, reinterpret_cast<sockaddr*>(&addr), &len) < 0) return 0;
+#endif
+    if (getsockname(static_cast<decltype(::socket(0,0,0))>(fd_), reinterpret_cast<sockaddr*>(&addr), &len) < 0) return 0;
     return ntohs(addr.sin_port);
 }
 
 bool UdpSocket::send(const std::vector<uint8_t>& datagram) {
     if (fd_ < 0 || datagram.empty()) return false;
+#ifdef _WIN32
+    return ::send(static_cast<SOCKET>(fd_), reinterpret_cast<const char*>(datagram.data()), static_cast<int>(datagram.size()), 0) == static_cast<int>(datagram.size());
+#else
     return ::send(fd_, datagram.data(), datagram.size(), 0) == static_cast<ssize_t>(datagram.size());
+#endif
 }
 
 std::optional<std::vector<uint8_t>> UdpSocket::recv(int timeout_ms) {
     if (fd_ < 0) return std::nullopt;
-    pollfd pfd{fd_, POLLIN, 0};
+#ifdef _WIN32
+    WSAPOLLFD pfd{static_cast<SOCKET>(fd_), POLLRDNORM, 0};
+    if (WSAPoll(&pfd, 1, timeout_ms) <= 0) return std::nullopt;
+#else
+    pollfd pfd{static_cast<int>(fd_), POLLIN, 0};
     if (poll(&pfd, 1, timeout_ms) <= 0) return std::nullopt;
+#endif
     std::vector<uint8_t> buf(2048);
+#ifdef _WIN32
+    int n = ::recv(static_cast<SOCKET>(fd_), reinterpret_cast<char*>(buf.data()), static_cast<int>(buf.size()), 0);
+#else
     ssize_t n = ::recv(fd_, buf.data(), buf.size(), 0);
+#endif
     if (n <= 0) return std::nullopt;
     buf.resize(static_cast<size_t>(n));
     return buf;

@@ -5,6 +5,7 @@
 #include <atomic>
 #include <functional>
 #include <optional>
+#include <cstdint>
 
 namespace ironwall {
 
@@ -18,7 +19,7 @@ public:
     std::optional<ServerMessage> recv(int timeout_ms = 1000);
     bool connected() const { return sock_ >= 0; }
 private:
-    int sock_ = -1;
+    std::intptr_t sock_ = -1;
 };
 
 class TcpServer {
@@ -32,7 +33,7 @@ public:
     void stop();
 private:
     void accept_loop();
-    int listen_sock_ = -1;
+    std::intptr_t listen_sock_ = -1;
     std::atomic<bool> running_{false};
     std::thread accept_thread_;
     Handler handler_;
