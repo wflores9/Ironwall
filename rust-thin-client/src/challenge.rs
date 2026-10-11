@@ -50,7 +50,7 @@ impl ChallengeEngine {
         attestation: TeeAttestationResult,
         proof: ZkMovementProof,
     ) -> IronwallResult<ChallengeResponse> {
-        if challenge.challenge_id.trim().is_empty() || challenge.proof_id.trim().is_empty() {
+        if challenge.challenge_id.trim().is_empty() || challenge.proof_id.trim().is_empty() || proof.proof_id == challenge.proof_id {
             return Err(IronwallError::Anchor("challenge identity missing".into()));
         }
         if challenge.deadline <= challenge.issued_at
@@ -88,6 +88,18 @@ mod tests {
         let proof = crate::zk::ZkMovementValidator::new(100.0)
             .prove_valid_movement("player-1", (0.0, 0.0, 0.0), (0.1, 0.0, 0.0), 100)
             .await.unwrap();
+        assert!(engine.respond(&challenge, attestation, proof).await.is_err());
+    }
+
+    #[tokio::test]
+    async fn reused_original_proof_is_rejected() {
+        let engine = ChallengeEngine::new();
+        let mut challenge = engine.issue_challenge("original", "review");
+        let attestation = crate::tee::TeeAttestation::new().generate_attestation().await.unwrap();
+        let proof = crate::zk::ZkMovementValidator::new(100.0)
+            .prove_valid_movement("player-1", (0.0, 0.0, 0.0), (0.1, 0.0, 0.0), 100)
+            .await.unwrap();
+        challenge.proof_id = proof.proof_id.clone();
         assert!(engine.respond(&challenge, attestation, proof).await.is_err());
     }
 
