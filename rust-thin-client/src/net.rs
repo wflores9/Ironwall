@@ -119,6 +119,10 @@ impl NetServer {
                     }).await;
                 }
                 ClientMessage::Heartbeat { position, .. } => {
+                    if ![position.0, position.1, position.2].iter().all(|v| v.is_finite()) {
+                        let _ = self.send(ServerMessage::Kick { reason: "invalid heartbeat position".into() }).await;
+                        break;
+                    }
                     info!("server got Heartbeat pos={:?}", position);
                 }
             }
@@ -131,6 +135,28 @@ impl NetServer {
 mod tests {
     use super::*;
     use chrono::Utc;
+
+    #[tokio::test]
+    async fn rejects_nonfinite_heartbeat_position() {
+        let (client, server) = create_loopback();
+        let handle = tokio::spawn(server.run_demo());
+        let mut client = client;
+        let attestation = crate::tee::TeeAttestation::new()
+            .generate_attestation().await.unwrap();
+        client.send(ClientMessage::Hello {
+            player_id: "player-one".into(),
+            client_version: "test".into(),
+            attestation,
+        }).await.unwrap();
+        assert!(matches!(client.recv().await, Some(ServerMessage::Welcome { .. })));
+        client.send(ClientMessage::Heartbeat {
+            ts: Utc::now(),
+            position: (f32::NAN, 0.0, 0.0),
+        }).await.unwrap();
+        assert!(matches!(client.recv().await, Some(ServerMessage::Kick { .. })));
+        drop(client);
+        handle.await.unwrap();
+    }
 
     #[tokio::test]
     async fn rejects_unsolicited_challenge_response() {
