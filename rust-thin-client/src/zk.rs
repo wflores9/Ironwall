@@ -40,6 +40,11 @@ impl ZkMovementValidator {
             ));
         }
 
+        if !self.max_speed.is_finite() || self.max_speed <= 0.0 ||
+            ![from.0, from.1, from.2, to.0, to.1, to.2].iter().all(|v| v.is_finite()) {
+            return Err(IronwallError::InvalidMovement("non-finite coordinates or invalid speed limit".into()));
+        }
+
         let dx = to.0 - from.0;
         let dy = to.1 - from.1;
         let dz = to.2 - from.2;
@@ -47,7 +52,7 @@ impl ZkMovementValidator {
         let dt_sec = delta_t_ms as f32 / 1000.0;
         let speed = dist / dt_sec;
 
-        if speed > self.max_speed {
+        if !speed.is_finite() || speed > self.max_speed {
             return Err(IronwallError::InvalidMovement(format!(
                 "movement speed {:.2} exceeds max {:.2} (possible speedhack)",
                 speed, self.max_speed
