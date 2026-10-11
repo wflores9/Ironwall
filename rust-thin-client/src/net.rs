@@ -134,6 +134,32 @@ mod tests {
     use chrono::Utc;
 
     #[tokio::test]
+    async fn rejects_empty_identity_and_duplicate_hello() {
+        for ids in [vec![""], vec!["player-one", "player-two"]] {
+            let (client, server) = create_loopback();
+            let handle = tokio::spawn(server.run_demo());
+            let mut client = client;
+            let attestation = crate::tee::TeeAttestation::new()
+                .generate_attestation().await.unwrap();
+            for id in &ids {
+                client.send(ClientMessage::Hello {
+                    player_id: (*id).into(),
+                    client_version: "test".into(),
+                    attestation: attestation.clone(),
+                }).await.unwrap();
+                let reply = client.recv().await.unwrap();
+                if *id == "player-one" {
+                    assert!(matches!(reply, ServerMessage::Welcome { .. }));
+                } else {
+                    assert!(matches!(reply, ServerMessage::Kick { .. }));
+                }
+            }
+            drop(client);
+            handle.await.unwrap();
+        }
+    }
+
+    #[tokio::test]
     async fn rejects_heartbeat_before_hello() {
         let (client, server) = create_loopback();
         let handle = tokio::spawn(server.run_demo());
