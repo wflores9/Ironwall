@@ -50,7 +50,10 @@ impl ChallengeEngine {
         attestation: TeeAttestationResult,
         proof: ZkMovementProof,
     ) -> IronwallResult<ChallengeResponse> {
-        if challenge.deadline <= challenge.issued_at || Utc::now() < challenge.issued_at || Utc::now() > challenge.deadline {
+        if challenge.deadline <= challenge.issued_at
+            || challenge.deadline - challenge.issued_at > chrono::Duration::seconds(30)
+            || Utc::now() < challenge.issued_at
+            || Utc::now() > challenge.deadline {
             return Err(IronwallError::Anchor("challenge deadline exceeded".into()));
         }
 
@@ -78,6 +81,18 @@ mod tests {
         let engine = ChallengeEngine::new();
         let mut challenge = engine.issue_challenge("proof-1", "review");
         challenge.deadline = Utc::now() - chrono::Duration::seconds(1);
+        let attestation = crate::tee::TeeAttestation::new().generate_attestation().await.unwrap();
+        let proof = crate::zk::ZkMovementValidator::new(100.0)
+            .prove_valid_movement("player-1", (0.0, 0.0, 0.0), (0.1, 0.0, 0.0), 100)
+            .await.unwrap();
+        assert!(engine.respond(&challenge, attestation, proof).await.is_err());
+    }
+
+    #[tokio::test]
+    async fn excessively_long_challenge_window_is_rejected() {
+        let engine = ChallengeEngine::new();
+        let mut challenge = engine.issue_challenge("proof-1", "review");
+        challenge.deadline = challenge.issued_at + chrono::Duration::minutes(30);
         let attestation = crate::tee::TeeAttestation::new().generate_attestation().await.unwrap();
         let proof = crate::zk::ZkMovementValidator::new(100.0)
             .prove_valid_movement("player-1", (0.0, 0.0, 0.0), (0.1, 0.0, 0.0), 100)
