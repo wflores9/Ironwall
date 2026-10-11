@@ -206,13 +206,18 @@ async def main() -> None:
         wallet = await generate_faucet_wallet(faucet_client, debug=False)
         print(f"  xrpl_wallet : {wallet.classic_address}")
     except Exception as exc:
-        print(f"  {_YELLOW}⚠ Could not fund testnet wallet: {exc} — XRPL anchor will stub{_RESET}")
+        print(f"  {_YELLOW}⚠ Could not fund testnet wallet: {exc} — XRPL anchoring cannot proceed{_RESET}")
         wallet = None
 
     xrpl_recorder = XRPLMatchRecorder(wallet, network="testnet")
     dual = DualAnchorRecorder(hedera_recorder, xrpl_recorder)
 
-    anchors = await dual.commit(result, receipt)
+    try:
+        anchors = await dual.commit(result, receipt)
+    except Exception as exc:
+        print(f"  {_RED}Ledger anchoring failed: {exc}{_RESET}")
+        print("  No successful dual-anchor receipt was produced.")
+        return
 
     hedera_anchor = anchors["hedera"]
     xrpl_anchor = anchors["xrpl"]

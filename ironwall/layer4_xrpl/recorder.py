@@ -95,8 +95,7 @@ class XRPLMatchRecorder:
         )
 
         if not _SDK_AVAILABLE or self.wallet is None:
-            log.warning("xrpl-py not installed or no wallet — XRPL anchor skipped (stub)")
-            return {"tx_hash": "STUB_XRPL_TX", "fingerprint": fingerprint}
+            raise RuntimeError("XRPL anchoring unavailable: install xrpl-py and configure a funded wallet")
 
         client = AsyncJsonRpcClient(self.url)
         memo = Memo(

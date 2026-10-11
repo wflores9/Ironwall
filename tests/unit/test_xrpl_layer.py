@@ -40,10 +40,9 @@ class TestXRPLMatchRecorder:
             await xrpl_recorder.commit_match_record(VALID_RESULT, UNATTESTED)
 
     @pytest.mark.asyncio
-    async def test_stub_returns_tx_hash(self, xrpl_recorder):
-        receipt = await xrpl_recorder.commit_match_record(VALID_RESULT, VALID_ATTEST)
-        assert "tx_hash" in receipt
-        assert "fingerprint" in receipt
+    async def test_no_wallet_fails_closed(self, xrpl_recorder):
+        with pytest.raises(RuntimeError, match="XRPL anchoring unavailable"):
+            await xrpl_recorder.commit_match_record(VALID_RESULT, VALID_ATTEST)
 
     def test_fingerprint_contains_merkle_root(self, xrpl_recorder):
         fp = xrpl_recorder._build_fingerprint(VALID_RESULT, VALID_ATTEST)
