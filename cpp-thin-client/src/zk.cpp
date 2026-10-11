@@ -13,11 +13,16 @@ ZkMovementProof ZkMovementValidator::prove(const std::string& player_id,
                                            uint32_t delta_t_ms) const {
     if (delta_t_ms == 0) throw InvalidMovement("delta_t_ms cannot be zero");
 
+    if (!std::isfinite(max_speed_) || max_speed_ <= 0.f ||
+        !std::isfinite(from.x) || !std::isfinite(from.y) || !std::isfinite(from.z) ||
+        !std::isfinite(to.x) || !std::isfinite(to.y) || !std::isfinite(to.z)) {
+        throw InvalidMovement("non-finite coordinates or invalid speed limit");
+    }
     float dist = distance(from, to);
     float dt = delta_t_ms / 1000.f;
     float speed = dist / dt;
 
-    if (speed > max_speed_) {
+    if (!std::isfinite(speed) || speed > max_speed_) {
         throw InvalidMovement("movement speed " + std::to_string(speed) +
                               " exceeds max " + std::to_string(max_speed_) +
                               " (possible speedhack)");

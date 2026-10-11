@@ -40,6 +40,11 @@ impl ZkMovementValidator {
             ));
         }
 
+        if !self.max_speed.is_finite() || self.max_speed <= 0.0 ||
+            ![from.0, from.1, from.2, to.0, to.1, to.2].iter().all(|v| v.is_finite()) {
+            return Err(IronwallError::InvalidMovement("non-finite coordinates or invalid speed limit".into()));
+        }
+
         let dx = to.0 - from.0;
         let dy = to.1 - from.1;
         let dz = to.2 - from.2;
@@ -47,7 +52,7 @@ impl ZkMovementValidator {
         let dt_sec = delta_t_ms as f32 / 1000.0;
         let speed = dist / dt_sec;
 
-        if speed > self.max_speed {
+        if !speed.is_finite() || speed > self.max_speed {
             return Err(IronwallError::InvalidMovement(format!(
                 "movement speed {:.2} exceeds max {:.2} (possible speedhack)",
                 speed, self.max_speed
@@ -86,5 +91,32 @@ impl ZkMovementValidator {
             timestamp: Utc::now(),
             speed,
         })
+    }
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[tokio::test]
+    async fn rejects_nonfinite_coordinates() {
+        let validator = ZkMovementValidator::new(10.0);
+        for bad in [f32::NAN, f32::INFINITY, f32::NEG_INFINITY] {
+            assert!(validator.prove_valid_movement("p1", (bad, 0.0, 0.0), (0.0, 0.0, 0.0), 16).await.is_err());
+            assert!(validator.prove_valid_movement("p1", (0.0, 0.0, 0.0), (0.0, bad, 0.0), 16).await.is_err());
+        }
+    }
+
+    #[tokio::test]
+    async fn rejects_invalid_speed_limit_and_overflow() {
+        for limit in [f32::NAN, f32::INFINITY, 0.0, -1.0] {
+            assert!(ZkMovementValidator::new(limit)
+                .prove_valid_movement("p1", (0.0, 0.0, 0.0), (1.0, 0.0, 0.0), 16)
+                .await.is_err());
+        }
+        assert!(ZkMovementValidator::new(f32::MAX)
+            .prove_valid_movement("p1", (-f32::MAX, 0.0, 0.0), (f32::MAX, 0.0, 0.0), 16)
+            .await.is_err());
     }
 }
