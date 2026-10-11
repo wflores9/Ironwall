@@ -12,6 +12,7 @@ on:
     paths:
       - 'rust-thin-client/**'
       - 'cpp-thin-client/**'
+      - '.github/workflows/thin-clients.yml'
 
 jobs:
   rust:
