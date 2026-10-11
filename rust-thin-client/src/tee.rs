@@ -12,6 +12,8 @@ pub struct TeeAttestationResult {
     pub timestamp: DateTime<Utc>,
     pub mr_enclave: String,
     pub mr_signer: String,
+    /// Explicitly distinguishes synthetic demo data from hardware-backed evidence.
+    pub simulated: bool,
 }
 
 pub struct TeeAttestation;
@@ -38,6 +40,22 @@ impl TeeAttestation {
             timestamp: Utc::now(),
             mr_enclave: "0".repeat(64),
             mr_signer: "0".repeat(64),
+            simulated: true,
         })
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[tokio::test]
+    async fn synthetic_attestation_is_never_hardware_qualified() {
+        let result = TeeAttestation::new().generate_attestation().await.unwrap();
+        assert!(result.simulated);
+        assert_eq!(result.mr_enclave, "0".repeat(64));
+        assert_eq!(result.mr_signer, "0".repeat(64));
+        let serialized = serde_json::to_value(&result).unwrap();
+        assert_eq!(serialized["simulated"], true);
     }
 }
