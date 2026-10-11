@@ -110,14 +110,13 @@ impl NetServer {
                         .await;
                 }
                 ClientMessage::ChallengeResponse { response } => {
-                    info!("server got ChallengeResponse {}", response.challenge_id);
-                    let _ = self
-                        .send(ServerMessage::Ack {
-                            proof_id: response.challenge_id,
-                            accepted: true,
-                            reason: Some("challenge cleared".into()),
-                        })
-                        .await;
+                    // This demo server never issues an authenticated challenge.
+                    // Never grant a success acknowledgment for unsolicited evidence.
+                    let _ = self.send(ServerMessage::Ack {
+                        proof_id: response.challenge_id,
+                        accepted: false,
+                        reason: Some("no outstanding server-issued challenge".into()),
+                    }).await;
                 }
                 ClientMessage::Heartbeat { position, .. } => {
                     info!("server got Heartbeat pos={:?}", position);
