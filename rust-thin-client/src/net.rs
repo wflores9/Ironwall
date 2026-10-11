@@ -92,6 +92,14 @@ impl NetServer {
                         .await;
                 }
                 ClientMessage::MovementProof { proof, .. } => {
+                    if proof.proof_id.trim().is_empty() || proof.player_id.trim().is_empty() {
+                        let _ = self.send(ServerMessage::Ack {
+                            proof_id: proof.proof_id,
+                            accepted: false,
+                            reason: Some("invalid movement proof identity".into()),
+                        }).await;
+                        continue;
+                    }
                     if !seen_proofs.insert(proof.proof_id.clone()) {
                         let _ = self.send(ServerMessage::Ack {
                             proof_id: proof.proof_id,
