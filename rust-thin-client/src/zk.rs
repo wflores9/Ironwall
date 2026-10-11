@@ -93,3 +93,30 @@ impl ZkMovementValidator {
         })
     }
 }
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[tokio::test]
+    async fn rejects_nonfinite_coordinates() {
+        let validator = ZkMovementValidator::new(10.0);
+        for bad in [f32::NAN, f32::INFINITY, f32::NEG_INFINITY] {
+            assert!(validator.prove_valid_movement("p1", (bad, 0.0, 0.0), (0.0, 0.0, 0.0), 16).await.is_err());
+            assert!(validator.prove_valid_movement("p1", (0.0, 0.0, 0.0), (0.0, bad, 0.0), 16).await.is_err());
+        }
+    }
+
+    #[tokio::test]
+    async fn rejects_invalid_speed_limit_and_overflow() {
+        for limit in [f32::NAN, f32::INFINITY, 0.0, -1.0] {
+            assert!(ZkMovementValidator::new(limit)
+                .prove_valid_movement("p1", (0.0, 0.0, 0.0), (1.0, 0.0, 0.0), 16)
+                .await.is_err());
+        }
+        assert!(ZkMovementValidator::new(f32::MAX)
+            .prove_valid_movement("p1", (-f32::MAX, 0.0, 0.0), (f32::MAX, 0.0, 0.0), 16)
+            .await.is_err());
+    }
+}
