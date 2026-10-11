@@ -3,6 +3,7 @@
 
 use anyhow::Result;
 use tokio::sync::mpsc;
+use std::collections::HashSet;
 use tracing::info;
 
 use crate::protocol::{ClientMessage, ServerMessage};
@@ -59,6 +60,7 @@ impl NetServer {
     pub async fn run_demo(mut self) {
         info!("NetServer demo loop started");
         let mut hello_seen = false;
+        let mut seen_proofs = HashSet::new();
         while let Some(msg) = self.recv().await {
             if !matches!(msg, ClientMessage::Hello { .. }) && !hello_seen {
                 let _ = self.send(ServerMessage::Kick {
@@ -90,6 +92,14 @@ impl NetServer {
                         .await;
                 }
                 ClientMessage::MovementProof { proof, .. } => {
+                    if !seen_proofs.insert(proof.proof_id.clone()) {
+                        let _ = self.send(ServerMessage::Ack {
+                            proof_id: proof.proof_id,
+                            accepted: false,
+                            reason: Some("replayed movement proof id".into()),
+                        }).await;
+                        continue;
+                    }
                     info!("server got MovementProof {}", proof.proof_id);
                     let _ = self
                         .send(ServerMessage::Ack {
