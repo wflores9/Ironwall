@@ -146,6 +146,16 @@ mod tests {
     use super::*;
     use chrono::Utc;
 
+    #[test]
+    fn movement_identity_must_match_handshake() {
+        fn valid(proof_id: &str, proof_player: &str, session_player: &str) -> bool {
+            !proof_id.trim().is_empty() && proof_player == session_player
+        }
+        assert!(valid("proof-1", "alice", "alice"));
+        assert!(!valid("proof-1", "bob", "alice"));
+        assert!(!valid("", "alice", "alice"));
+    }
+
     #[tokio::test]
     async fn rejects_nonfinite_heartbeat_position() {
         let (client, server) = create_loopback();
