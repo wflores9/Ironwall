@@ -133,6 +133,35 @@ mod tests {
     use chrono::Utc;
 
     #[tokio::test]
+    async fn rejects_unsolicited_challenge_response() {
+        let (client, server) = create_loopback();
+        let handle = tokio::spawn(server.run_demo());
+        let mut client = client;
+        let attestation = crate::tee::TeeAttestation::new()
+            .generate_attestation().await.unwrap();
+        client.send(ClientMessage::Hello {
+            player_id: "player-one".into(),
+            client_version: "test".into(),
+            attestation: attestation.clone(),
+        }).await.unwrap();
+        assert!(matches!(client.recv().await, Some(ServerMessage::Welcome { .. })));
+        let proof = crate::zk::ZkMovementValidator::new(100.0)
+            .prove_valid_movement("player-one", (0.0, 0.0, 0.0), (0.1, 0.0, 0.0), 100)
+            .await.unwrap();
+        client.send(ClientMessage::ChallengeResponse {
+            response: crate::challenge::ChallengeResponse {
+                challenge_id: "never-issued".into(),
+                new_attestation: attestation,
+                new_proof: proof,
+                responded_at: Utc::now(),
+            },
+        }).await.unwrap();
+        assert!(matches!(client.recv().await, Some(ServerMessage::Ack { accepted: false, .. })));
+        drop(client);
+        handle.await.unwrap();
+    }
+
+    #[tokio::test]
     async fn rejects_empty_identity_and_duplicate_hello() {
         for ids in [vec![""], vec!["player-one", "player-two"]] {
             let (client, server) = create_loopback();
