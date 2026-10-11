@@ -40,10 +40,18 @@ std::optional<std::string> ChainSubmitter::http_post_json(const std::string& url
                       "-d '" + body + "' '" + url + "' 2>/dev/null";
     std::array<char, 4096> buf{};
     std::string result;
+    #ifdef _WIN32
+    FILE* pipe = _popen(cmd.c_str(), "r");
+#else
     FILE* pipe = popen(cmd.c_str(), "r");
+#endif
     if (!pipe) return std::nullopt;
     while (fgets(buf.data(), buf.size(), pipe)) result += buf.data();
+    #ifdef _WIN32
+    int rc = _pclose(pipe);
+#else
     int rc = pclose(pipe);
+#endif
     if (rc != 0 || result.empty()) return std::nullopt;
     return result;
 }

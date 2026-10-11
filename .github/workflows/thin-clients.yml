@@ -12,6 +12,7 @@ on:
     paths:
       - 'rust-thin-client/**'
       - 'cpp-thin-client/**'
+      - '.github/workflows/thin-clients.yml'
 
 jobs:
   rust:
@@ -65,8 +66,8 @@ jobs:
           if-no-files-found: ignore
 
   cpp-windows:
-    name: C++ (windows-latest)
-    runs-on: windows-latest
+    name: C++ (windows-2022)
+    runs-on: windows-2022
     defaults:
       run:
         working-directory: cpp-thin-client
