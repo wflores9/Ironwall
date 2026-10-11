@@ -60,6 +60,7 @@ impl NetServer {
     pub async fn run_demo(mut self) {
         info!("NetServer demo loop started");
         let mut hello_seen = false;
+        let mut bound_player_id = String::new();
         let mut seen_proofs = HashSet::new();
         while let Some(msg) = self.recv().await {
             if !matches!(msg, ClientMessage::Hello { .. }) && !hello_seen {
@@ -82,6 +83,7 @@ impl NetServer {
                         }).await;
                         break;
                     }
+                    bound_player_id = player_id.clone();
                     hello_seen = true;
                     info!("server got Hello from {}", player_id);
                     let _ = self
@@ -92,11 +94,11 @@ impl NetServer {
                         .await;
                 }
                 ClientMessage::MovementProof { proof, .. } => {
-                    if proof.proof_id.trim().is_empty() || proof.player_id.trim().is_empty() {
+                    if proof.proof_id.trim().is_empty() || proof.player_id != bound_player_id {
                         let _ = self.send(ServerMessage::Ack {
                             proof_id: proof.proof_id,
                             accepted: false,
-                            reason: Some("invalid movement proof identity".into()),
+                            reason: Some("movement proof identity does not match session".into()),
                         }).await;
                         continue;
                     }
