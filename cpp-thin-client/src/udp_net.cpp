@@ -20,11 +20,14 @@ static bool winsock_init() { static const bool ok = [] { WSADATA w{}; return WSA
 UdpSocket::~UdpSocket() { close(); }
 
 void UdpSocket::close() {
-    if (fd_ >= 0) { #ifdef _WIN32
+    if (fd_ >= 0) {
+#ifdef _WIN32
 ::closesocket(static_cast<SOCKET>(fd_));
 #else
 ::close(fd_);
-#endif; fd_ = -1; }
+#endif
+        fd_ = -1;
+    }
 }
 
 bool UdpSocket::bind(uint16_t port) {
