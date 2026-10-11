@@ -56,7 +56,10 @@ bool UdpSocket::bind(uint16_t port) {
 
 bool UdpSocket::connect(const std::string& host, uint16_t port) {
     if (fd_ < 0) {
-        fd_ = ::socket(AF_INET, SOCK_DGRAM, 0);
+#ifdef _WIN32
+        if (!winsock_init()) return false;
+#endif
+        fd_ = static_cast<std::intptr_t>(::socket(AF_INET, SOCK_DGRAM, 0));
         if (fd_ < 0) return false;
     }
     sockaddr_in addr{};
