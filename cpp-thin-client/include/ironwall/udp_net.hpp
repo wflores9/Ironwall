@@ -32,7 +32,7 @@ public:
     bool valid() const { return fd_ >= 0; }
 
 private:
-    int fd_ = -1;
+    std::intptr_t fd_ = -1;
 };
 
 // One-shot localhost echo demo used by tests / smoke
