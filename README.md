@@ -1,5 +1,7 @@
 # PROJECT IRONWALL
 
+<img width="1536" height="1024" alt="3D253F6B-FA20-4B25-8AC0-FEF2AA144B81" src="https://github.com/user-attachments/assets/2ddfa5df-b91c-4295-9ca6-39238509f6db" />
+
 **Open-source anti-cheat protocol stack.**
 Thin client · TEE attestation · ZK-SNARKs · Hedera HCS
 
